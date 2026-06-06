@@ -1,4 +1,5 @@
 export enum UIEndpointsCommon {
+  LOADING = '/loading',
   HOME = '/',
   WILDCARD = '*',
   ERROR_404 = '/404',

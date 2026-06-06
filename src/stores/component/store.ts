@@ -1,10 +1,15 @@
 import { create } from 'zustand';
 
-import { UseComponentStoreProps } from './type';
+import { UseComponentStoreProps, UseComponentStoreStateProps } from './type';
 
-const initialState: Partial<UseComponentStoreProps> = {};
+const initialState: UseComponentStoreStateProps = {
+  enableAudio: true,
+  language: 'en',
+  finishPreload: false,
+};
 
 export const useComponentStore = create<UseComponentStoreProps>((set) => ({
+  ...initialState,
   resetState() {
     set(() => initialState);
   },
