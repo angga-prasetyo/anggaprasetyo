@@ -10,10 +10,9 @@ const CTLayoutComponent: React.FC<CTLayoutProps> = ({
   ...rest
 }) => {
   return (
-    <div id="ct_layout_dashboard" className="h-screen" {...rest}>
+    <div id="ct_layout" className="h-screen" {...rest}>
       <CTSeoMeta meta={meta} />
-
-      <div id="content">{children}</div>
+      {children}
     </div>
   );
 };

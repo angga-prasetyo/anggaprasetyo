@@ -1,19 +1,17 @@
-import { CTLayoutDashboard } from '@/components/ct-layout';
+import { CTBeamBorder } from '@/components/ct-beam-border/component';
+import { CTLayout } from '@/components/ct-layout';
 
 import { pageMeta } from './constant';
 
 const LoadingPage: React.FC = () => {
-  const generateLoading = () => {
-    const result = [];
-    for (let index = 0; index < 37; index++) {
-      result.push(<h1>Loading</h1>);
-    }
-    return result;
-  };
   return (
-    <CTLayoutDashboard meta={pageMeta} titlePage="LoadingPage">
-      <div>{generateLoading()}</div>
-    </CTLayoutDashboard>
+    <CTLayout meta={pageMeta} titlePage="LoadingPage">
+      <div className="flex justify-center items-center h-full">
+        <div className="relative w-[80vw] h-[20vh] rounded-4xl border-2">
+          <CTBeamBorder borderWidth={4} />
+        </div>
+      </div>
+    </CTLayout>
   );
 };
 
