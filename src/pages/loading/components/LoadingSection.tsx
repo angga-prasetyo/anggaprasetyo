@@ -1,12 +1,17 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
-import { useAudio } from '@/hooks/useAudio';
+import { AUDIOS } from '@/constants/audios';
+import { useComponentStore } from '@/stores/component/store';
 
 export const LoadingSection: React.FC = () => {
-  const { playBgm } = useAudio();
+  const { changeBgm } = useComponentStore((state) => state);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => playBgm(), []);
+  useEffect(() => changeBgm(AUDIOS.LOADING), []);
 
-  return <h1>Loading</h1>;
+  const switchBGM = useCallback(() => {
+    changeBgm(AUDIOS.BEGIN);
+  }, [changeBgm]);
+
+  return <button onClick={switchBGM}>Switch BGM</button>;
 };

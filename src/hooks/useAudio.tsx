@@ -1,14 +1,7 @@
-import { useCallback, useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import { useComponentStore } from '@/stores/component/store';
 
-// <audio
-//   id="background_music"
-//   src={BackgroundMusic}
-//   controls
-//   loop
-//   style={{ display: 'none' }}
-// />
 export function useAudio() {
   const { bgm, enableAudio } = useComponentStore((state) => state);
 
@@ -22,19 +15,14 @@ export function useAudio() {
     );
   }, [bgm, enableAudio]);
 
-  const playBgm = useCallback(() => {
-    if (enableAudio) {
-      const bgmEl = document.getElementById('bgm') as HTMLAudioElement;
-      bgmEl.play();
-    }
-  }, [enableAudio]);
+  useEffect(() => {
+    if (!enableAudio) return;
+    const bgmEl = document.getElementById('bgm') as HTMLAudioElement | null;
+    if (!bgmEl) return;
 
-  const stopBgm = useCallback(() => {
-    if (enableAudio) {
-      const bgmEl = document.getElementById('bgm') as HTMLAudioElement;
-      bgmEl.pause();
-    }
-  }, [enableAudio]);
+    bgmEl.load();
+    bgmEl.play();
+  }, [bgm, enableAudio]);
 
-  return { bgmHTML, playBgm, stopBgm };
+  return { bgmHTML };
 }
