@@ -17,8 +17,12 @@ export const words: {
     [LANGUAGES.ENG]: 'Indonesia 🇮🇩',
   },
   english: {
-    [LANGUAGES.IDN]: 'Inggris 🇺🇸',
+    [LANGUAGES.IDN]: 'Inggris (Amerika) 🇺🇸',
     [LANGUAGES.ENG]: 'English (US) 🇺🇸',
+  },
+  next: {
+    [LANGUAGES.IDN]: 'Lanjut',
+    [LANGUAGES.ENG]: 'Next',
   },
   popup__enable_sound_title: {
     [LANGUAGES.IDN]: 'IZINKAN PUTAR SUARA?',
