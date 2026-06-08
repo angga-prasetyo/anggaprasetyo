@@ -13,12 +13,12 @@ export const words: {
     [LANGUAGES.ENG]: 'Allow',
   },
   indonesia: {
-    [LANGUAGES.IDN]: 'Indonesia',
-    [LANGUAGES.ENG]: 'Inggris (US)',
+    [LANGUAGES.IDN]: 'Indonesia 🇮🇩',
+    [LANGUAGES.ENG]: 'Indonesia 🇮🇩',
   },
   english: {
-    [LANGUAGES.IDN]: 'Indonesia',
-    [LANGUAGES.ENG]: 'English (US)',
+    [LANGUAGES.IDN]: 'Inggris 🇺🇸',
+    [LANGUAGES.ENG]: 'English (US) 🇺🇸',
   },
   popup__enable_sound_title: {
     [LANGUAGES.IDN]: 'IZINKAN PUTAR SUARA?',
@@ -29,7 +29,7 @@ export const words: {
     [LANGUAGES.ENG]: 'Allow to get the best experience.',
   },
   popup__choose_language_title: {
-    [LANGUAGES.IDN]: 'Pilih Bahasa',
-    [LANGUAGES.ENG]: 'Choose Language',
+    [LANGUAGES.IDN]: 'PILIH BAHASA',
+    [LANGUAGES.ENG]: 'CHOOSE LANGUAGE',
   },
 };
