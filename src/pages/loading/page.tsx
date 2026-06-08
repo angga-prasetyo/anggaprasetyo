@@ -1,52 +1,34 @@
 import { useMemo } from 'react';
 
-import { CTBeamBorder } from '@/components/ct-beam-border/component';
 import { CTLayout } from '@/components/ct-layout';
-import { CTPulsatingButton } from '@/components/ct-pulsating-button/component';
-import { CTRadioGroup } from '@/components/ct-radio-group/component';
-import { CTRadioGroupProps } from '@/components/ct-radio-group/type';
-import { LANGUAGES, words } from '@/constants/languages';
-import { useComponentStore } from '@/stores/component/store';
-import { EnumValues } from '@/types/common';
+import { UseLoadingStore } from '@/stores/loading/store';
 
-import { pageMeta } from './constant';
+import { AudioSection } from './components/AudioSection';
+import { LangSection } from './components/LangSection';
+import { LoadingSection } from './components/LoadingSection';
+import { pageMeta, SECTIONS } from './constant';
 
 const LoadingPage: React.FC = () => {
-  const { language, changeLanguage } = useComponentStore((state) => state);
-  const languageOptions: CTRadioGroupProps<
-    EnumValues<typeof LANGUAGES>
-  >['options'] = useMemo(
-    () => [
-      {
-        label: words.english[language],
-        value: LANGUAGES.ENG,
-      },
-      {
-        label: words.indonesia[language],
-        value: LANGUAGES.IDN,
-      },
-    ],
-    [language],
-  );
+  const { currentSection } = UseLoadingStore((state) => state);
+
+  const sections = useMemo(() => {
+    switch (currentSection) {
+      case SECTIONS.LANG:
+        return <LangSection />;
+      case SECTIONS.AUDIO:
+        return <AudioSection />;
+      case SECTIONS.LOADING:
+        return <LoadingSection />;
+      case SECTIONS.BEGIN:
+        return <h1>Begin</h1>;
+      default:
+        return <></>;
+    }
+  }, [currentSection]);
+
   return (
     <CTLayout meta={pageMeta} titlePage="LoadingPage">
-      <div className="flex justify-center items-center h-full">
-        <div className="relative w-[80vw] max-w-96 h-70 rounded-4xl border-2 py-5 px-8">
-          <h2 className="text-center text-[#ddbb88] font-bold mb-4">
-            {words.popup__choose_language_title[language]}
-          </h2>
-          <CTRadioGroup<LANGUAGES>
-            className="items-center"
-            defaultValue={language}
-            options={languageOptions}
-            onValueChange={(value) => changeLanguage(value)}
-          />
-          <CTPulsatingButton className="relative mt-10 justify-self-end">
-            <p className="font-semibold">{words.next[language]}</p>
-          </CTPulsatingButton>
-          <CTBeamBorder borderWidth={4} />
-        </div>
-      </div>
+      {sections}
     </CTLayout>
   );
 };

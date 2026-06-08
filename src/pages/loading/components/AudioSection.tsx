@@ -1,0 +1,52 @@
+import { useCallback } from 'react';
+
+import { CTBeamBorder } from '@/components/ct-beam-border/component';
+import { CTPulsatingButton } from '@/components/ct-pulsating-button/component';
+import { AUDIOS } from '@/constants/audios';
+import { words } from '@/constants/languages';
+import { useComponentStore } from '@/stores/component/store';
+import { UseLoadingStore } from '@/stores/loading/store';
+
+import { SECTIONS } from '../constant';
+
+export const AudioSection: React.FC = () => {
+  const { language, changeBgm, changeEnableAudio } = useComponentStore(
+    (state) => state,
+  );
+  const { changeSection } = UseLoadingStore((state) => state);
+
+  const handleNext = useCallback(() => {
+    changeSection(SECTIONS.LOADING);
+  }, [changeSection]);
+
+  const handleNextWithAudio = useCallback(() => {
+    changeBgm(AUDIOS.LOADING);
+    changeEnableAudio(true);
+    handleNext();
+  }, [changeBgm, changeEnableAudio, handleNext]);
+
+  return (
+    <div className="flex justify-center items-center h-full">
+      <div className="relative w-[80vw] max-w-96 h-55 rounded-4xl border-2 pb-3 pt-8 px-8">
+        <h2 className="text-center text-[#ddbb88] font-bold mb-4">
+          {words.popup__enable_sound_title[language]}
+        </h2>
+        <p>{words.popup__enable_sound_description[language]}</p>
+        <div className="flex justify-around">
+          <CTPulsatingButton
+            className="relative mt-10 bg-[#dc322f]"
+            variant="ripple"
+            onClick={handleNext}>
+            <p className="font-semibold text-white">{words.deny[language]}</p>
+          </CTPulsatingButton>
+          <CTPulsatingButton
+            className="relative mt-10 justify-self-end"
+            onClick={handleNextWithAudio}>
+            <p className="font-semibold">{words.allow[language]}</p>
+          </CTPulsatingButton>
+        </div>
+        <CTBeamBorder borderWidth={4} />
+      </div>
+    </div>
+  );
+};

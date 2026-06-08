@@ -12,6 +12,10 @@ export const words: {
     [LANGUAGES.IDN]: 'Izinkan',
     [LANGUAGES.ENG]: 'Allow',
   },
+  deny: {
+    [LANGUAGES.IDN]: 'Tolak',
+    [LANGUAGES.ENG]: 'Deny',
+  },
   indonesia: {
     [LANGUAGES.IDN]: 'Indonesia 🇮🇩',
     [LANGUAGES.ENG]: 'Indonesia 🇮🇩',
