@@ -6,4 +6,4 @@ export const AUDIOS = {
   LOADING: loadingBgm,
   BEGIN: beginBgm,
   MAIN: mainBgm,
-};
+} as const;

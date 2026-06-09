@@ -5,38 +5,51 @@ export enum LANGUAGES {
   ENG = 'en',
 }
 
+export enum WORDS {
+  ALLOW = 'allow',
+  DENY = 'deny',
+  INDONESIA = 'indonesia',
+  ENGLISH = 'english',
+  NEXT = 'next',
+  POPUP__ENABLE_SOUND_TITLE = 'popup__enable_sound_title',
+  POPUP__ENABLE_SOUND_DESCRIPTION = 'popup__enable_sound_description',
+  POPUP__CHOOSE_LANGUAGE_TITLE = 'popup__choose_language_title',
+}
+
 export const words: {
-  [key: string]: { [key in EnumValues<typeof LANGUAGES>]: string };
+  [key in EnumValues<typeof WORDS>]: {
+    [key in EnumValues<typeof LANGUAGES>]: string;
+  };
 } = {
-  allow: {
+  [WORDS.ALLOW]: {
     [LANGUAGES.IDN]: 'Izinkan',
     [LANGUAGES.ENG]: 'Allow',
   },
-  deny: {
+  [WORDS.DENY]: {
     [LANGUAGES.IDN]: 'Tolak',
     [LANGUAGES.ENG]: 'Deny',
   },
-  indonesia: {
+  [WORDS.INDONESIA]: {
     [LANGUAGES.IDN]: 'Indonesia 🇮🇩',
     [LANGUAGES.ENG]: 'Indonesia 🇮🇩',
   },
-  english: {
+  [WORDS.ENGLISH]: {
     [LANGUAGES.IDN]: 'Inggris (Amerika) 🇺🇸',
     [LANGUAGES.ENG]: 'English (US) 🇺🇸',
   },
-  next: {
+  [WORDS.NEXT]: {
     [LANGUAGES.IDN]: 'Lanjut',
     [LANGUAGES.ENG]: 'Next',
   },
-  popup__enable_sound_title: {
+  [WORDS.POPUP__ENABLE_SOUND_TITLE]: {
     [LANGUAGES.IDN]: 'IZINKAN PUTAR SUARA?',
     [LANGUAGES.ENG]: 'ALLOW PLAY SOUND?',
   },
-  popup__enable_sound_description: {
+  [WORDS.POPUP__ENABLE_SOUND_DESCRIPTION]: {
     [LANGUAGES.IDN]: 'Izinkan untuk mendapatkan pengalaman terbaik',
     [LANGUAGES.ENG]: 'Allow to get the best experience.',
   },
-  popup__choose_language_title: {
+  [WORDS.POPUP__CHOOSE_LANGUAGE_TITLE]: {
     [LANGUAGES.IDN]: 'PILIH BAHASA',
     [LANGUAGES.ENG]: 'CHOOSE LANGUAGE',
   },

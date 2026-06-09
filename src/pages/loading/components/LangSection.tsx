@@ -4,7 +4,7 @@ import { CTBeamBorder } from '@/components/ct-beam-border/component';
 import { CTPulsatingButton } from '@/components/ct-pulsating-button/component';
 import { CTRadioGroup } from '@/components/ct-radio-group/component';
 import { CTRadioGroupProps } from '@/components/ct-radio-group/type';
-import { LANGUAGES, words } from '@/constants/languages';
+import { LANGUAGES, WORDS, words } from '@/constants/languages';
 import { useComponentStore } from '@/stores/component/store';
 import { useLoadingStore } from '@/stores/loading/store';
 import { EnumValues } from '@/types/common';
@@ -38,7 +38,7 @@ export const LangSection: React.FC = () => {
     <div className="flex justify-center items-center h-full">
       <div className="relative w-[80vw] max-w-96 h-75 rounded-4xl border-2 pb-3 pt-8 px-8">
         <h2 className="text-center text-[#ddbb88] font-bold mb-4">
-          {words.popup__choose_language_title[language]}
+          {words[WORDS.POPUP__CHOOSE_LANGUAGE_TITLE][language]}
         </h2>
         <CTRadioGroup<LANGUAGES>
           className="items-center"
@@ -49,7 +49,7 @@ export const LangSection: React.FC = () => {
         <CTPulsatingButton
           className="relative mt-10 justify-self-end"
           onClick={handleNext}>
-          <p className="font-semibold">{words.next[language]}</p>
+          <p className="font-semibold">{words[WORDS.NEXT][language]}</p>
         </CTPulsatingButton>
         <CTBeamBorder borderWidth={4} />
       </div>
