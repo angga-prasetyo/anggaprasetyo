@@ -21,6 +21,9 @@ export const useComponentStore = create<UseComponentStoreProps>((set) => ({
   changeBgm(bgm) {
     set((state) => ({ ...state, bgm }));
   },
+  changeFinishPreload(finishPreload) {
+    set((state) => ({ ...state, finishPreload }));
+  },
   resetState() {
     set(() => initialState);
   },

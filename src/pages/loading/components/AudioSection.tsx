@@ -5,7 +5,7 @@ import { CTPulsatingButton } from '@/components/ct-pulsating-button/component';
 import { AUDIOS } from '@/constants/audios';
 import { words } from '@/constants/languages';
 import { useComponentStore } from '@/stores/component/store';
-import { UseLoadingStore } from '@/stores/loading/store';
+import { useLoadingStore } from '@/stores/loading/store';
 
 import { SECTIONS } from '../constant';
 
@@ -13,7 +13,7 @@ export const AudioSection: React.FC = () => {
   const { language, changeBgm, changeEnableAudio } = useComponentStore(
     (state) => state,
   );
-  const { changeSection } = UseLoadingStore((state) => state);
+  const { changeSection } = useLoadingStore((state) => state);
 
   const handleNext = useCallback(() => {
     changeSection(SECTIONS.LOADING);

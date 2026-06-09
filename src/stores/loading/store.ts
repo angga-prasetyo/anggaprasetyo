@@ -8,7 +8,7 @@ const initialState: UseLoadingStoreStateProps = {
   currentSection: SECTIONS.LANG,
 };
 
-export const UseLoadingStore = create<UseLoadingStoreProps>((set) => ({
+export const useLoadingStore = create<UseLoadingStoreProps>((set) => ({
   ...initialState,
   changeSection(currentSection) {
     set((state) => ({ ...state, currentSection }));

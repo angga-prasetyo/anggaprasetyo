@@ -10,9 +10,14 @@ export interface UseComponentStoreStateProps {
 }
 
 export interface UseComponentStoreFunctionProps {
-  changeLanguage: (value: EnumValues<typeof LANGUAGES>) => void;
-  changeEnableAudio: (value: boolean) => void;
-  changeBgm: (value: EnumValues<typeof AUDIOS>) => void;
+  changeLanguage: (language: UseComponentStoreStateProps['language']) => void;
+  changeEnableAudio: (
+    enableAudio: UseComponentStoreStateProps['enableAudio'],
+  ) => void;
+  changeBgm: (bgm: UseComponentStoreStateProps['bgm']) => void;
+  changeFinishPreload: (
+    finishPreload: UseComponentStoreStateProps['finishPreload'],
+  ) => void;
   resetState: () => void;
 }
 

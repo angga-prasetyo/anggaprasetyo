@@ -1,15 +1,16 @@
 import { useMemo } from 'react';
 
 import { CTLayout } from '@/components/ct-layout';
-import { UseLoadingStore } from '@/stores/loading/store';
+import { useLoadingStore } from '@/stores/loading/store';
 
 import { AudioSection } from './components/AudioSection';
+import { BeginSection } from './components/BeginSection';
 import { LangSection } from './components/LangSection';
 import { LoadingSection } from './components/LoadingSection';
 import { pageMeta, SECTIONS } from './constant';
 
 const LoadingPage: React.FC = () => {
-  const { currentSection } = UseLoadingStore((state) => state);
+  const { currentSection } = useLoadingStore((state) => state);
 
   const sections = useMemo(() => {
     switch (currentSection) {
@@ -20,7 +21,7 @@ const LoadingPage: React.FC = () => {
       case SECTIONS.LOADING:
         return <LoadingSection />;
       case SECTIONS.BEGIN:
-        return <h1>Begin</h1>;
+        return <BeginSection />;
       default:
         return <></>;
     }

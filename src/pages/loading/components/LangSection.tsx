@@ -6,14 +6,14 @@ import { CTRadioGroup } from '@/components/ct-radio-group/component';
 import { CTRadioGroupProps } from '@/components/ct-radio-group/type';
 import { LANGUAGES, words } from '@/constants/languages';
 import { useComponentStore } from '@/stores/component/store';
-import { UseLoadingStore } from '@/stores/loading/store';
+import { useLoadingStore } from '@/stores/loading/store';
 import { EnumValues } from '@/types/common';
 
 import { SECTIONS } from '../constant';
 
 export const LangSection: React.FC = () => {
   const { language, changeLanguage } = useComponentStore((state) => state);
-  const { changeSection } = UseLoadingStore((state) => state);
+  const { changeSection } = useLoadingStore((state) => state);
   const languageOptions: CTRadioGroupProps<
     EnumValues<typeof LANGUAGES>
   >['options'] = useMemo(
