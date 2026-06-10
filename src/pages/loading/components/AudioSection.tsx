@@ -28,13 +28,15 @@ export const AudioSection: React.FC = () => {
   return (
     <div className="flex justify-center items-center h-full">
       <div className="relative w-[80vw] max-w-96 h-55 rounded-4xl border-2 pb-3 pt-8 px-8">
-        <h2 className="text-center text-[#ddbb88] font-bold mb-4">
+        <h2 className="text-center text-vc-func_name font-bold mb-4">
           {words[WORDS.POPUP__ENABLE_SOUND_TITLE][language]}
         </h2>
-        <p>{words[WORDS.POPUP__ENABLE_SOUND_DESCRIPTION][language]}</p>
+        <p className="text-center">
+          {words[WORDS.POPUP__ENABLE_SOUND_DESCRIPTION][language]}
+        </p>
         <div className="flex justify-around">
           <CTPulsatingButton
-            className="relative mt-10 bg-[#dc322f]"
+            className="relative mt-10 bg-vc-delete"
             variant="ripple"
             onClick={handleNext}>
             <p className="font-semibold text-white">
