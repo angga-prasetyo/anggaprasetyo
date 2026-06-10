@@ -14,3 +14,5 @@ export const Home = () => {
     </CTErrorBoundary>
   );
 };
+
+export const preloadHome = () => import('./page');
