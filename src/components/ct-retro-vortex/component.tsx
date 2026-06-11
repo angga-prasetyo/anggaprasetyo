@@ -129,7 +129,7 @@ function CoreGlow({
           'radial-gradient(circle, #fff 0%, rgba(0,255,200,0.9) 40%, rgba(0,200,255,0.4) 70%, transparent 100%)',
         boxShadow:
           '0 0 18px 6px rgba(0,255,200,0.5), 0 0 48px 20px rgba(0,180,255,0.2)',
-        animation: `corePulse 3s ease-in${variant === 'blind' ? ', coreBlind 5s ease-in' : ''}`,
+        animation: `coreGlow 3s ease-in${variant === 'blind' ? ', coreBlind 5s ease-in' : ''}`,
       }}
     />
   );
@@ -232,7 +232,7 @@ function RetroVortexStyles() {
         from { transform: translate(-50%, -50%) scale(1)    rotate(0deg); }
         to   { transform: translate(-50%, -50%) scale(0.05) rotate(720deg); }
       }
-      @keyframes corePulse {
+      @keyframes coreGlow {
         from { transform: translate(-50%, -50%) scale(0.85); opacity: 0; }
         to   { transform: translate(-50%, -50%) scale(1.25); opacity: 1;   }
       }
