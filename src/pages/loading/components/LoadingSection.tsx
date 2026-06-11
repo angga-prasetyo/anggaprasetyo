@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
+import { CTRetroVortex } from '@/components/ct-retro-vortex/component';
+import { AnimatedCircularProgressBar } from '@/components/ui/animated-circular-progress-bar';
 import { AUDIOS } from '@/constants/audios';
 import { preloadHome } from '@/pages/home';
 import { useComponentStore } from '@/stores/component/store';
@@ -55,7 +57,8 @@ export const LoadingSection: React.FC = () => {
 
   return (
     <div className="h-full w-full flex justify-center items-center">
-      <h1>{`Progress: ${progress}%`}</h1>
+      <CTRetroVortex ringsOnly skipRingIdx={[0, 1, 2, 3]} />
+      <AnimatedCircularProgressBar className="absolute" value={progress} />
     </div>
   );
 };

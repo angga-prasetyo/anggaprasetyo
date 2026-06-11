@@ -161,18 +161,30 @@ function Particles({ items }: { items: Particle[] }) {
 // ---------------------------------------------------------------------------
 // Main component
 // ---------------------------------------------------------------------------
-interface RetroVortexProps {
-  /** Height of the scene in px (default 520) */
+interface RetroVortexPropsWithRingsOnly {
+  ringsOnly: true;
+  skipRingIdx?: number[];
+}
+
+interface DefaultRetroVortexProps {
+  ringsOnly?: false;
+  skipRingIdx?: number[];
+}
+type RetroVortexProps = (
+  | RetroVortexPropsWithRingsOnly
+  | DefaultRetroVortexProps
+) & {
   height?: number | string;
-  /** Particle count (default 28) */
   particleCount?: number;
   className?: string;
-}
+};
 
 export function CTRetroVortex({
   height = '100%',
   particleCount = 5,
   className,
+  ringsOnly = false,
+  skipRingIdx,
 }: RetroVortexProps) {
   const [blindingCoreGlow, setBlindingCoreGlow] = useState(false);
   setTimeout(() => {
@@ -205,12 +217,18 @@ export function CTRetroVortex({
             left: '50%',
             transform: 'translate(-50%, -50%)',
           }}>
-          <Rays />
-          {RINGS.map((r, i) => (
-            <Ring key={r.size} {...{ ...r }} index={i} />
-          ))}
-          <Particles items={particlesRef.current} />
-          <CoreGlow {...(blindingCoreGlow ? { variant: 'blind' } : {})} />
+          {RINGS.map((r, i) => {
+            const skipRing = skipRingIdx?.find((el) => el == i);
+            if (skipRing) return;
+            return <Ring key={r.size} {...{ ...r }} index={i} />;
+          })}
+          {!ringsOnly && (
+            <>
+              <Rays />
+              <Particles items={particlesRef.current} />
+              <CoreGlow {...(blindingCoreGlow ? { variant: 'blind' } : {})} />
+            </>
+          )}
         </div>
       </div>
     </>
