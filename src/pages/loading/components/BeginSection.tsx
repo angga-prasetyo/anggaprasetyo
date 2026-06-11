@@ -21,14 +21,24 @@ export const BeginSection: React.FC = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => changeBgm(AUDIOS.BEGIN), []);
 
-  setInterval(() => {
-    setParticles((current) => (current += 15));
-  }, particlesIncrementIntervals);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setParticles((c) => c + 55);
+    }, particlesIncrementIntervals);
 
-  setTimeout(() => {
-    changeFinishPreload(true);
-    navigate(UIEndpointsCommon.HOME);
-  }, maxAnimationDuration);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      changeFinishPreload(true);
+      navigate(UIEndpointsCommon.HOME);
+    }, maxAnimationDuration);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [changeFinishPreload, navigate]);
 
   return (
     <div className="h-full w-full flex justify-center items-center">

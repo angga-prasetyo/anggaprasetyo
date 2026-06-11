@@ -35,8 +35,10 @@ const RAY_ANGLES = Array.from({ length: 12 }, (_, i) => i * 30);
 // ---------------------------------------------------------------------------
 // Utils
 // ---------------------------------------------------------------------------
-function generateParticles(count: number): Particle[] {
-  const accelerationDivider = count >= 50 ? 10 : 1;
+function generateParticles(
+  count: number,
+  accelerationDivider: number,
+): Particle[] {
   return Array.from({ length: count }, () => {
     const angle = Math.random() * 360;
     const dist = 60 + Math.random() * 1400;
@@ -181,7 +183,7 @@ type RetroVortexProps = (
 
 export function CTRetroVortex({
   height = '100%',
-  particleCount = 5,
+  particleCount = 15,
   className,
   ringsOnly = false,
   skipRingIdx,
@@ -192,8 +194,13 @@ export function CTRetroVortex({
   }, 6000);
   // Stable particle list — recalculate only on particleCount change
   const particlesRef = useRef<Particle[]>([]);
-  if (particlesRef.current.length !== particleCount) {
-    particlesRef.current = generateParticles(particleCount);
+  if (particlesRef.current.length < particleCount) {
+    const toAdd = particleCount - particlesRef.current.length;
+    const accelerationDivider = particleCount / 15;
+    particlesRef.current = [
+      ...particlesRef.current,
+      ...generateParticles(toAdd, accelerationDivider),
+    ];
   }
 
   return (
