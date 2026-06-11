@@ -189,9 +189,12 @@ export function CTRetroVortex({
   skipRingIdx,
 }: RetroVortexProps) {
   const [blindingCoreGlow, setBlindingCoreGlow] = useState(false);
-  setTimeout(() => {
-    setBlindingCoreGlow(true);
-  }, 6000);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setBlindingCoreGlow(true), 6000);
+    return () => clearTimeout(timeout);
+  }, []);
+
   // Stable particle list — recalculate only on particleCount change
   const particlesRef = useRef<Particle[]>([]);
   if (particlesRef.current.length < particleCount) {
