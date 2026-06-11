@@ -7,6 +7,9 @@ import { CTErrorBoundary } from './components/ct-error-boundary/component.tsx';
 
 import './index.css';
 
+// Add Initial Dark Theme
+document.body.classList.add('dark');
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <CTErrorBoundary>

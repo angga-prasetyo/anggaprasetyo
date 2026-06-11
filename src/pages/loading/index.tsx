@@ -3,16 +3,14 @@ import { Suspense, lazy } from 'react';
 import { CTErrorBoundary } from '@/components/ct-error-boundary/component';
 import { CTLayoutLoader } from '@/components/ct-layout/loader';
 
-const HomePage = lazy(() => import('./page'));
+const LoadingPage = lazy(() => import('./page'));
 
-export const Home = () => {
+export const Loading = () => {
   return (
     <CTErrorBoundary>
       <Suspense fallback={<CTLayoutLoader />}>
-        <HomePage />
+        <LoadingPage />
       </Suspense>
     </CTErrorBoundary>
   );
 };
-
-export const preloadHome = () => import('./page');

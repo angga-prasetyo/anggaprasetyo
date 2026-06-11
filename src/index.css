@@ -33,7 +33,7 @@
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
+  --chart-5: #384887;
   --radius: 0.625rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
@@ -43,6 +43,22 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  /* Custom Colors */
+  --vc-background: #000c18;
+  --vc-foreground: #6688cc;
+  --vc-func_name: #ddbb88;
+  --vc-number: #f280d0;
+  --vc-string: #22aa44;
+  --vc-comment: #384887;
+  --vc-func_arg: #2277ff;
+  --vc-line_number: #406385;
+  --vc-act_line_number: #80a2c2;
+  --vc-keyword: #225588;
+  --vc-const: #9966b8;
+  --vc-term_bright_cyan: #78ffff;
+  --vc-delete: #dc322f;
+  /* End of Custom Colors */
 }
 
 a {
@@ -99,22 +115,67 @@ button {
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* Custom Colors */
+  --color-vc-background: var(--vc-background);
+  --color-vc-foreground: var(--vc-foreground);
+  --color-vc-func_name: var(--vc-func_name);
+  --color-vc-number: var(--vc-number);
+  --color-vc-string: var(--vc-string);
+  --color-vc-comment: var(--vc-comment);
+  --color-vc-func_arg: var(--vc-func_arg);
+  --color-vc-line_number: var(--vc-line_number);
+  --color-vc-act_line_number: var(--vc-act_line_number);
+  --color-vc-keyword: var(--vc-keyword);
+  --color-vc-const: var(--vc-const);
+  --color-vc-term_bright_cyan: var(--vc-term_bright_cyan);
+  --color-vc-delete: var(--vc-delete);
+
+  /* End of Custom Colors */
+
+  /* Custom Animation */
+
+  /* Pulse Animation */
+  --animate-pulse: pulse var(--duration) ease-out infinite;
+  --animate-pulse-ripple: pulse-ripple var(--duration)
+    cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  @keyframes pulse {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 var(--pulse-color, oklch(from var(--bg) l c h / 0.5));
+    }
+    50% {
+      box-shadow: 0 0 0 var(--distance)
+        var(--pulse-color, oklch(from var(--bg) l c h / 0.5));
+    }
+  }
+  @keyframes pulse-ripple {
+    0% {
+      box-shadow: 0 0 0 0 oklch(from var(--pulse-color, var(--bg)) l c h / 1);
+    }
+    100% {
+      box-shadow: 0 0 0 var(--distance)
+        oklch(from var(--pulse-color, var(--bg)) l c h / 0);
+    }
+  }
+
+  /* End of Custom Animation */
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
+  --background: #000c18;
+  --foreground: #6688cc;
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
+  --primary: #78ffff;
+  --primary-foreground: #333333;
+  --secondary: #384887;
   --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
+  --muted: #384887;
   --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
+  --accent: #384887;
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 10%);
@@ -124,12 +185,12 @@ button {
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
+  --chart-5: #384887;
   --sidebar: oklch(0.205 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
   --sidebar-primary: oklch(0.488 0.243 264.376);
   --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent: #384887;
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);

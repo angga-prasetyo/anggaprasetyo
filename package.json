@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.2.8",
+    "@radix-ui/react-radio-group": "^1.4.0",
     "@rive-app/react-webgl2": "^4.28.6",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
