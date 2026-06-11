@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { cn } from '@/lib/utils';
 
@@ -36,15 +36,15 @@ const RAY_ANGLES = Array.from({ length: 12 }, (_, i) => i * 30);
 // Utils
 // ---------------------------------------------------------------------------
 function generateParticles(count: number): Particle[] {
-  const accelerationDivider = count >= 30 ? 10 : 1;
+  const accelerationDivider = count >= 50 ? 10 : 1;
   return Array.from({ length: count }, () => {
     const angle = Math.random() * 360;
-    const dist = 60 + Math.random() * 140;
+    const dist = 60 + Math.random() * 1400;
     const rad = (angle * Math.PI) / 180;
     return {
       x: Math.cos(rad) * dist,
       y: Math.sin(rad) * dist,
-      size: 2 + Math.random() * 3,
+      size: 5 + Math.random() * 3,
       color:
         PARTICLE_COLORS[Math.floor(Math.random() * PARTICLE_COLORS.length)],
       duration: (1.2 + Math.random() * 2.4) / accelerationDivider,
@@ -82,14 +82,12 @@ function Ring({
 function Rays() {
   return (
     <div
-      className="absolute"
+      className="absolute w-screen h-screen"
       style={{
         top: '50%',
         left: '50%',
-        width: 3000,
-        height: 3000,
         transform: 'translate(-50%, -50%)',
-        animation: 'raysRotate 11s linear infinite',
+        animation: 'raysRotate 8s linear infinite',
       }}>
       {RAY_ANGLES.map((angle) => (
         <div
@@ -131,10 +129,7 @@ function CoreGlow({
           'radial-gradient(circle, #fff 0%, rgba(0,255,200,0.9) 40%, rgba(0,200,255,0.4) 70%, transparent 100%)',
         boxShadow:
           '0 0 18px 6px rgba(0,255,200,0.5), 0 0 48px 20px rgba(0,180,255,0.2)',
-        animation:
-          variant === 'pulse'
-            ? 'corePulse 3s ease-in'
-            : 'coreBlind 11s ease-in',
+        animation: `corePulse 3s ease-in${variant === 'blind' ? ', coreBlind 5s ease-in' : ''}`,
       }}
     />
   );
@@ -142,7 +137,7 @@ function CoreGlow({
 
 function Particles({ items }: { items: Particle[] }) {
   return (
-    <div className="absolute" style={{ top: '50%', left: '50%' }}>
+    <div className="absolute">
       {items.map((p, i) => (
         <div
           key={i}
@@ -179,6 +174,10 @@ export function CTRetroVortex({
   particleCount = 5,
   className,
 }: RetroVortexProps) {
+  const [blindingCoreGlow, setBlindingCoreGlow] = useState(false);
+  setTimeout(() => {
+    setBlindingCoreGlow(true);
+  }, 6000);
   // Stable particle list — recalculate only on particleCount change
   const particlesRef = useRef<Particle[]>([]);
   if (particlesRef.current.length !== particleCount) {
@@ -198,9 +197,6 @@ export function CTRetroVortex({
           className,
         )}
         style={{ height }}>
-        {/* --- Background grid --- */}
-        {/* <GridPlane /> */}
-
         {/* --- Vortex centre --- */}
         <div
           className="absolute"
@@ -214,23 +210,8 @@ export function CTRetroVortex({
             <Ring key={r.size} {...{ ...r }} index={i} />
           ))}
           <Particles items={particlesRef.current} />
-          <CoreGlow />
-          <CoreGlow size="100%" variant="blind" />
+          <CoreGlow {...(blindingCoreGlow ? { variant: 'blind' } : {})} />
         </div>
-
-        {/* --- Edge fades --- */}
-        <div className="absolute top-0 left-0 w-full h-[30%] bg-linear-to-b from-black to-transparent pointer-events-none" />
-        <div className="absolute top-0 left-0 h-full w-[12%] bg-linear-to-r from-black to-transparent pointer-events-none" />
-        <div className="absolute top-0 right-0 h-full w-[12%] bg-linear-to-l from-black to-transparent pointer-events-none" />
-
-        {/* --- CRT scan line --- */}
-        <div
-          className="absolute left-0 w-full h-0.5 pointer-events-none"
-          style={{
-            background: 'rgba(0,255,180,0.06)',
-            animation: 'scanMove 8s linear infinite',
-          }}
-        />
       </div>
     </>
   );
@@ -247,10 +228,6 @@ function RetroVortexStyles() {
     const style = document.createElement('style');
     style.id = STYLE_ID;
     style.textContent = `
-      @keyframes gridPull {
-        from { background-position: 0 0; }
-        to   { background-position: 0 60px; }
-      }
       @keyframes spinRing {
         from { transform: translate(-50%, -50%) scale(1)    rotate(0deg); }
         to   { transform: translate(-50%, -50%) scale(0.05) rotate(720deg); }
@@ -260,8 +237,8 @@ function RetroVortexStyles() {
         to   { transform: translate(-50%, -50%) scale(1.25); opacity: 1;   }
       }
       @keyframes coreBlind{
-        from { transform: translate(-50%, -50%) scale(0.85); opacity: 0; }
-        to   { transform: translate(-50%, -50%) scale(100); opacity: 1;   }
+        from { transform: scale(1.25); }
+        to   { transform: scale(100);  }
       }
       @keyframes raysRotate {
         from { transform: translate(-50%, -50%) rotate(0deg); opacity: 0;   }

@@ -22,7 +22,7 @@ export const BeginSection: React.FC = () => {
   useEffect(() => changeBgm(AUDIOS.BEGIN), []);
 
   setInterval(() => {
-    setParticles((current) => (current += 5));
+    setParticles((current) => (current += 15));
   }, particlesIncrementIntervals);
 
   setTimeout(() => {
