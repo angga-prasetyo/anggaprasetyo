@@ -58,6 +58,13 @@
   --vc-const: #9966b8;
   --vc-term_bright_cyan: #78ffff;
   --vc-delete: #dc322f;
+  --background-blinding: radial-gradient(
+    circle,
+    #fff 0%,
+    rgba(0, 255, 200, 0.9) 40%,
+    rgba(0, 200, 255, 0.4) 70%,
+    transparent 100%
+  );
   /* End of Custom Colors */
 }
 
@@ -130,6 +137,7 @@ button {
   --color-vc-const: var(--vc-const);
   --color-vc-term_bright_cyan: var(--vc-term_bright_cyan);
   --color-vc-delete: var(--vc-delete);
+  --color-background-blinding: var(--background-blinding);
 
   /* End of Custom Colors */
 
@@ -156,6 +164,26 @@ button {
     100% {
       box-shadow: 0 0 0 var(--distance)
         oklch(from var(--pulse-color, var(--bg)) l c h / 0);
+    }
+  }
+
+  --animate-fadeIn: fadeIn var(--duration) ease-in forwards;
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  --animate-fadeOut: fadeOut var(--duration) ease-out forwards;
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
     }
   }
 
