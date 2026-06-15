@@ -4,6 +4,7 @@ import { CTLayout } from '@/components/ct-layout';
 import { AUDIOS } from '@/constants/audios';
 import { useComponentStore } from '@/stores/component/store';
 
+import NavMenu from './components/NavMenu';
 import { pageMeta } from './constant';
 
 const HomePage: React.FC = () => {
@@ -60,6 +61,10 @@ const HomePage: React.FC = () => {
           </div>
         </div>
       </section>
+
+      <div className="absolute bottom-40 right-0">
+        <NavMenu />
+      </div>
     </CTLayout>
   );
 };

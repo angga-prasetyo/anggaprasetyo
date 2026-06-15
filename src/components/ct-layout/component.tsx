@@ -32,7 +32,7 @@ const CTLayoutComponent: React.FC<CTLayoutProps> = ({
   return (
     <div
       id="ct_layout"
-      className={cn('h-screen', className)}
+      className={cn('h-screen relative', className)}
       style={{ background }}
       {...rest}>
       <CTSeoMeta meta={meta} />
