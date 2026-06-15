@@ -13,6 +13,7 @@
     "test": "eslint ./src --ext js,jsx,ts,tsx --fix --ignore-path ./.gitignore --report-unused-disable-directives --max-warnings 0 && vitest run --coverage && pnpm build && playwright test"
   },
   "dependencies": {
+    "@fontsource-variable/exo-2": "^5.2.8",
     "@fontsource-variable/inter": "^5.2.8",
     "@radix-ui/react-radio-group": "^1.4.0",
     "@rive-app/react-webgl2": "^4.28.6",

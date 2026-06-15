@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 
 import { CTLayout } from '@/components/ct-layout';
-import { Skeleton } from '@/components/ui/skeleton';
 import { AUDIOS } from '@/constants/audios';
 import { useComponentStore } from '@/stores/component/store';
 
@@ -13,21 +12,18 @@ const HomePage: React.FC = () => {
   useEffect(() => changeBgm(AUDIOS.MAIN), []);
   return (
     <CTLayout meta={pageMeta} titlePage="Homepage">
-      {/* Overlay blinding yang fade out */}
+      {/* Overlay blinding fade out */}
       <div
-        className="absolute inset-0 pointer-events-none animate-fadeOut"
+        className="fixed -inset-50 pointer-events-none animate-fadeOut"
         style={
           {
             background: 'var(--background-blinding)',
-            transform: 'scale(2)',
-            '--duration': '3s',
           } as React.CSSProperties
         }
       />
-      <div className="flex items-center gap-4">
-        <h1>Home</h1>
-        <Skeleton className="h-4 w-62.5" />
-      </div>
+
+      {/* Home Content */}
+      <div className="flex items-center gap-4">adasdas</div>
     </CTLayout>
   );
 };
