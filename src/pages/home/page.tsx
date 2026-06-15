@@ -37,16 +37,29 @@ const HomePage: React.FC = () => {
           Enim elit veniam sit ullamco magna.
         </h2>
       </div> */}
-      <div className="pt-15 flex justify-end">
-        <div className="relative bg-[#596266] w-60 mr-5">
-          <h2 className="absolute text-[#E8E8DC] text-xl font-bold -top-4 left-3">
+      <section className="pt-15 flex flex-col items-end justify-end">
+        <div className="relative bg-[#596266] w-42 mr-3">
+          <h2 className="absolute text-[#E8E8DC] text-lg font-bold -top-4 left-3">
             Angga Prasetyo
           </h2>
           <h2 className="text-[#E8E8DC] text-md font-bold pt-4 pb-2 pl-3">
-            Remote Frontend Engineer
+            Frontend Engineer
           </h2>
         </div>
-      </div>
+        <div className="p-px bg-[#00c9d4] w-42 mr-3 my-1 opacity-30" />
+        <div className="flex justify-between gap-1 w-42 mr-3">
+          <div className="bg-[#a9a9a6] rounded w-full">
+            <h3 className="text-[#4d4d4d] font-semibold text-center text-sm">
+              React
+            </h3>
+          </div>
+          <div className="bg-[#a9a9a6] rounded w-full">
+            <h3 className="text-[#4d4d4d] font-semibold text-center text-sm">
+              SPA
+            </h3>
+          </div>
+        </div>
+      </section>
     </CTLayout>
   );
 };
