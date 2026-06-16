@@ -24,20 +24,6 @@ const HomePage: React.FC = () => {
       />
 
       {/* Home Content */}
-      {/* <div className="bg-[#080C10]">
-        <h2 className="text-[#00c9d4] text-2xl font-bold pt-30">
-          Enim elit veniam sit ullamco magna.
-        </h2>
-        <h2 className="text-[#C0392B] text-2xl font-bold">
-          Enim elit veniam sit ullamco magna.
-        </h2>
-        <h2 className="text-[#E8F4F4] text-2xl font-bold">
-          Enim elit veniam sit ullamco magna.
-        </h2>
-         <h2 className="text-[#E8E8DC] text-2xl font-bold">
-          Enim elit veniam sit ullamco magna.
-        </h2>
-      </div> */}
       <section className="pt-15 flex flex-col items-end justify-end">
         <div className="relative bg-[#596266] w-42 mr-3">
           <h2 className="absolute text-[#E8E8DC] text-lg font-bold -top-4 left-3">
@@ -62,7 +48,7 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
-      <div className="absolute bottom-40 right-0">
+      <div className="absolute bottom-5 right-0">
         <NavMenu />
       </div>
     </CTLayout>

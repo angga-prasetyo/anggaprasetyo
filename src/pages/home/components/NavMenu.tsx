@@ -3,10 +3,12 @@ import { useState } from 'react';
 import {
   User,
   Code2,
-  GraduationCap,
   ChevronRight,
+  BriefcaseBusiness,
   type LucideIcon,
 } from 'lucide-react';
+
+import { cn } from '@/lib/utils';
 
 type NavItem = {
   id: string;
@@ -20,11 +22,11 @@ const NAV_ITEMS: NavItem[] = [
   { id: 'profile', index: '01', sub: 'Overview', label: 'Profile', icon: User },
   { id: 'projects', index: '02', sub: 'Works', label: 'Projects', icon: Code2 },
   {
-    id: 'education',
+    id: 'experience',
     index: '03',
     sub: 'Record',
-    label: 'Education',
-    icon: GraduationCap,
+    label: 'Experience',
+    icon: BriefcaseBusiness,
   },
 ];
 
@@ -33,7 +35,7 @@ interface NavMenuProps {
 }
 
 export function NavMenu({ onSelect }: NavMenuProps) {
-  const [active, setActive] = useState('');
+  const [active, setActive] = useState('profile');
   const [hovered, setHovered] = useState<string | null>(null);
 
   function handleSelect(id: string) {
@@ -52,7 +54,7 @@ export function NavMenu({ onSelect }: NavMenuProps) {
           animation: ef-pulse 1.8s ease-in-out infinite;
         }
       `}</style>
-      <div className="flex flex-col items-end justify-end mt-10">
+      <div className="flex flex-col items-end justify-end">
         <nav
           aria-label="Main navigation"
           className="flex flex-col justify-end items-end gap-2.5 w-55">
@@ -66,16 +68,18 @@ export function NavMenu({ onSelect }: NavMenuProps) {
 
             return (
               <button
-                className="relative flex items-center gap-3.5 py-3.5 pl-3.5 pr-4.5 cursor-pointer text-left outline-0 w-full"
+                className={cn(
+                  'relative flex items-center gap-3.5 py-3.5 pl-3.5 pr-4.5cursor-pointer text-left outline-0 w-full border',
+                  isActive || isHovered
+                    ? 'bg-[#1D150F]/70 border-[#C0392B]/45'
+                    : 'bg-[#1c1e22]',
+                )}
                 key={item.id}
                 onClick={() => handleSelect(item.id)}
                 onMouseEnter={() => setHovered(item.id)}
                 onMouseLeave={() => setHovered(null)}
                 aria-current={isActive ? 'page' : undefined}
                 style={{
-                  background:
-                    isActive || isHovered ? 'rgba(245,197,24,0.08)' : '#1c1e22',
-                  border: `1px solid ${isActive || isHovered ? 'rgba(245,197,24,0.45)' : 'rgba(255,255,255,0.1)'}`,
                   clipPath:
                     'polygon(10px 0%,100% 0%,100% calc(100% - 10px),calc(100% - 10px) 100%,0% 100%,0% 10px)',
                   transform: `translateX(${tx}px) rotateY(${ry}deg)`,
@@ -89,10 +93,12 @@ export function NavMenu({ onSelect }: NavMenuProps) {
                 }}>
                 {/* active left bar */}
                 <span
-                  className="absolute left-0 top-1 bottom-1 w-1 bg-[#f5c518]"
+                  className={cn(
+                    'absolute left-0 top-1 bottom-1 w-1 bg-[#C0392B] opacity-0',
+                    isActive && 'opacity-100',
+                  )}
                   aria-hidden="true"
                   style={{
-                    opacity: isActive ? 1 : 0,
                     transition: 'opacity 0.2s ease',
                   }}
                 />
@@ -104,12 +110,11 @@ export function NavMenu({ onSelect }: NavMenuProps) {
                   {[1, 0.5, 0.25].map((opacity, i) => (
                     <span
                       key={i}
-                      className="block w-1 h-1 rotate-45"
+                      className={cn(
+                        'block w-1 h-1 rotate-45',
+                        isActive || isHovered ? 'bg-[#00c9d4]' : 'bg-white/15',
+                      )}
                       style={{
-                        background:
-                          isActive || isHovered
-                            ? '#f5c518'
-                            : 'rgba(255,255,255,0.15)',
                         opacity,
                         transition: 'background 0.2s ease',
                       }}
@@ -119,18 +124,14 @@ export function NavMenu({ onSelect }: NavMenuProps) {
 
                 {/* icon box */}
                 <span
-                  className="flex justify-center items-center w-8 h-8 shrink-0"
+                  className={cn(
+                    'flex justify-center items-center w-8 h-8 shrink-0 border',
+                    isActive || isHovered
+                      ? 'border-[#C0392B] bg-black/50 text-[#C0392B]'
+                      : 'border-white/1 bg-white/4 text-white/45',
+                  )}
                   style={{
-                    border: `1px solid ${isActive || isHovered ? '#c49a12' : 'rgba(255,255,255,0.1)'}`,
-                    background:
-                      isActive || isHovered
-                        ? 'rgba(245,197,24,0.12)'
-                        : 'rgba(255,255,255,0.04)',
                     transition: 'border-color 0.2s ease, background 0.2s ease',
-                    color:
-                      isActive || isHovered
-                        ? '#f5c518'
-                        : 'rgba(255,255,255,0.45)',
                   }}>
                   <Icon size={15} />
                 </span>
@@ -141,9 +142,11 @@ export function NavMenu({ onSelect }: NavMenuProps) {
                     {item.index?.toUpperCase()} / {item.sub?.toUpperCase()}
                   </span>
                   <span
-                    className="block text-[15px] font-extrabold tracking-[1px]"
+                    className={cn(
+                      'block text-[15px] font-extrabold tracking-[1px]',
+                      isActive || isHovered ? 'text-white' : 'text-[#aeaea8]',
+                    )}
                     style={{
-                      color: isActive || isHovered ? '#ffffff' : '#e8e8e0',
                       transition: 'color 0.2s ease',
                     }}>
                     {item.label?.toUpperCase()}
@@ -152,17 +155,14 @@ export function NavMenu({ onSelect }: NavMenuProps) {
 
                 {/* chevron */}
                 <ChevronRight
-                  className="w-3.5 h-3.5 shrink-0"
+                  className={cn(
+                    'w-3.5 h-3.5 shrink-0',
+                    isActive || isHovered
+                      ? 'text-[#f5c518] translate-x-0.5'
+                      : 'text-white/15 translate-x-0',
+                  )}
                   aria-hidden="true"
                   style={{
-                    color:
-                      isActive || isHovered
-                        ? '#f5c518'
-                        : 'rgba(255,255,255,0.15)',
-                    transform:
-                      isActive || isHovered
-                        ? 'translateX(2px)'
-                        : 'translateX(0)',
                     transition: 'color 0.2s ease, transform 0.2s ease',
                   }}
                 />
