@@ -4,6 +4,7 @@ import { CTLayout } from '@/components/ct-layout';
 import { AUDIOS } from '@/constants/audios';
 import { useComponentStore } from '@/stores/component/store';
 
+import { ChatBubble } from './components/ChatBubble';
 import NavMenu from './components/NavMenu';
 import { pageMeta } from './constant';
 
@@ -25,7 +26,7 @@ const HomePage: React.FC = () => {
 
       {/* Home Content */}
       <section className="pt-15 flex flex-col items-end justify-end">
-        <div className="relative bg-[#596266] w-42 mr-3">
+        <div className="relative bg-[#596266]/30 w-42 mr-3">
           <h2 className="absolute text-[#E8E8DC] text-lg font-bold -top-4 left-3">
             Angga Prasetyo
           </h2>
@@ -47,8 +48,11 @@ const HomePage: React.FC = () => {
           </div>
         </div>
       </section>
+      <div className="absolute top-15 left-2 w-50">
+        <ChatBubble message="Reprehenderit irure aliqua culpa ad ut sit laboris sunt consequat veniam reprehenderit. Occaecat enim ut proident elit irure duis. Nulla minim ad culpa officia pariatur labore nostrud mollit. Incididunt enim sunt aute occaecat occaecat velit. Pariatur proident quis pariatur incididunt occaecat amet laborum do non dolore voluptate. Eiusmod Lorem do aute occaecat commodo magna deserunt ad eu enim." />
+      </div>
 
-      <div className="absolute bottom-5 right-0">
+      <div className="absolute bottom-5 right-0 bg-[#4d4d4d] py-1 border-4 border-white/50 rounded-md">
         <NavMenu />
       </div>
     </CTLayout>
