@@ -11,7 +11,12 @@ import { defineConfig } from 'vitest/config';
 export default () => {
   return defineConfig({
     optimizeDeps: {
-      include: ['react-router-dom'],
+      include: [
+        'react-router-dom',
+        'three',
+        '@react-three/fiber',
+        '@react-three/drei',
+      ],
     },
     plugins: [
       react(),
@@ -27,6 +32,7 @@ export default () => {
       alias: {
         '@': path.resolve(__dirname, './src'),
       },
+      dedupe: ['three'],
     },
     server: {
       port: 3000,

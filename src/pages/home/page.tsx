@@ -4,6 +4,7 @@ import { CTLayout } from '@/components/ct-layout';
 import { AUDIOS } from '@/constants/audios';
 import { useComponentStore } from '@/stores/component/store';
 
+import { Character } from './components/Char';
 import { ChatBubble } from './components/ChatBubble';
 import NavMenu from './components/NavMenu';
 import { pageMeta } from './constant';
@@ -52,6 +53,7 @@ const HomePage: React.FC = () => {
         <ChatBubble message="Reprehenderit irure aliqua culpa ad ut sit laboris sunt consequat veniam reprehenderit. Occaecat enim ut proident elit irure duis. Nulla minim ad culpa officia pariatur labore nostrud mollit. Incididunt enim sunt aute occaecat occaecat velit. Pariatur proident quis pariatur incididunt occaecat amet laborum do non dolore voluptate. Eiusmod Lorem do aute occaecat commodo magna deserunt ad eu enim." />
       </div>
 
+      <Character />
       <div className="absolute bottom-5 right-0 bg-[#4d4d4d] py-1 border-4 border-white/50 rounded-md">
         <NavMenu />
       </div>
