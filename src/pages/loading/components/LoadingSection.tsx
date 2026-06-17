@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
+import { useGLTF } from '@react-three/drei';
+
 import { CTRetroVortex } from '@/components/ct-retro-vortex/component';
 import { AnimatedCircularProgressBar } from '@/components/ui/animated-circular-progress-bar';
 import { AUDIOS } from '@/constants/audios';
@@ -36,6 +38,9 @@ export const LoadingSection: React.FC = () => {
         ...(enableAudio
           ? [preloadAudio(AUDIOS.BEGIN), preloadAudio(AUDIOS.MAIN)]
           : []),
+
+        // 3D Model
+        useGLTF.preload('/ap-char_v1.glb'),
       ];
 
       // Progress Calculation
