@@ -188,6 +188,28 @@ button {
     }
   }
 
+  @keyframes blink-cursor {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+  --animate-blink-cursor: blink-cursor var(--duration, 1s) step-end infinite;
+
+  @keyframes scale-up-center {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  --animate-scale-up-center: scale-up-center var(--duration, 1s)
+    cubic-bezier(0.39, 0.575, 0.565, 1) both;
+
   /* End of Custom Animation */
 }
 
