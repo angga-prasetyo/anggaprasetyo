@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import {
   User,
@@ -8,7 +8,9 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 
+import { WORDS, words } from '@/constants/languages';
 import { cn } from '@/lib/utils';
+import { useComponentStore } from '@/stores/component/store';
 
 type NavItem = {
   id: string;
@@ -18,23 +20,38 @@ type NavItem = {
   icon: LucideIcon;
 };
 
-const NAV_ITEMS: NavItem[] = [
-  { id: 'profile', index: '01', sub: 'Overview', label: 'Profile', icon: User },
-  { id: 'projects', index: '02', sub: 'Works', label: 'Projects', icon: Code2 },
-  {
-    id: 'experience',
-    index: '03',
-    sub: 'Record',
-    label: 'Experience',
-    icon: BriefcaseBusiness,
-  },
-];
-
 interface NavMenuProps {
   onSelect?: (id: string) => void;
 }
 
 export function NavMenu({ onSelect }: NavMenuProps) {
+  const { language } = useComponentStore((state) => state);
+  const NAV_ITEMS: NavItem[] = useMemo(
+    () => [
+      {
+        id: 'profile',
+        index: '01',
+        sub: words[WORDS.OVERVIEW][language],
+        label: words[WORDS.PROFILE][language],
+        icon: User,
+      },
+      {
+        id: 'projects',
+        index: '02',
+        sub: words[WORDS.WORKS][language],
+        label: words[WORDS.PROJECT][language],
+        icon: Code2,
+      },
+      {
+        id: 'experience',
+        index: '03',
+        sub: words[WORDS.RECORD][language],
+        label: words[WORDS.EXPERIENCE][language],
+        icon: BriefcaseBusiness,
+      },
+    ],
+    [language],
+  );
   const [active, setActive] = useState('profile');
   const [hovered, setHovered] = useState<string | null>(null);
 

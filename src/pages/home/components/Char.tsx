@@ -7,6 +7,10 @@ import { Group, LoopOnce, Mesh, SRGBColorSpace } from 'three';
 import { LinearToneMapping } from 'three';
 import { Bone } from 'three';
 
+import { useHomeStore } from '@/stores/home/store';
+
+import { charExpressions, CONTACT_KEYS } from '../constant';
+
 function Model() {
   const group = useRef<Group>(null);
   const { scene, animations } = useGLTF('/ap-char_v1.glb');
@@ -18,6 +22,8 @@ function Model() {
     chest: null,
     spine: null,
   });
+
+  const { chatTopic } = useHomeStore((state) => state);
 
   useEffect(() => {
     meshRefs.current = [];
@@ -46,25 +52,50 @@ function Model() {
 
     const t = clock.getElapsedTime();
 
-    // Kedip setiap 3 detik
-    const blinkCycle = t % 3;
-    const isBlinking = blinkCycle < 0.15;
-    const val = isBlinking ? 1 : 0;
+    // Kedip setiap 3 detik jika tidak nullish
+    const nullishBlinkingTopicCriteria = [CONTACT_KEYS.IN];
 
-    meshRefs.current.forEach((mesh) => {
-      if (!mesh.morphTargetInfluences || !mesh.morphTargetDictionary) return;
-      const dict = mesh.morphTargetDictionary;
-      const influences = mesh.morphTargetInfluences;
+    if (!nullishBlinkingTopicCriteria.find((el) => el === chatTopic)) {
+      const blinkCycle = t % 3;
+      const isBlinking = blinkCycle < 0.15;
+      const val = isBlinking ? 1 : 0;
 
-      if (dict['Fcl_EYE_Close'] !== undefined)
-        influences[dict['Fcl_EYE_Close']] = val;
-    });
+      meshRefs.current.forEach((mesh) => {
+        if (!mesh.morphTargetInfluences || !mesh.morphTargetDictionary) return;
+        const dict = mesh.morphTargetDictionary;
+        const influences = mesh.morphTargetInfluences;
+
+        if (dict['Fcl_EYE_Close'] !== undefined)
+          influences[dict['Fcl_EYE_Close']] = val;
+      });
+    }
 
     // Breathing
     const breath = Math.sin(t * 0.8) * 0.015;
     if (bonesRef.current.chest) bonesRef.current.chest.rotation.x = breath;
     if (bonesRef.current.spine)
       bonesRef.current.spine.rotation.x = breath * 0.5;
+  });
+
+  // Ekspresi berdasarkan chatTopic
+  const expression = charExpressions[chatTopic || 'neutral'];
+
+  meshRefs.current.forEach((mesh) => {
+    if (!mesh.morphTargetInfluences || !mesh.morphTargetDictionary) return;
+    const dict = mesh.morphTargetDictionary;
+    const influences = mesh.morphTargetInfluences;
+
+    // Reset semua ekspresi dulu
+    Object.keys(charExpressions).forEach((topic) => {
+      Object.keys(charExpressions[topic]).forEach((key) => {
+        if (dict[key] !== undefined) influences[dict[key]] = 0;
+      });
+    });
+
+    // Apply ekspresi baru
+    Object.entries(expression).forEach(([key, value]) => {
+      if (dict[key] !== undefined) influences[dict[key]] = value;
+    });
   });
 
   return <primitive ref={group} object={scene} position={[-0.1, -1.2, 0]} />;

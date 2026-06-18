@@ -5,19 +5,23 @@ import { AUDIOS } from '@/constants/audios';
 import { words } from '@/constants/languages';
 import { useComponentStore } from '@/stores/component/store';
 import { useHomeStore } from '@/stores/home/store';
-import { EnumValues } from '@/types/common';
 
 import { Character } from './components/Char';
 import { ChatBubble } from './components/ChatBubble';
 import { Contacts } from './components/Contacts';
 import NavMenu from './components/NavMenu';
-import { CONTACT_KEYS, pageMeta } from './constant';
+import { pageMeta } from './constant';
 
 const HomePage: React.FC = () => {
   const { language, changeBgm } = useComponentStore((state) => state);
-  const { chatTopic } = useHomeStore((state) => state);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => changeBgm(AUDIOS.MAIN), []);
+  const { chatTopic, resetState } = useHomeStore((state) => state);
+  useEffect(() => {
+    changeBgm(AUDIOS.MAIN);
+    return () => {
+      resetState();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <CTLayout meta={pageMeta} titlePage="Homepage">
       {/* Overlay blinding fade out */}
@@ -64,9 +68,7 @@ const HomePage: React.FC = () => {
       <div className="absolute top-15 left-2 w-50">
         <ChatBubble
           show={Boolean(chatTopic)}
-          message={
-            words[chatTopic as EnumValues<typeof CONTACT_KEYS>][language]
-          }
+          message={chatTopic ? words[chatTopic][language] : ''}
         />
       </div>
       <div className="absolute bottom-5 right-0 bg-[#4d4d4d] py-1 border-4 border-white/50 rounded-md">
