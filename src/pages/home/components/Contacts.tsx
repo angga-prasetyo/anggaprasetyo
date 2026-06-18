@@ -9,9 +9,14 @@ import { useMediaQuery } from 'usehooks-ts';
 
 import { USE_MEDIA_QUERY__SCREEN } from '@/constants/others';
 import { cn } from '@/lib/utils';
+import { useHomeStore } from '@/stores/home/store';
+import { EnumValues } from '@/types/common';
+import { capitalize } from '@/utils/string';
 
-interface ContactItem {
-  key: string;
+import { CONTACT_KEYS } from '../constant';
+
+export interface ContactItem {
+  key: EnumValues<typeof CONTACT_KEYS>;
   label: string;
   href: string;
   // filled-background and tooltip background color/gradient as a CSS value
@@ -21,9 +26,9 @@ interface ContactItem {
 
 const SOCIALS: ContactItem[] = [
   {
-    key: 'whatsapp',
-    label: 'Whatsapp',
-    href: 'https://api.whatsapp.com/send?phone=+YOUR_NUMBER',
+    key: CONTACT_KEYS.WA,
+    label: capitalize(CONTACT_KEYS.WA),
+    href: 'https://api.whatsapp.com/send?phone=+6285894979242',
     fill: '#128c7e',
     icon: (
       <svg
@@ -36,9 +41,9 @@ const SOCIALS: ContactItem[] = [
     ),
   },
   {
-    key: 'linkedin',
-    label: 'LinkedIn',
-    href: 'https://linkedin.com/in/YOUR_PROFILE',
+    key: CONTACT_KEYS.IN,
+    label: capitalize(CONTACT_KEYS.IN, { split: '-', join: '' }),
+    href: 'https://linkedin.com/in/angga-prasetyo-68b5a21bb',
     fill: '#0a66c2',
     icon: (
       <svg
@@ -51,9 +56,9 @@ const SOCIALS: ContactItem[] = [
     ),
   },
   {
-    key: 'github',
-    label: 'GitHub',
-    href: 'https://github.com/YOUR_USERNAME',
+    key: CONTACT_KEYS.GITHUB,
+    label: capitalize(CONTACT_KEYS.GITHUB),
+    href: 'https://github.com/angga-prasetyo',
     fill: '#333',
     icon: (
       <svg
@@ -66,9 +71,9 @@ const SOCIALS: ContactItem[] = [
     ),
   },
   {
-    key: 'email',
-    label: 'Email',
-    href: 'mailto:your@email.com',
+    key: CONTACT_KEYS.EMAIL,
+    label: capitalize(CONTACT_KEYS.EMAIL),
+    href: 'mailto:angga.flavoring448@passinbox.com',
     fill: '#ea4335',
     icon: (
       <svg
@@ -84,49 +89,49 @@ const SOCIALS: ContactItem[] = [
 
 export const Contacts: FC = () => {
   const isDesktop = useMediaQuery(USE_MEDIA_QUERY__SCREEN.DESKTOP);
+  const { chatTopic, changeTopic } = useHomeStore((state) => state);
+
   return (
     <ul className="absolute flex flex-col items-end justify-center gap-2 list-none m-0 p-0 right-1">
-      {SOCIALS.map(({ key, label, href, fill, icon }) => (
-        <li
-          key={key}
-          className="flex justify-center items-center group/item gap-2 cursor-icon">
-          {/* Tooltip */}
-          <div
-            className={cn(
-              'py-2 px-2 rounded text-white text-sm whitespace-nowrap pointer-events-none -top-7.5 transition-all duration-300 ease-in-out group-hover/item:opacity-100 group-hover/item:visible group-hover/item:-top-12.5',
-              isDesktop && 'invisible opacity-0',
-            )}
-            style={{ background: fill }}>
-            {label}
-          </div>
+      {SOCIALS.map(({ key, label, href, fill, icon }) => {
+        return (
+          <li
+            key={key}
+            className="flex justify-center items-center group/item gap-2 cursor-icon"
+            onClick={() => changeTopic(key)}>
+            {/* Tooltip */}
+            <div
+              className={cn(
+                'py-2 px-2 rounded text-white text-sm whitespace-nowrap pointer-events-none -top-7.5 transition-all duration-300 ease-in-out group-hover/item:opacity-100 group-hover/item:visible group-hover/item:-top-12.5',
+                isDesktop && 'invisible opacity-0',
+              )}
+              style={{ background: fill }}>
+              {label}
+            </div>
 
-          {/* Icon button */}
-          <a
-            href={href}
-            aria-label={label}
-            target="_blank"
-            className="
-              relative overflow-hidden
-              flex items-center justify-center
-              w-12.5 h-12.5 rounded-full
-              bg-white text-[#4d4d4d]
-              transition-[color,box-shadow] duration-300 ease-in-out
-              hover:text-white hover:shadow-[3px_2px_45px_0px_rgb(0_0_0/12%)]
-            ">
-            {/* Fill layer — slides up from bottom on hover */}
-            <span
-              className="
-                absolute bottom-0 left-0 w-full h-0
-                transition-[height] duration-300 ease-in-out
-                group-hover/item:h-full
-              "
-              style={{ background: fill }}
-              aria-hidden="true"
-            />
-            {icon}
-          </a>
-        </li>
-      ))}
+            {/* Icon button */}
+            <a
+              href={href}
+              aria-label={label}
+              target="_blank"
+              className={cn(
+                'relative overflow-hidden flex items-center justify-center w-12.5 h-12.5 rounded-full bg-white text-[#4d4d4d] transition-[color,box-shadow] duration-300 ease-in-out hover:text-white hover:shadow-[3px_2px_45px_0px_rgb(0_0_0/12%)]',
+                key === chatTopic && 'text-white',
+              )}>
+              {/* Fill layer — slides up from bottom on hover */}
+              <span
+                className={cn(
+                  'absolute bottom-0 left-0 w-full h-0 transition-[height] duration-300 ease-in-out group-hover/item:h-full',
+                  key === chatTopic && 'h-full',
+                )}
+                style={{ background: fill }}
+                aria-hidden="true"
+              />
+              {icon}
+            </a>
+          </li>
+        );
+      })}
     </ul>
   );
 };

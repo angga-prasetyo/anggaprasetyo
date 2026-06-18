@@ -6,7 +6,7 @@ export interface UseLoadingStoreStateProps {
 }
 
 export interface UseLoadingStoreFunctionProps {
-  changeSection: (value: EnumValues<typeof SECTIONS>) => void;
+  changeSection: (currentSection: UseLoadingStoreStateProps['currentSection']) => void;
   resetState: () => void;
 }
 

@@ -1,19 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import { CTLayout } from '@/components/ct-layout';
-import { CTPulsatingButton } from '@/components/ct-pulsating-button/component';
 import { AUDIOS } from '@/constants/audios';
+import { words } from '@/constants/languages';
 import { useComponentStore } from '@/stores/component/store';
+import { useHomeStore } from '@/stores/home/store';
+import { EnumValues } from '@/types/common';
 
 import { Character } from './components/Char';
 import { ChatBubble } from './components/ChatBubble';
 import { Contacts } from './components/Contacts';
 import NavMenu from './components/NavMenu';
-import { pageMeta } from './constant';
+import { CONTACT_KEYS, pageMeta } from './constant';
 
 const HomePage: React.FC = () => {
-  const { changeBgm } = useComponentStore((state) => state);
-  const [showChat, setShowChat] = useState(false);
+  const { language, changeBgm } = useComponentStore((state) => state);
+  const { chatTopic } = useHomeStore((state) => state);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => changeBgm(AUDIOS.MAIN), []);
   return (
@@ -61,14 +63,11 @@ const HomePage: React.FC = () => {
       <Character />
       <div className="absolute top-15 left-2 w-50">
         <ChatBubble
-          show={showChat}
-          message="Reprehenderit irure aliqua culpa ad ut sit laboris sunt consequat veniam reprehenderit. Occaecat enim ut proident elit irure duis. Nulla minim ad culpa officia pariatur labore nostrud mollit. Incididunt enim sunt aute occaecat occaecat velit. Pariatur proident quis pariatur incididunt occaecat amet laborum do non dolore voluptate. Eiusmod Lorem do aute occaecat commodo magna deserunt ad eu enim."
+          show={Boolean(chatTopic)}
+          message={
+            words[chatTopic as EnumValues<typeof CONTACT_KEYS>][language]
+          }
         />
-        {!showChat && (
-          <CTPulsatingButton onClick={() => setShowChat(true)}>
-            Trigger Chat
-          </CTPulsatingButton>
-        )}
       </div>
       <div className="absolute bottom-5 right-0 bg-[#4d4d4d] py-1 border-4 border-white/50 rounded-md">
         <NavMenu />
