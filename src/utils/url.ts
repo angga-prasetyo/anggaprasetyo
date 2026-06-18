@@ -23,3 +23,4 @@ export const generateUrlWithParams = (
   pathname: string,
   stringifiedParams: string
 ) => `${pathname}${stringifiedParams ? `?${stringifiedParams}` : ''}`;
+

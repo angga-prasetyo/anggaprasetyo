@@ -127,8 +127,7 @@ function CoreGlow({
         width: size,
         height: size,
         transform: 'translate(-50%, -50%)',
-        background:
-          'radial-gradient(circle, #fff 0%, rgba(0,255,200,0.9) 40%, rgba(0,200,255,0.4) 70%, transparent 100%)',
+        background: 'var(--background-blinding)',
         boxShadow:
           '0 0 18px 6px rgba(0,255,200,0.5), 0 0 48px 20px rgba(0,180,255,0.2)',
         animation: `coreGlow 3s ease-in${variant === 'blind' ? ', coreBlind 5s ease-in' : ''}`,

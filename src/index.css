@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
-@import '@fontsource-variable/inter';
+@import '@fontsource-variable/exo-2';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -56,8 +56,16 @@
   --vc-act_line_number: #80a2c2;
   --vc-keyword: #225588;
   --vc-const: #9966b8;
-  --vc-term_bright_cyan: #78ffff;
+  --vc-term_bright_cyan: #00d4c8;
   --vc-delete: #dc322f;
+  --background-blinding: radial-gradient(
+    circle,
+    #fff 0%,
+    rgba(0, 255, 200, 0.9) 40%,
+    rgba(0, 200, 255, 0.4) 70%,
+    transparent 100%
+  );
+  --home-background: linear-gradient(#6b7a7a, #e8e8dc);
   /* End of Custom Colors */
 }
 
@@ -76,7 +84,7 @@ button {
 
 @theme inline {
   --font-heading: var(--font-sans);
-  --font-sans: 'Inter Variable', sans-serif;
+  --font-sans: 'Exo 2 Variable', sans-serif;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -130,6 +138,7 @@ button {
   --color-vc-const: var(--vc-const);
   --color-vc-term_bright_cyan: var(--vc-term_bright_cyan);
   --color-vc-delete: var(--vc-delete);
+  --color-background-blinding: var(--background-blinding);
 
   /* End of Custom Colors */
 
@@ -158,6 +167,48 @@ button {
         oklch(from var(--pulse-color, var(--bg)) l c h / 0);
     }
   }
+
+  --animate-fadeIn: fadeIn var(--duration) ease-in forwards;
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  --animate-fadeOut: fadeOut var(--duration, 6s) ease-out forwards;
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes blink-cursor {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+  --animate-blink-cursor: blink-cursor var(--duration, 1s) step-end infinite;
+
+  @keyframes scale-up-center {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  --animate-scale-up-center: scale-up-center var(--duration, 1s)
+    cubic-bezier(0.39, 0.575, 0.565, 1) both;
 
   /* End of Custom Animation */
 }
