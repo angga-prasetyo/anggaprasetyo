@@ -32,13 +32,14 @@ export const BeginSection: React.FC = () => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       changeFinishPreload(true);
+      changeBgm(AUDIOS.LOADING);
       navigate(UIEndpointsCommon.HOME);
     }, maxAnimationDuration);
 
     return () => {
       clearTimeout(timeout);
     };
-  }, [changeFinishPreload, navigate]);
+  }, [changeBgm, changeFinishPreload, navigate]);
 
   return (
     <div className="h-full w-full flex justify-center items-center">

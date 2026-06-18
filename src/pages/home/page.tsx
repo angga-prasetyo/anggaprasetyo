@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 
 import { CTLayout } from '@/components/ct-layout';
+import { CTPulsatingButton } from '@/components/ct-pulsating-button/component';
 import { AUDIOS } from '@/constants/audios';
-import { words } from '@/constants/languages';
+import { WORDS, words } from '@/constants/languages';
 import { useComponentStore } from '@/stores/component/store';
 import { useHomeStore } from '@/stores/home/store';
 
@@ -59,9 +60,16 @@ const HomePage: React.FC = () => {
         </div>
         <div className="absolute top-35">
           <div className="relative bg-black/60 w-37 mt-2 mb-1">
-            <h3 className="text-white text-center">Contact Info</h3>
+            <h3 className="text-white text-center">
+              {words[WORDS.CONTACT][language]}
+            </h3>
           </div>
           <Contacts />
+        </div>
+        <div className="absolute top-105 right-3">
+          <a href="/ap-cv.pdf" download="Angga Prasetyo - Remote Frontend Developer">
+          <CTPulsatingButton>Download CV</CTPulsatingButton>
+          </a>
         </div>
       </section>
       <Character />

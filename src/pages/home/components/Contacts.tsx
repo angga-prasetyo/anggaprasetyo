@@ -94,6 +94,7 @@ export const Contacts: FC = () => {
   return (
     <ul className="absolute flex flex-col items-end justify-center gap-2 list-none m-0 p-0 right-1">
       {SOCIALS.map(({ key, label, href, fill, icon }) => {
+        const isActive = key === chatTopic;
         return (
           <li
             key={key}
@@ -103,7 +104,8 @@ export const Contacts: FC = () => {
             <div
               className={cn(
                 'py-2 px-2 rounded text-white text-sm whitespace-nowrap pointer-events-none -top-7.5 transition-all duration-300 ease-in-out group-hover/item:opacity-100 group-hover/item:visible group-hover/item:-top-12.5',
-                isDesktop && 'invisible opacity-0',
+                isDesktop || (!isActive && 'invisible opacity-0'),
+                isActive && 'visible opacity-100',
               )}
               style={{ background: fill }}>
               {label}
@@ -116,13 +118,13 @@ export const Contacts: FC = () => {
               target="_blank"
               className={cn(
                 'relative overflow-hidden flex items-center justify-center w-12.5 h-12.5 rounded-full bg-white text-[#4d4d4d] transition-[color,box-shadow] duration-300 ease-in-out hover:text-white hover:shadow-[3px_2px_45px_0px_rgb(0_0_0/12%)]',
-                key === chatTopic && 'text-white',
+                isActive && 'text-white',
               )}>
               {/* Fill layer — slides up from bottom on hover */}
               <span
                 className={cn(
                   'absolute bottom-0 left-0 w-full h-0 transition-[height] duration-300 ease-in-out group-hover/item:h-full',
-                  key === chatTopic && 'h-full',
+                  isActive && 'h-full',
                 )}
                 style={{ background: fill }}
                 aria-hidden="true"
