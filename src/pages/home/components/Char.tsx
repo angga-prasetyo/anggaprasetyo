@@ -74,15 +74,15 @@ export function Character() {
   return (
     <Canvas
       className="fixed w-full h-screen"
-      camera={{ position: [-2, 0.5, 6], fov: 9 }}
+      camera={{ position: [-2, -1, 6], fov: 9 }}
       gl={{
         alpha: true,
         outputColorSpace: SRGBColorSpace,
         toneMapping: LinearToneMapping,
-        toneMappingExposure: 3,
+        toneMappingExposure: 3.5,
       }}>
       <ambientLight intensity={0.5} />
-      <directionalLight position={[1, 2, 3]} intensity={1} />
+      <directionalLight position={[-1, 0.5, 10]} intensity={1} />
       <Suspense fallback={null}>
         <Model />
       </Suspense>

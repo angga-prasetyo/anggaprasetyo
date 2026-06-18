@@ -7,6 +7,7 @@ import { useComponentStore } from '@/stores/component/store';
 
 import { Character } from './components/Char';
 import { ChatBubble } from './components/ChatBubble';
+import { Contacts } from './components/Contacts';
 import NavMenu from './components/NavMenu';
 import { pageMeta } from './constant';
 
@@ -50,7 +51,14 @@ const HomePage: React.FC = () => {
             </h3>
           </div>
         </div>
+        <div className="absolute top-35">
+          <div className="relative bg-black/60 w-37 mt-2 mb-1">
+            <h3 className="text-white text-center">Contact Info</h3>
+          </div>
+          <Contacts />
+        </div>
       </section>
+      <Character />
       <div className="absolute top-15 left-2 w-50">
         <ChatBubble
           show={showChat}
@@ -62,8 +70,6 @@ const HomePage: React.FC = () => {
           </CTPulsatingButton>
         )}
       </div>
-
-      <Character />
       <div className="absolute bottom-5 right-0 bg-[#4d4d4d] py-1 border-4 border-white/50 rounded-md">
         <NavMenu />
       </div>
