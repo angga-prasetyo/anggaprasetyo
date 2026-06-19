@@ -32,7 +32,7 @@ export const BeginSection: React.FC = () => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       changeFinishPreload(true);
-      changeBgm(AUDIOS.LOADING);
+      changeBgm(AUDIOS.MAIN);
       navigate(UIEndpointsCommon.HOME);
     }, maxAnimationDuration);
 

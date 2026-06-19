@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 
 import { CTLayout } from '@/components/ct-layout';
 import { CTPulsatingButton } from '@/components/ct-pulsating-button/component';
-import { AUDIOS } from '@/constants/audios';
 import { WORDS, words } from '@/constants/languages';
 import { useComponentStore } from '@/stores/component/store';
 import { useHomeStore } from '@/stores/home/store';
@@ -14,12 +13,11 @@ import NavMenu from './components/NavMenu';
 import { pageMeta } from './constant';
 
 const HomePage: React.FC = () => {
-  const { language, changeBgm } = useComponentStore((state) => state);
-  const { chatTopic, resetState } = useHomeStore((state) => state);
+  const { language } = useComponentStore((state) => state);
+  const { chatTopic, changeTopic } = useHomeStore((state) => state);
   useEffect(() => {
-    changeBgm(AUDIOS.MAIN);
     return () => {
-      resetState();
+      changeTopic(null);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -67,13 +65,15 @@ const HomePage: React.FC = () => {
           <Contacts />
         </div>
         <div className="absolute top-105 right-3">
-          <a href="/ap-cv.pdf" download="Angga Prasetyo - Remote Frontend Developer">
-          <CTPulsatingButton>Download CV</CTPulsatingButton>
+          <a
+            href="/ap-cv.pdf"
+            download="Angga Prasetyo - Remote Frontend Developer">
+            <CTPulsatingButton>Download CV</CTPulsatingButton>
           </a>
         </div>
       </section>
       <Character />
-      <div className="absolute top-15 left-2 w-50">
+      <div className="absolute top-15 left-2 w-55">
         <ChatBubble
           show={Boolean(chatTopic)}
           message={chatTopic ? words[chatTopic][language] : ''}

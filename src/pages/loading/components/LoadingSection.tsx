@@ -1,14 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { useGLTF } from '@react-three/drei';
-
 import { CTRetroVortex } from '@/components/ct-retro-vortex/component';
 import { AnimatedCircularProgressBar } from '@/components/ui/animated-circular-progress-bar';
 import { AUDIOS } from '@/constants/audios';
 import { preloadHome } from '@/pages/home';
 import { useComponentStore } from '@/stores/component/store';
 import { useLoadingStore } from '@/stores/loading/store';
-import { preloadAudio } from '@/utils/other';
+import { preloadAudio, preloadGLTF } from '@/utils/other';
 
 import { SECTIONS } from '../constant';
 
@@ -40,7 +38,7 @@ export const LoadingSection: React.FC = () => {
           : []),
 
         // 3D Model
-        useGLTF.preload('/ap-char_v1.glb'),
+        preloadGLTF('/ap-char_v1.glb'),
       ];
 
       // Progress Calculation

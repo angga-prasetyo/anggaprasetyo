@@ -1,3 +1,7 @@
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+
+import { useHomeStore } from '@/stores/home/store';
+
 export function preloadAudio(src: string, timeout = 5000): Promise<void> {
   return new Promise((resolve) => {
     const audio = new Audio();
@@ -29,5 +33,20 @@ export function preloadImage(src: string, timeout = 5000): Promise<void> {
       resolve();
     };
     img.src = src;
+  });
+}
+
+export function preloadGLTF(path: string): Promise<void> {
+  return new Promise((resolve, reject) => {
+    new GLTFLoader().load(
+      path,
+      (gltf) => {
+        // Store parsed result — no network request needed in HomePage
+        useHomeStore.getState().changeGltf(gltf);
+        resolve();
+      },
+      undefined,
+      reject,
+    );
   });
 }
