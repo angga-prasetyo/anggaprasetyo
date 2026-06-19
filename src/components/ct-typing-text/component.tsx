@@ -43,7 +43,7 @@ export function CTTypingText({
   children,
   words,
   className,
-  duration = 100,
+  duration = 45,
   typeSpeed,
   deleteSpeed,
   delay = 0,

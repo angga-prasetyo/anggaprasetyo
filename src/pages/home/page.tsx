@@ -73,7 +73,7 @@ const HomePage: React.FC = () => {
         </div>
       </section>
       <Character />
-      <div className="absolute top-15 left-2 w-50">
+      <div className="absolute top-15 left-2 w-55">
         <ChatBubble
           show={Boolean(chatTopic)}
           message={chatTopic ? words[chatTopic][language] : ''}
