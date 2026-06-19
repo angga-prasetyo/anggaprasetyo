@@ -1,12 +1,16 @@
+import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
+
 import { CONTACT_KEYS } from '@/pages/home/constant';
 import { EnumValues } from '@/types/common';
 
 export interface UseHomeStoreStateProps {
-  chatTopic: EnumValues<typeof CONTACT_KEYS> | null
+  chatTopic: EnumValues<typeof CONTACT_KEYS> | null;
+  gltf: GLTF | null;
 }
 
 export interface UseHomeStoreFunctionProps {
   changeTopic: (chatTopic: UseHomeStoreStateProps['chatTopic']) => void;
+  changeGltf: (gltf: UseHomeStoreStateProps['gltf']) => void;
   resetState: () => void;
 }
 

@@ -14,10 +14,10 @@ import { pageMeta } from './constant';
 
 const HomePage: React.FC = () => {
   const { language } = useComponentStore((state) => state);
-  const { chatTopic, resetState } = useHomeStore((state) => state);
+  const { chatTopic, changeTopic } = useHomeStore((state) => state);
   useEffect(() => {
     return () => {
-      resetState();
+      changeTopic(null);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

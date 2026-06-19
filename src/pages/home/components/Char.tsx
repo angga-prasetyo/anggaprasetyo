@@ -1,19 +1,25 @@
 import { useEffect, useRef } from 'react';
 import { Suspense } from 'react';
 
-import { useGLTF, useAnimations } from '@react-three/drei';
+import { useAnimations } from '@react-three/drei';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Group, LoopOnce, Mesh, SRGBColorSpace } from 'three';
-import { LinearToneMapping } from 'three';
-import { Bone } from 'three';
+import {
+  Bone,
+  Group,
+  LinearToneMapping,
+  LoopOnce,
+  Mesh,
+  SRGBColorSpace,
+} from 'three';
+import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 import { useHomeStore } from '@/stores/home/store';
 
 import { charExpressions, CONTACT_KEYS } from '../constant';
 
-function Model() {
+function Model({ gltf }: { gltf: GLTF }) {
   const group = useRef<Group>(null);
-  const { scene, animations } = useGLTF('/ap-char_v1.glb');
+  const { scene, animations } = gltf;
   const { actions } = useAnimations(animations, group);
 
   const started = useRef(false);
@@ -102,6 +108,10 @@ function Model() {
 }
 
 export function Character() {
+  const { gltf } = useHomeStore((state) => state);
+
+  if (!gltf) return <></>;
+
   return (
     <Canvas
       className="fixed w-full h-screen"
@@ -115,7 +125,7 @@ export function Character() {
       <ambientLight intensity={0.5} />
       <directionalLight position={[-1, 0.5, 10]} intensity={1} />
       <Suspense fallback={null}>
-        <Model />
+        <Model gltf={gltf} />
       </Suspense>
     </Canvas>
   );
