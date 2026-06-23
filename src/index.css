@@ -144,7 +144,7 @@ button {
 
   /* Custom Animation */
 
-  /* Pulse Animation */
+  /* Pulse & Ripple */
   --animate-pulse: pulse var(--duration) ease-out infinite;
   --animate-pulse-ripple: pulse-ripple var(--duration)
     cubic-bezier(0.16, 1, 0.3, 1) infinite;
@@ -168,6 +168,7 @@ button {
     }
   }
 
+  /* Fade In */
   --animate-fadeIn: fadeIn var(--duration) ease-in forwards;
   @keyframes fadeIn {
     0% {
@@ -178,6 +179,7 @@ button {
     }
   }
 
+  /* Fade Out */
   --animate-fadeOut: fadeOut var(--duration, 6s) ease-out forwards;
   @keyframes fadeOut {
     0% {
@@ -188,6 +190,7 @@ button {
     }
   }
 
+  /* Blink Cursor */
   @keyframes blink-cursor {
     0%,
     100% {
@@ -199,6 +202,7 @@ button {
   }
   --animate-blink-cursor: blink-cursor var(--duration, 1s) step-end infinite;
 
+  /* Scale Up Center */
   @keyframes scale-up-center {
     0% {
       transform: scale(0);
@@ -209,6 +213,79 @@ button {
   }
   --animate-scale-up-center: scale-up-center var(--duration, 1s)
     cubic-bezier(0.39, 0.575, 0.565, 1) both;
+
+  /* Moving Square */
+  @keyframes moving-square {
+    0% {
+      left: 0;
+      top: 0;
+    }
+    10.5% {
+      left: 0;
+      top: 0;
+    }
+    12.5% {
+      left: var(--step);
+      top: 0;
+    }
+    23% {
+      left: var(--step);
+      top: 0;
+    }
+    25% {
+      left: var(--stepDouble);
+      top: 0;
+    }
+    35.5% {
+      left: var(--stepDouble);
+      top: 0;
+    }
+    37.5% {
+      left: var(--stepDouble);
+      top: var(--step);
+    }
+    48% {
+      left: var(--stepDouble);
+      top: var(--step);
+    }
+    50% {
+      left: var(--step);
+      top: var(--step);
+    }
+    60.5% {
+      left: var(--step);
+      top: var(--step);
+    }
+    62.5% {
+      left: var(--step);
+      top: var(--stepDouble);
+    }
+    73% {
+      left: var(--step);
+      top: var(--stepDouble);
+    }
+    75% {
+      left: 0;
+      top: var(--stepDouble);
+    }
+    85.5% {
+      left: 0;
+      top: var(--stepDouble);
+    }
+    87.5% {
+      left: 0;
+      top: var(--step);
+    }
+    98% {
+      left: 0;
+      top: var(--step);
+    }
+    100% {
+      left: 0;
+      top: 0;
+    }
+  }
+  --animate-moving-square: moving-square var(--duration, 10s) ease-in-out infinite both
 
   /* End of Custom Animation */
 }
