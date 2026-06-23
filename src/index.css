@@ -180,7 +180,6 @@ button {
   }
 
   /* Fade Out */
-  --animate-fadeOut: fadeOut var(--duration, 6s) ease-out forwards;
   @keyframes fadeOut {
     0% {
       opacity: 1;
@@ -189,6 +188,7 @@ button {
       opacity: 0;
     }
   }
+  --animate-fadeOut: fadeOut var(--duration, 6s) ease-out forwards;
 
   /* Blink Cursor */
   @keyframes blink-cursor {
@@ -285,7 +285,70 @@ button {
       top: 0;
     }
   }
-  --animate-moving-square: moving-square var(--duration, 10s) ease-in-out infinite both
+  --animate-moving-square: moving-square var(--duration, 10s) ease-in-out
+    infinite both;
+
+  /* Spin Ring */
+  @keyframes spin-ring {
+    from {
+      transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    }
+    to {
+      transform: translate(-50%, -50%) scale(0.05) rotate(720deg);
+    }
+  }
+  --animate-spin-ring: spin-ring var(--duration, 3s) linear infinite;
+
+  /* Rotate Rays */
+  @keyframes rotate-ray {
+    from {
+      transform: translate(-50%, -50%) rotate(0deg);
+      opacity: 0;
+    }
+    to {
+      transform: translate(-50%, -50%) rotate(1060deg);
+      opacity: 1;
+    }
+  }
+  --animate-rotate-ray: rotate-ray var(--duration, 8s) linear infinite;
+
+  /* Core Glow & Blind */
+  @keyframes core-glow {
+    from {
+      transform: translate(-50%, -50%) scale(0.85);
+      opacity: 0;
+    }
+    to {
+      transform: translate(-50%, -50%) scale(1.25);
+      opacity: 1;
+    }
+  }
+  @keyframes core-blind {
+    from {
+      transform: translate(-50%, -50%) scale(1.25);
+    }
+    to {
+      transform: translate(-50%, -50%) scale(100);
+    }
+  }
+  --animate-core-glow: core-glow var(--duration-glow, 3s) ease-in forwards;
+  --animate-core-blind:
+    core-glow var(--duration-glow, 3s) ease-in forwards,
+    core-blind var(--duration-blind, 6s) ease-in 6s forwards;
+
+  /* Particle Drift */
+  @keyframes particle-drift {
+    0% {
+      transform: translate(var(--px), var(--py)) scale(1);
+      opacity: 0.9;
+    }
+    100% {
+      transform: translate(0px, 0px) scale(0);
+      opacity: 0;
+    }
+  }
+  --animate-particle-drift: particle-drift var(--duration) linear var(--delay) infinite;
+
 
   /* End of Custom Animation */
 }
