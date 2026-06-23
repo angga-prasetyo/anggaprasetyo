@@ -22,7 +22,7 @@ const HomePage: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <CTLayout meta={pageMeta} titlePage="Homepage">
+    <CTLayout meta={pageMeta} className="overflow-hidden">
       {/* Overlay blinding fade out */}
       <div
         className="fixed -inset-50 pointer-events-none animate-fadeOut"

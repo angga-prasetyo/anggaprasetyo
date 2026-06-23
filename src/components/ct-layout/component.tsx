@@ -1,5 +1,3 @@
-import { useMemo } from 'react';
-
 import { useLocation } from 'react-router-dom';
 
 import { CTSeoMeta } from '@/components/ct-seo-meta/component';
@@ -11,28 +9,20 @@ import { CTLayoutProps } from './type';
 
 const CTLayoutComponent: React.FC<CTLayoutProps> = ({
   meta,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  titlePage,
   children,
   className,
   ...rest
 }) => {
   const { pathname } = useLocation();
 
-  const isLoadingPage = useMemo(
-    () => pathname === UIEndpointsCommon.LOADING,
-    [pathname],
-  );
+  const isLoadingPage = pathname === UIEndpointsCommon.LOADING;
 
-  const background = useMemo(
-    () => (isLoadingPage ? 'var(--vc-background)' : 'var(--home-background)'),
-    [isLoadingPage],
-  );
+  const background = isLoadingPage ? 'var(--vc-background)' : 'var(--home-background)';
 
   return (
     <div
       id="ct_layout"
-      className={cn('h-screen relative overflow-hidden', className)}
+      className={cn('h-screen relative', className)}
       style={{ background }}
       {...rest}>
       <CTSeoMeta meta={meta} />
