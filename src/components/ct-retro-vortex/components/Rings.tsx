@@ -16,9 +16,9 @@ export function Rings({
 }: {
   skipRingIdx: RetroVortexProps['skipRingIdx'];
 }) {
-  return RINGS.map(({ size, color, duration }, i) => {
-    const skipRingSet = new Set([...(skipRingIdx ?? [])]);
+  const skipRingSet = new Set([...(skipRingIdx ?? [])]);
 
+  return RINGS.map(({ size, color, duration }, i) => {
     if (skipRingSet.has(i)) return;
 
     const animationDirection = i % 2 === 0 ? 'normal' : 'reverse';
