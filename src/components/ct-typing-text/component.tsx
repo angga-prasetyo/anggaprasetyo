@@ -1,43 +1,10 @@
-import {
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-  type HTMLAttributes,
-} from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { cn } from '@/lib/utils';
 
-type ElementType =
-  | 'article'
-  | 'div'
-  | 'h1'
-  | 'h2'
-  | 'h3'
-  | 'h4'
-  | 'h5'
-  | 'h6'
-  | 'li'
-  | 'p'
-  | 'section'
-  | 'span';
-
-interface CTTypingTextProps extends HTMLAttributes<HTMLElement> {
-  children?: string;
-  words?: string[];
-  className?: string;
-  duration?: number;
-  typeSpeed?: number;
-  deleteSpeed?: number;
-  delay?: number;
-  pauseDelay?: number;
-  loop?: boolean;
-  as?: ElementType;
-  startOnView?: boolean;
-  showCursor?: boolean;
-  blinkCursor?: boolean;
-  cursorStyle?: 'line' | 'block' | 'underscore';
-}
+import { CURSOR_CHAR } from './constant';
+import { CTTypingTextProps, TypingPhase } from './type';
+import { nextTypingState } from './utils';
 
 export function CTTypingText({
   children,
@@ -56,14 +23,20 @@ export function CTTypingText({
   cursorStyle = 'line',
   ...props
 }: CTTypingTextProps) {
-  const [displayedText, setDisplayedText] = useState<string>('');
+  const [displayedText, setDisplayedText] = useState('');
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [currentCharIndex, setCurrentCharIndex] = useState(0);
-  const [phase, setPhase] = useState<'typing' | 'pause' | 'deleting'>('typing');
+  const [phase, setPhase] = useState<TypingPhase>('typing');
   const [isInView, setIsInView] = useState(false);
-  const elementRef = useRef<HTMLElement | null>(null);
 
-  // IntersectionObserver replaces motion's useInView
+  // useRef<HTMLElement> is correct here — all HTML elements extend HTMLElement,
+  // and Tag is a polymorphic prop (span, p, div, etc.)
+  const elementRef = useRef<HTMLElement>(null);
+
+  // -------------------------------------------------------------------------
+  // IntersectionObserver — triggers animation when element enters viewport
+  // -------------------------------------------------------------------------
+
   useEffect(() => {
     if (!startOnView) {
       setIsInView(true);
@@ -87,10 +60,17 @@ export function CTTypingText({
     return () => observer.disconnect();
   }, [startOnView]);
 
+  // -------------------------------------------------------------------------
+  // Derived values
+  // -------------------------------------------------------------------------
+
+  // Memoized because array identity changes every render — would cause
+  // the animation useEffect to re-run unnecessarily
   const wordsToAnimate = useMemo(
-    () => words ?? (children ? [children] : []),
+    () => words ?? (children != null ? [children] : []),
     [words, children],
   );
+
   const hasMultipleWords = wordsToAnimate.length > 1;
 
   const typingSpeed = typeSpeed ?? duration;
@@ -98,10 +78,14 @@ export function CTTypingText({
 
   const shouldStart = startOnView ? isInView : true;
 
-  const animationSourceKey = useMemo(
-    () => (words ? words.join('\u0000') : (children ?? '')),
-    [words, children],
-  );
+  // String key that uniquely identifies the current word/children source.
+  // Used as a reset signal: when this changes, animation restarts from zero.
+  // Not memoized — it's only used as a useEffect dep, not in render.
+  const animationSourceKey = words ? words.join('\u0000') : (children ?? '');
+
+  // -------------------------------------------------------------------------
+  // Reset state whenever the content source changes
+  // -------------------------------------------------------------------------
 
   useEffect(() => {
     setDisplayedText('');
@@ -110,64 +94,42 @@ export function CTTypingText({
     setPhase('typing');
   }, [animationSourceKey]);
 
+  // -------------------------------------------------------------------------
+  // Animation tick — schedules the next state transition via setTimeout
+  // -------------------------------------------------------------------------
+
   useEffect(() => {
-    let timeout: ReturnType<typeof setTimeout> | null = null;
+    if (!shouldStart || wordsToAnimate.length === 0) return;
 
-    if (shouldStart && wordsToAnimate.length > 0) {
-      const timeoutDelay =
-        delay > 0 && displayedText === ''
-          ? delay
-          : phase === 'typing'
-            ? typingSpeed
-            : phase === 'deleting'
-              ? deletingSpeed
-              : pauseDelay;
+    const graphemes = Array.from(wordsToAnimate[currentWordIndex] ?? '');
 
-      timeout = setTimeout(() => {
-        const currentWord = wordsToAnimate[currentWordIndex] || '';
-        const graphemes = Array.from(currentWord);
-
-        switch (phase) {
-          case 'typing':
-            if (currentCharIndex < graphemes.length) {
-              setDisplayedText(
-                graphemes.slice(0, currentCharIndex + 1).join(''),
-              );
-              setCurrentCharIndex(currentCharIndex + 1);
-            } else {
-              if (hasMultipleWords || loop) {
-                const isLastWord =
-                  currentWordIndex === wordsToAnimate.length - 1;
-                if (!isLastWord || loop) {
-                  setPhase('pause');
-                }
-              }
-            }
-            break;
-
-          case 'pause':
-            setPhase('deleting');
-            break;
-
-          case 'deleting':
-            if (currentCharIndex > 0) {
-              setDisplayedText(
-                graphemes.slice(0, currentCharIndex - 1).join(''),
-              );
-              setCurrentCharIndex(currentCharIndex - 1);
-            } else {
-              const nextIndex = (currentWordIndex + 1) % wordsToAnimate.length;
-              setCurrentWordIndex(nextIndex);
-              setPhase('typing');
-            }
-            break;
-        }
-      }, timeoutDelay);
-    }
-
-    return () => {
-      if (timeout !== null) clearTimeout(timeout);
+    // Lookup table replaces 3-level nested ternary
+    const phaseDelayMap: Record<TypingPhase, number> = {
+      typing: typingSpeed,
+      pause: pauseDelay,
+      deleting: deletingSpeed,
     };
+    const isInitialDelay = delay > 0 && displayedText === '';
+    const timeoutDelay = isInitialDelay ? delay : phaseDelayMap[phase];
+
+    const timeout = setTimeout(() => {
+      const next = nextTypingState(
+        { phase, currentCharIndex, currentWordIndex },
+        graphemes,
+        wordsToAnimate.length,
+        loop,
+      );
+
+      if (next.displayedText !== undefined)
+        setDisplayedText(next.displayedText);
+      if (next.currentCharIndex !== undefined)
+        setCurrentCharIndex(next.currentCharIndex);
+      if (next.currentWordIndex !== undefined)
+        setCurrentWordIndex(next.currentWordIndex);
+      if (next.phase !== undefined) setPhase(next.phase);
+    }, timeoutDelay);
+
+    return () => clearTimeout(timeout);
   }, [
     shouldStart,
     phase,
@@ -175,7 +137,6 @@ export function CTTypingText({
     currentWordIndex,
     displayedText,
     wordsToAnimate,
-    hasMultipleWords,
     loop,
     typingSpeed,
     deletingSpeed,
@@ -183,10 +144,15 @@ export function CTTypingText({
     delay,
   ]);
 
+  // -------------------------------------------------------------------------
+  // Cursor visibility
+  // -------------------------------------------------------------------------
+
   const currentWordGraphemes = Array.from(
-    wordsToAnimate[currentWordIndex] || '',
+    wordsToAnimate[currentWordIndex] ?? '',
   );
-  const isComplete =
+
+  const isAnimationComplete =
     !loop &&
     currentWordIndex === wordsToAnimate.length - 1 &&
     currentCharIndex >= currentWordGraphemes.length &&
@@ -194,22 +160,14 @@ export function CTTypingText({
 
   const shouldShowCursor =
     showCursor &&
-    !isComplete &&
+    !isAnimationComplete &&
     (hasMultipleWords ||
       loop ||
       currentCharIndex < currentWordGraphemes.length);
 
-  const getCursorChar = () => {
-    switch (cursorStyle) {
-      case 'block':
-        return '▌';
-      case 'underscore':
-        return '_';
-      case 'line':
-      default:
-        return '|';
-    }
-  };
+  // -------------------------------------------------------------------------
+  // Render
+  // -------------------------------------------------------------------------
 
   return (
     <Tag
@@ -220,7 +178,7 @@ export function CTTypingText({
       {shouldShowCursor && (
         <span
           className={cn('inline-block', blinkCursor && 'animate-blink-cursor')}>
-          {getCursorChar()}
+          {CURSOR_CHAR[cursorStyle]}
         </span>
       )}
     </Tag>
