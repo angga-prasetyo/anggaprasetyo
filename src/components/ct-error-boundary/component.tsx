@@ -27,12 +27,12 @@ export class CTErrorBoundary extends Component<
         });
 
       return (
-        <div id="ct_error_boundary">
-          <h3 className="ct_error_boundary__title">
+        <div id="ct-error-boundary">
+          <h3 className="ct-error-boundary-title">
             {this.state.error && this.state.error.toString()}
           </h3>
-          <details className="ct_error_boundary__details">
-            <pre className="ct_error_boundary__error-stack">
+          <details className="ct-error-boundary-details">
+            <pre className="ct-error-boundary-error-stack">
               {this.state.errorInfo.componentStack}
             </pre>
           </details>

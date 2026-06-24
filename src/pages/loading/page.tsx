@@ -28,7 +28,7 @@ const LoadingPage: React.FC = () => {
   }, [currentSection]);
 
   return (
-    <CTLayout meta={pageMeta} titlePage="Loading">
+    <CTLayout meta={pageMeta}>
       {sections}
     </CTLayout>
   );

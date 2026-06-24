@@ -60,7 +60,7 @@ export const LoadingSection: React.FC = () => {
 
   return (
     <div className="h-full w-full flex justify-center items-center">
-      <CTRetroVortex ringsOnly skipRingIdx={[0, 1, 2, 3]} />
+      <CTRetroVortex ringsOnly skipRingIdx={[0, 1, 2]} />
       <AnimatedCircularProgressBar className="absolute" value={progress} />
     </div>
   );
