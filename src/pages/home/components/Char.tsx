@@ -13,9 +13,10 @@ import {
 } from 'three';
 import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
+import { CONTACT_KEYS } from '@/constants/others';
 import { useHomeStore } from '@/stores/home/store';
 
-import { charExpressions, CONTACT_KEYS } from '../constant';
+import { charExpressions } from '../constant';
 
 function Model({ gltf }: { gltf: GLTF }) {
   const group = useRef<Group>(null);
@@ -84,7 +85,8 @@ function Model({ gltf }: { gltf: GLTF }) {
   });
 
   // Ekspresi berdasarkan chatTopic
-  const expression = charExpressions[chatTopic || 'neutral'];
+  const expression =
+    charExpressions?.[chatTopic || 'neutral'] || charExpressions.neutral;
 
   meshRefs.current.forEach((mesh) => {
     if (!mesh.morphTargetInfluences || !mesh.morphTargetDictionary) return;

@@ -1,5 +1,6 @@
-import { CONTACT_KEYS } from '@/pages/home/constant';
 import { EnumValues } from '@/types/common';
+
+import { CONTACT_KEYS } from './others';
 
 export enum LANGUAGES {
   IDN = 'id',
@@ -23,6 +24,8 @@ export enum WORDS {
   EXPERIENCE = 'experience',
   CONTACT = 'contact',
   NAVBAR__MINIMIZE = 'navbar__minimize',
+  DOWNLOAD_CV = 'download_cv',
+  CHAT__NO_PAGES = 'chat__no_pages',
 }
 
 type AllWordKeys = EnumValues<typeof WORDS> | CONTACT_KEYS;
@@ -67,6 +70,16 @@ export const words: {
   [WORDS.NAVBAR__MINIMIZE]: {
     [LANGUAGES.IDN]: 'Geser untuk Perkecil ',
     [LANGUAGES.ENG]: 'Swipe to Minimize ',
+  },
+  [WORDS.DOWNLOAD_CV]: {
+    [LANGUAGES.IDN]: 'Unduh CV',
+    [LANGUAGES.ENG]: 'Download CV',
+  },
+  [WORDS.CHAT__NO_PAGES]: {
+    [LANGUAGES.IDN]:
+      'Maaf, halaman itu sedang dalam pengerjaan. Saat ini kamu belum bisa akses kesana.',
+    [LANGUAGES.ENG]:
+      'Sorry, the page is still in progress. For now you cannot access it.',
   },
   [CONTACT_KEYS.WA]: {
     [LANGUAGES.IDN]:

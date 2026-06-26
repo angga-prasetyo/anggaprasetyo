@@ -67,7 +67,9 @@ const HomePage: React.FC = () => {
           <a
             href="/ap-cv.pdf"
             download="Angga Prasetyo - Remote Frontend Developer">
-            <CTGlossyButton>Download CV</CTGlossyButton>
+            <CTGlossyButton>
+              {words[WORDS.DOWNLOAD_CV][language]}
+            </CTGlossyButton>
           </a>
         </div>
       </section>

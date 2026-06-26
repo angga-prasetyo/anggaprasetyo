@@ -13,6 +13,7 @@ import { WORDS, words } from '@/constants/languages';
 import { useSwipe } from '@/hooks/useSwipe';
 import { cn } from '@/lib/utils';
 import { useComponentStore } from '@/stores/component/store';
+import { useHomeStore } from '@/stores/home/store';
 
 type NavItem = {
   id: string;
@@ -30,6 +31,7 @@ const ARROW_DELAYS = ['0s', '0.2s', '0.4s'];
 
 export function NavMenu({ onSelect }: NavMenuProps) {
   const { language } = useComponentStore((state) => state);
+  const { changeTopic } = useHomeStore((state) => state);
   const NAV_ITEMS: NavItem[] = useMemo(
     () => [
       {
@@ -72,6 +74,13 @@ export function NavMenu({ onSelect }: NavMenuProps) {
   function handleSelect(id: string) {
     setActive(id);
     onSelect?.(id);
+
+    switch (id) {
+      case 'profile':
+        return changeTopic(null);
+      default:
+        return changeTopic(WORDS.CHAT__NO_PAGES);
+    }
   }
 
   return (

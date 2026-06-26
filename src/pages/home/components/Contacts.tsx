@@ -7,13 +7,11 @@ import type { FC } from 'react';
 
 import { useMediaQuery } from 'usehooks-ts';
 
-import { USE_MEDIA_QUERY__SCREEN } from '@/constants/others';
+import { CONTACT_KEYS, USE_MEDIA_QUERY__SCREEN } from '@/constants/others';
 import { cn } from '@/lib/utils';
 import { useHomeStore } from '@/stores/home/store';
 import { EnumValues } from '@/types/common';
 import { capitalize } from '@/utils/string';
-
-import { CONTACT_KEYS } from '../constant';
 
 export interface ContactItem {
   key: EnumValues<typeof CONTACT_KEYS>;
