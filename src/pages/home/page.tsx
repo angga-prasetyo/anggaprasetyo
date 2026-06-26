@@ -79,9 +79,7 @@ const HomePage: React.FC = () => {
           message={chatTopic ? words[chatTopic][language] : ''}
         />
       </div>
-      <div className="absolute bottom-5 right-0 bg-[#4d4d4d] py-1 border-4 border-white/50 rounded-md">
-        <NavMenu />
-      </div>
+      <NavMenu />
     </CTLayout>
   );
 };

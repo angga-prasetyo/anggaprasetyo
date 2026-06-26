@@ -22,6 +22,7 @@ export enum WORDS {
   RECORD = 'record',
   EXPERIENCE = 'experience',
   CONTACT = 'contact',
+  NAVBAR__MINIMIZE = 'navbar__minimize',
 }
 
 type AllWordKeys = EnumValues<typeof WORDS> | CONTACT_KEYS;
@@ -62,6 +63,10 @@ export const words: {
   [WORDS.POPUP__CHOOSE_LANGUAGE_TITLE]: {
     [LANGUAGES.IDN]: 'PILIH BAHASA',
     [LANGUAGES.ENG]: 'CHOOSE LANGUAGE',
+  },
+  [WORDS.NAVBAR__MINIMIZE]: {
+    [LANGUAGES.IDN]: 'Geser untuk Perkecil ',
+    [LANGUAGES.ENG]: 'Swipe to Minimize ',
   },
   [CONTACT_KEYS.WA]: {
     [LANGUAGES.IDN]:

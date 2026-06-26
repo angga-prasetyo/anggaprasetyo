@@ -118,7 +118,7 @@ export const CTPulsatingButton = React.forwardRef<
           aria-hidden="true"
           className={cn(
             'pointer-events-none absolute inset-0 rounded-[inherit] bg-inherit',
-            variant === 'pulse' ? 'animate-pulse' : 'animate-pulse-ripple',
+            variant === 'pulse' ? 'animate-btn-pulse' : 'animate-btn-pulse-ripple',
           )}
         />
       </button>
