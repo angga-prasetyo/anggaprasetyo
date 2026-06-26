@@ -5,19 +5,23 @@ import { UIEndpointsCommon } from '@/constants/ui-endpoints/common';
 import { cn } from '@/lib/utils';
 
 import { Header } from './components/Header';
+import NavMenu from './components/NavMenu';
 import { CTLayoutProps } from './type';
 
 const CTLayoutComponent: React.FC<CTLayoutProps> = ({
   meta,
   children,
   className,
+  showNav = false,
   ...rest
 }) => {
   const { pathname } = useLocation();
 
   const isLoadingPage = pathname === UIEndpointsCommon.LOADING;
 
-  const background = isLoadingPage ? 'var(--vc-background)' : 'var(--home-background)';
+  const background = isLoadingPage
+    ? 'var(--vc-background)'
+    : 'var(--home-background)';
 
   return (
     <div
@@ -28,6 +32,7 @@ const CTLayoutComponent: React.FC<CTLayoutProps> = ({
       <CTSeoMeta meta={meta} />
       {!isLoadingPage && <Header />}
       {children}
+      {showNav && <NavMenu />}
     </div>
   );
 };

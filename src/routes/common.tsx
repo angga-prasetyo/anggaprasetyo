@@ -19,7 +19,7 @@ export const commonRoute: RouteObject[] = [
   },
   {
     path: UIEndpointsCommon.HOME,
-    element: <CTRouteGuard />,
+    element: <CTRouteGuard isPrivate />,
     children: [
       {
         index: true,

@@ -9,7 +9,6 @@ import { useHomeStore } from '@/stores/home/store';
 import { Character } from './components/Char';
 import { ChatBubble } from './components/ChatBubble';
 import { Contacts } from './components/Contacts';
-import NavMenu from './components/NavMenu';
 import { pageMeta } from './constant';
 
 const HomePage: React.FC = () => {
@@ -22,7 +21,7 @@ const HomePage: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <CTLayout meta={pageMeta} className="overflow-hidden">
+    <CTLayout meta={pageMeta} className="overflow-hidden" showNav>
       {/* Overlay blinding fade out */}
       <div
         className="fixed -inset-50 pointer-events-none animate-fadeOut"
@@ -79,7 +78,6 @@ const HomePage: React.FC = () => {
           message={chatTopic ? words[chatTopic][language] : ''}
         />
       </div>
-      <NavMenu />
     </CTLayout>
   );
 };

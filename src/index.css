@@ -188,7 +188,7 @@ button {
       opacity: 0;
     }
   }
-  --animate-fadeOut: fadeOut var(--duration, 6s) ease-out forwards;
+  --animate-fadeOut: fadeOut var(--duration, 1s) ease-out forwards;
 
   /* Blink Cursor */
   @keyframes blink-cursor {

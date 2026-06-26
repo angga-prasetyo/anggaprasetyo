@@ -75,7 +75,7 @@ export function NavMenu({ onSelect }: NavMenuProps) {
   }
 
   return (
-    <div className="ct-nav-menu">
+    <div className="ct-nav-menu fixed inset-0">
       {/* Hamburger Menu When Closed */}
       {!open && (
         <div
