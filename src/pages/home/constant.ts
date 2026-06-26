@@ -1,16 +1,11 @@
 import { CTSeoMetaPropsMeta } from '@/components/ct-seo-meta/type';
+import { WORDS } from '@/constants/languages';
+import { CONTACT_KEYS } from '@/constants/others';
 
 export const pageMeta: CTSeoMetaPropsMeta = {
   descriptionPage: 'Home page for Custom Dashboard',
   titlePage: 'Home || Custom',
 };
-
-export enum CONTACT_KEYS {
-  GITHUB = 'github',
-  EMAIL = 'email',
-  WA = 'whatsapp',
-  IN = 'linked-in',
-}
 
 export const charExpressions: Record<string, Record<string, number>> = {
   [CONTACT_KEYS.EMAIL]: {
@@ -27,6 +22,11 @@ export const charExpressions: Record<string, Record<string, number>> = {
   [CONTACT_KEYS.IN]: {
     Fcl_EYE_Joy: 1,
     Fcl_MTH_Fun: 0.8,
+  },
+  [WORDS.CHAT__NO_PAGES]: {
+    Fcl_EYE_Sorrow: 0.5,
+    Fcl_MTH_Sorrow: 1,
+    Fcl_BRW_Sorrow: 1,
   },
   neutral: {
     Fcl_ALL_Neutral: 1,

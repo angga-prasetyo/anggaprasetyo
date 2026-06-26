@@ -13,9 +13,10 @@ import {
 } from 'three';
 import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
+import { CONTACT_KEYS } from '@/constants/others';
 import { useHomeStore } from '@/stores/home/store';
 
-import { charExpressions, CONTACT_KEYS } from '../constant';
+import { charExpressions } from '../constant';
 
 function Model({ gltf }: { gltf: GLTF }) {
   const group = useRef<Group>(null);
@@ -84,7 +85,8 @@ function Model({ gltf }: { gltf: GLTF }) {
   });
 
   // Ekspresi berdasarkan chatTopic
-  const expression = charExpressions[chatTopic || 'neutral'];
+  const expression =
+    charExpressions?.[chatTopic || 'neutral'] || charExpressions.neutral;
 
   meshRefs.current.forEach((mesh) => {
     if (!mesh.morphTargetInfluences || !mesh.morphTargetDictionary) return;
@@ -104,7 +106,7 @@ function Model({ gltf }: { gltf: GLTF }) {
     });
   });
 
-  return <primitive ref={group} object={scene} position={[-0.1, -1.2, 0]} />;
+  return <primitive ref={group} object={scene} position={[-0.15, -1.185, 0]} />;
 }
 
 export function Character() {
@@ -114,7 +116,7 @@ export function Character() {
 
   return (
     <Canvas
-      className="fixed w-full h-screen"
+      className="fixed w-full h-dvh pointer-events-none"
       camera={{ position: [-2, -1, 6], fov: 9 }}
       gl={{
         alpha: true,
