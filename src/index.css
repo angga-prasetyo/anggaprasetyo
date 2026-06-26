@@ -388,6 +388,14 @@ button {
     }
   }
   --animate-slide-left: slide-left var(--duration, 0.7s) ease forwards;
+
+  /* Glossy Button */
+  @keyframes glossy-btn {
+    0%   { background-position: 130%; opacity: 1; }
+          100% { background-position: -166%; opacity: 0; }
+  }
+  --animate-glossy-btn: glossy-btn var(--duration, 3s) ease infinite;
+
   /* End of Custom Animation */
 }
 

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
+import { CTGlossyButton } from '@/components/ct-glossy-btn/component';
 import { CTLayout } from '@/components/ct-layout';
-import { CTPulsatingButton } from '@/components/ct-pulsating-button/component';
 import { WORDS, words } from '@/constants/languages';
 import { useComponentStore } from '@/stores/component/store';
 import { useHomeStore } from '@/stores/home/store';
@@ -63,11 +63,11 @@ const HomePage: React.FC = () => {
           </div>
           <Contacts />
         </div>
-        <div className="absolute top-105 right-3">
+        <div className="absolute top-105 right-2">
           <a
             href="/ap-cv.pdf"
             download="Angga Prasetyo - Remote Frontend Developer">
-            <CTPulsatingButton>Download CV</CTPulsatingButton>
+            <CTGlossyButton>Download CV</CTGlossyButton>
           </a>
         </div>
       </section>
