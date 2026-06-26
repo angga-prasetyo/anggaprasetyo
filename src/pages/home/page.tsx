@@ -24,7 +24,7 @@ const HomePage: React.FC = () => {
     <CTLayout meta={pageMeta} className="overflow-hidden" showNav>
       {/* Overlay blinding fade out */}
       <div
-        className="fixed -inset-50 pointer-events-none animate-fadeOut"
+        className="fixed -inset-50 animate-fadeOut pointer-events-none"
         style={
           {
             background: 'var(--background-blinding)',
@@ -34,7 +34,7 @@ const HomePage: React.FC = () => {
 
       {/* Home Content */}
       <section className="pt-15 flex flex-col items-end justify-end">
-        <div className="relative bg-[#596266]/30 w-42 mr-3">
+        <div className="relative bg-[#596266]/30 w-42 mr-1">
           <h2 className="absolute text-[#E8E8DC] text-lg font-bold -top-4 left-3">
             Angga Prasetyo
           </h2>
@@ -42,8 +42,8 @@ const HomePage: React.FC = () => {
             Frontend Engineer
           </h2>
         </div>
-        <div className="p-px bg-[#00c9d4] w-42 mr-3 my-1 opacity-30" />
-        <div className="flex justify-between gap-1 w-42 mr-3">
+        <div className="p-px bg-[#00c9d4] w-42 m-1 opacity-30" />
+        <div className="flex justify-between gap-1 w-42 mr-1">
           <div className="bg-[#a9a9a6] rounded w-full">
             <h3 className="text-[#4d4d4d] font-semibold text-center text-sm">
               React
@@ -56,14 +56,14 @@ const HomePage: React.FC = () => {
           </div>
         </div>
         <div className="absolute top-35">
-          <div className="relative bg-black/60 w-37 mt-2 mb-1">
+          <div className="relative bg-black/60 w-39 mt-2 mb-1">
             <h3 className="text-white text-center">
               {words[WORDS.CONTACT][language]}
             </h3>
           </div>
           <Contacts />
         </div>
-        <div className="absolute top-105 right-2">
+        <div className="absolute top-60 right-2">
           <a
             href="/ap-cv.pdf"
             download="Angga Prasetyo - Remote Frontend Developer">
@@ -73,8 +73,11 @@ const HomePage: React.FC = () => {
           </a>
         </div>
       </section>
+
       <Character />
-      <div className="absolute top-15 left-2 w-55">
+      <div
+        className="absolute top-10 left-2 w-55 z-1"
+        onClick={() => changeTopic(null)}>
         <ChatBubble
           show={Boolean(chatTopic)}
           message={chatTopic ? words[chatTopic][language] : ''}

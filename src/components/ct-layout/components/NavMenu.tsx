@@ -91,7 +91,7 @@ export function NavMenu({ onSelect }: NavMenuProps) {
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
           onClick={() => setOpen(true)}
-          className="absolute bottom-25 right-0 bg-[#1c1e22] p-2 rounded text-[#00c9d4]">
+          className="absolute bottom-5 right-0 bg-[#1c1e22] p-2 rounded text-[#00c9d4]">
           <Menu />
         </div>
       )}
@@ -99,7 +99,7 @@ export function NavMenu({ onSelect }: NavMenuProps) {
       {/* Opened Nav Menu */}
       <div
         className={cn(
-          'absolute bottom-5 right-0 animate-slide-left',
+          'absolute bottom-0 right-0 animate-slide-left text-xs',
           !open && 'animate-slide-right',
         )}
         onTouchStart={handleTouchStart}

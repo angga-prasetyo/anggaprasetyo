@@ -6,9 +6,10 @@ interface ChatBubbleProps {
 }
 
 export function ChatBubble({ message, show }: ChatBubbleProps) {
-  if (!show) return;
+  if (!show) return null;
   return (
-    <div className="flex flex-col items-start gap-0.75">
+    <div
+      className="flex flex-col items-start gap-0.75">
       {/* Bubble */}
       <div
         className="bg-[#1c2333] border-2 border-[#1a5f80] px-2 py-2.5 text-md text-[#c9d1d9] leading-relaxed border-l-3 border-l-[#2a9fd6] max-h-32 w-full overflow-scroll animate-scale-up-center"

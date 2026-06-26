@@ -106,7 +106,7 @@ function Model({ gltf }: { gltf: GLTF }) {
     });
   });
 
-  return <primitive ref={group} object={scene} position={[-0.1, -1.2, 0]} />;
+  return <primitive ref={group} object={scene} position={[-0.15, -1.185, 0]} />;
 }
 
 export function Character() {
@@ -116,7 +116,7 @@ export function Character() {
 
   return (
     <Canvas
-      className="fixed w-full h-screen"
+      className="fixed w-full h-dvh pointer-events-none"
       camera={{ position: [-2, -1, 6], fov: 9 }}
       gl={{
         alpha: true,

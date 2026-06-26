@@ -391,8 +391,20 @@ button {
 
   /* Glossy Button */
   @keyframes glossy-btn {
-    0%   { background-position: 130%; opacity: 1; }
-          100% { background-position: -166%; opacity: 0; }
+      0% {
+    background: linear-gradient(-65deg, #0000 40%, #fff7 50%, #0000 70%);
+    background-size: 200% 100%;
+    background-repeat: no-repeat;
+    background-position: 130%;
+    opacity: 1;
+  }
+  100% {
+    background: linear-gradient(-65deg, #0000 40%, #fff7 50%, #0000 70%);
+    background-size: 200% 100%;
+    background-repeat: no-repeat;
+    background-position: -166%;
+    opacity: 0;
+  }
   }
   --animate-glossy-btn: glossy-btn var(--duration, 3s) ease infinite;
 
