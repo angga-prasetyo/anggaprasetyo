@@ -14,9 +14,12 @@ import { useSwipe } from '@/hooks/useSwipe';
 import { cn } from '@/lib/utils';
 import { useComponentStore } from '@/stores/component/store';
 import { useHomeStore } from '@/stores/home/store';
+import { EnumValues } from '@/types/common';
+
+import { NAV_ITEM_ID } from '../constant';
 
 type NavItem = {
-  id: string;
+  id: EnumValues<typeof NAV_ITEM_ID>;
   index: string;
   sub: string;
   label: string;
@@ -24,7 +27,7 @@ type NavItem = {
 };
 
 interface NavMenuProps {
-  onSelect?: (id: string) => void;
+  onSelect?: (id: NavItem['id']) => void;
 }
 
 const ARROW_DELAYS = ['0s', '0.2s', '0.4s'];
@@ -35,21 +38,21 @@ export function NavMenu({ onSelect }: NavMenuProps) {
   const NAV_ITEMS: NavItem[] = useMemo(
     () => [
       {
-        id: 'profile',
+        id: NAV_ITEM_ID.PROFILE,
         index: '01',
         sub: words[WORDS.OVERVIEW][language],
         label: words[WORDS.PROFILE][language],
         icon: User,
       },
       {
-        id: 'projects',
+        id: NAV_ITEM_ID.PROJECT,
         index: '02',
         sub: words[WORDS.WORKS][language],
         label: words[WORDS.PROJECT][language],
         icon: Code2,
       },
       {
-        id: 'experience',
+        id: NAV_ITEM_ID.EXP,
         index: '03',
         sub: words[WORDS.RECORD][language],
         label: words[WORDS.EXPERIENCE][language],
@@ -58,7 +61,7 @@ export function NavMenu({ onSelect }: NavMenuProps) {
     ],
     [language],
   );
-  const [active, setActive] = useState('profile');
+  const [active, setActive] = useState(NAV_ITEM_ID.PROFILE);
   const [hovered, setHovered] = useState<string | null>(null);
   const [open, setOpen] = useState(true);
 
@@ -71,12 +74,12 @@ export function NavMenu({ onSelect }: NavMenuProps) {
     },
   });
 
-  function handleSelect(id: string) {
+  function handleSelect(id: NavItem['id']) {
     setActive(id);
     onSelect?.(id);
 
     switch (id) {
-      case 'profile':
+      case NAV_ITEM_ID.PROFILE:
         return changeTopic(null);
       default:
         return changeTopic(WORDS.CHAT__NO_PAGES);
