@@ -91,6 +91,10 @@ button {
   --text-base: clamp(1rem, 0.9871rem + 0.1292vw, 1.125rem);
   --text-base--line-height: 1.5;
 
+  /* text-2xs: 8.19px → 9.22px — base ÷ 1.25³ */
+  --text-2xs: clamp(0.512rem, 0.4965rem + 0.0663vw, 0.576rem);
+  --text-2xs--line-height: 1.5;
+
   /* text-xs: 10px → 11.52px */
   --text-xs: clamp(0.625rem, 0.6151rem + 0.0808vw, 0.72rem);
   --text-xs--line-height: 1.5;
@@ -458,6 +462,31 @@ button {
     }
   }
   --animate-glossy-btn: glossy-btn var(--duration, 3s) ease infinite;
+
+
+  /* Scanline sweep — used on radio option hover */
+  @keyframes scanline-sweep {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  --animate-scanline-sweep: scanline-sweep var(--duration, 1.5s) linear infinite;
+
+  /* Corner Pulse in CTRevealButton */
+@keyframes corner-pulse {
+    0%,
+    100% {
+      transform: scale(1) translate(0, 0);
+    }
+    50% {
+      transform: scale(1.1) translate(var(--pulse-x, 0), var(--pulse-y, 0));
+    }
+  }
+  --animate-corner-pulse: corner-pulse var(--duration, 1.8s) ease-in-out infinite;
+  
 
   /* End of Custom Animation */
 }
