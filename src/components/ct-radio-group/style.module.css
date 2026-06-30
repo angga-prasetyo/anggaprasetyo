@@ -41,7 +41,7 @@
 
 .label:has([data-state='checked'])::before {
   background-color: #2d3750;
-  border-color: var(--color-vc-func_arg);
+  border-color: var(--color-vc-func-arg);
   height: 50px;
 }
 
@@ -62,7 +62,7 @@
 }
 
 .radio[data-state='checked'] {
-  background-color: var(--color-vc-func_arg);
+  background-color: var(--color-vc-func-arg);
   animation: pulse 0.7s forwards;
 }
 
