@@ -3,7 +3,6 @@ import { useMemo } from 'react';
 import { CTLayout } from '@/components/ct-layout';
 import { useLoadingStore } from '@/stores/loading/store';
 
-import { AudioSection } from './components/AudioSection';
 import { BeginSection } from './components/BeginSection';
 import { ConfigurationSection } from './components/configuration-section/component';
 import { LoadingSection } from './components/LoadingSection';
@@ -16,8 +15,6 @@ const LoadingPage: React.FC = () => {
     switch (currentSection) {
       case SECTIONS.LANG:
         return <ConfigurationSection />;
-      case SECTIONS.AUDIO:
-        return <AudioSection />;
       case SECTIONS.LOADING:
         return <LoadingSection />;
       case SECTIONS.BEGIN:

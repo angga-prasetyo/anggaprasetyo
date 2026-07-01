@@ -14,7 +14,6 @@ export enum WORDS {
   ENGLISH = 'english',
   NEXT = 'next',
   POPUP__ENABLE_SOUND_TITLE = 'popup__enable_sound_title',
-  POPUP__ENABLE_SOUND_DESCRIPTION = 'popup__enable_sound_description',
   POPUP__CHOOSE_LANGUAGE_TITLE = 'popup__choose_language_title',
   POPUP__CONFIGURATION_TITLE = 'popup__configuration_title',
   OVERVIEW = 'overview',
@@ -69,10 +68,6 @@ export const words: {
   [WORDS.POPUP__ENABLE_SOUND_TITLE]: {
     [LANGUAGES.IDN]: 'SUARA',
     [LANGUAGES.ENG]: 'AUDIO OUTPUT',
-  },
-  [WORDS.POPUP__ENABLE_SOUND_DESCRIPTION]: {
-    [LANGUAGES.IDN]: 'Izinkan untuk mendapatkan pengalaman terbaik',
-    [LANGUAGES.ENG]: 'Allow to get the best experience.',
   },
   [WORDS.POPUP__CONFIGURATION_TITLE]: {
     [LANGUAGES.IDN]: 'Konfigurasi Sistem',

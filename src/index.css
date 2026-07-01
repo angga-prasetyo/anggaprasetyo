@@ -199,30 +199,6 @@ button {
 
   /* Custom Animation */
 
-  /* Button Pulse & Ripple */
-  @keyframes btn-pulse {
-    0%,
-    100% {
-      box-shadow: 0 0 0 0 var(--pulse-color, oklch(from var(--bg) l c h / 0.5));
-    }
-    50% {
-      box-shadow: 0 0 0 var(--distance)
-        var(--pulse-color, oklch(from var(--bg) l c h / 0.5));
-    }
-  }
-  @keyframes btn-pulse-ripple {
-    0% {
-      box-shadow: 0 0 0 0 oklch(from var(--pulse-color, var(--bg)) l c h / 1);
-    }
-    100% {
-      box-shadow: 0 0 0 var(--distance)
-        oklch(from var(--pulse-color, var(--bg)) l c h / 0);
-    }
-  }
-  --animate-btn-pulse: btn-pulse var(--duration) ease-out infinite;
-  --animate-btn-pulse-ripple: btn-pulse-ripple var(--duration)
-    cubic-bezier(0.16, 1, 0.3, 1) infinite;
-
   /* Fade In */
   @keyframes fadeIn {
     0% {
@@ -343,7 +319,7 @@ button {
   --animate-moving-square: moving-square var(--duration, 10s) ease-in-out
     infinite both;
 
-  /* Spin Ring */
+  /* Spin Ring used in CTRetroVortex */
   @keyframes spin-ring {
     from {
       transform: translate(-50%, -50%) scale(1) rotate(0deg);
@@ -354,7 +330,7 @@ button {
   }
   --animate-spin-ring: spin-ring var(--duration, 3s) linear infinite;
 
-  /* Rotate Rays */
+  /* Rotate Rays used in CTRetroVortex */
   @keyframes rotate-ray {
     from {
       transform: translate(-50%, -50%) rotate(0deg);
@@ -367,7 +343,7 @@ button {
   }
   --animate-rotate-ray: rotate-ray var(--duration, 8s) linear infinite;
 
-  /* Core Glow & Blind */
+  /* Core Glow & Blind used in CTRetroVortex */
   @keyframes core-glow {
     from {
       transform: translate(-50%, -50%) scale(0.85);
@@ -391,7 +367,7 @@ button {
     core-glow var(--duration-glow, 3s) ease-in forwards,
     core-blind var(--duration-blind, 6s) ease-in 6s forwards;
 
-  /* Particle Drift */
+  /* Particle Drift used in CTRetroVortex */
   @keyframes particle-drift {
     0% {
       transform: translate(var(--px), var(--py)) scale(1);
@@ -405,7 +381,7 @@ button {
   --animate-particle-drift: particle-drift var(--duration) linear var(--delay)
     infinite;
 
-  /* Swipe Right Arrow */
+  /* Swipe Right Arrow used in Navbar */
   @keyframes swipe-right {
     0% {
       opacity: 0;
@@ -422,7 +398,7 @@ button {
   }
   --animate-swipe-right: swipe-right var(--duration, 1.2s) ease-in-out infinite;
 
-  /* Slide Right */
+  /* Slide Right used in Navbar */
   @keyframes slide-right {
     0% {
       transform: translateX(0);
@@ -433,7 +409,7 @@ button {
   }
   --animate-slide-right: slide-right var(--duration, 0.7s) ease forwards;
 
-  /* Slide Left */
+  /* Slide Left used in Navbar */
   @keyframes slide-left {
     0% {
       transform: translateX(100%);
@@ -444,7 +420,7 @@ button {
   }
   --animate-slide-left: slide-left var(--duration, 0.7s) ease forwards;
 
-  /* Glossy Button */
+  /* Glossy Button used in CTGlossyBtn */
   @keyframes glossy-btn {
     0% {
       background: linear-gradient(-65deg, #0000 40%, #fff7 50%, #0000 70%);
