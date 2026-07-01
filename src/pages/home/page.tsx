@@ -35,7 +35,7 @@ const HomePage: React.FC = () => {
       {/* Home Content */}
       <section className="pt-15 flex flex-col items-end justify-end">
         {/* Name & Role */}
-        <div className="relative bg-[#596266]/30 w-[50vw] md:w-60 md:mr-8">
+        <div className="relative bg-[#596266]/30 w-[50dvw] md:w-60 md:mr-8">
           <h2 className="absolute text-[#E8E8DC] text-lg font-bold -top-4 left-3 md:text-xl">
             Angga Prasetyo
           </h2>
@@ -45,10 +45,10 @@ const HomePage: React.FC = () => {
         </div>
 
         {/* Divider */}
-        <div className="p-px bg-[#00c9d4] opacity-30 my-0.5 w-[50vw] md:w-60 md:mr-8 md:my-1" />
+        <div className="p-px bg-[#00c9d4] opacity-30 my-0.5 w-[50dvw] md:w-60 md:mr-8 md:my-1" />
 
         {/* Specialization */}
-        <div className="flex justify-between gap-1 mr-0.5 w-[50vw] md:w-60 md:mr-8">
+        <div className="flex justify-between gap-1 mr-0.5 w-[50dvw] md:w-60 md:mr-8">
           <div className="bg-[#a9a9a6] rounded w-full">
             <h3 className="text-[#4d4d4d] font-semibold text-center text-sm">
               React
@@ -63,7 +63,7 @@ const HomePage: React.FC = () => {
 
         {/* Contact */}
         <div className="absolute top-34 md:top-38">
-          <div className="relative bg-black/60 w-[45vw] mt-2 mb-0.5 md:w-55 md:mr-8">
+          <div className="relative bg-black/60 w-[45dvw] mt-2 mb-0.5 md:w-55 md:mr-8">
             <h3 className="text-white text-center text-sm md:text-md">
               {words[WORDS.CONTACT][language]}
             </h3>
@@ -85,8 +85,8 @@ const HomePage: React.FC = () => {
 
       <Character />
       <div
-        className="absolute top-10 left-2 w-55 z-1"
-        onClick={() => changeTopic(null)}>
+        className="absolute top-10 left-2 w-[55dvw] z-1 md:w-[45dvw] md:translate-x-[50%] md:top-15"
+      >
         <ChatBubble
           show={Boolean(chatTopic)}
           message={chatTopic ? words[chatTopic][language] : ''}
