@@ -18,9 +18,6 @@ export const BeginSection: React.FC = () => {
 
   const [particles, setParticles] = useState(0);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => changeBgm(AUDIOS.BEGIN), []);
-
   useEffect(() => {
     const interval = setInterval(() => {
       setParticles((c) => c + 55);

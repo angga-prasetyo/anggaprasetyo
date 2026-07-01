@@ -47,16 +47,16 @@
   /* Custom Colors */
   --vc-background: #000c18;
   --vc-foreground: #6688cc;
-  --vc-func_name: #ddbb88;
+  --vc-func-name: #ddbb88;
   --vc-number: #f280d0;
   --vc-string: #22aa44;
   --vc-comment: #384887;
-  --vc-func_arg: #2277ff;
-  --vc-line_number: #406385;
-  --vc-act_line_number: #80a2c2;
+  --vc-func-arg: #2277ff;
+  --vc-line-number: #406385;
+  --vc-act-line-number: #80a2c2;
   --vc-keyword: #225588;
   --vc-const: #9966b8;
-  --vc-term_bright_cyan: #00d4c8;
+  --vc-term-bright-cyan: #00d4c8;
   --vc-delete: #dc322f;
   --background-blinding: radial-gradient(
     circle,
@@ -85,6 +85,61 @@ button {
 @theme inline {
   --font-heading: var(--font-sans);
   --font-sans: 'Exo 2 Variable', sans-serif;
+
+  /* Custom Font Size */
+  /* text-base: 16px → 18px */
+  --text-base: clamp(1rem, 0.9871rem + 0.1292vw, 1.125rem);
+  --text-base--line-height: 1.5;
+
+  /* text-2xs: 8.19px → 9.22px — base ÷ 1.25³ */
+  --text-2xs: clamp(0.512rem, 0.4965rem + 0.0663vw, 0.576rem);
+  --text-2xs--line-height: 1.5;
+
+  /* text-xs: 10px → 11.52px */
+  --text-xs: clamp(0.625rem, 0.6151rem + 0.0808vw, 0.72rem);
+  --text-xs--line-height: 1.5;
+
+  /* text-sm: 12.8px → 14.4px */
+  --text-sm: clamp(0.8rem, 0.7897rem + 0.1036vw, 0.9rem);
+  --text-sm--line-height: 1.5;
+
+  /* text-md = base alias */
+  --text-md: clamp(1rem, 0.9871rem + 0.1292vw, 1.125rem);
+  --text-md--line-height: 1.5;
+
+  /* text-lg: 20px → 22.5px */
+  --text-lg: clamp(1.25rem, 1.2339rem + 0.1615vw, 1.40625rem);
+  --text-lg--line-height: 1.4;
+
+  /* text-xl: 25px → 28.125px */
+  --text-xl: clamp(1.5625rem, 1.5424rem + 0.2019vw, 1.7578rem);
+  --text-xl--line-height: 1.3;
+
+  /* text-2xl: 31.25px → 35.16px */
+  --text-2xl: clamp(1.9531rem, 1.928rem + 0.2523vw, 2.1975rem);
+  --text-2xl--line-height: 1.25;
+
+  /* text-3xl: 39.06px → 43.95px */
+  --text-3xl: clamp(2.4413rem, 2.4099rem + 0.3143vw, 2.7469rem);
+  --text-3xl--line-height: 1.2;
+
+  /* text-4xl: 48.83px → 54.93px */
+  --text-4xl: clamp(3.0519rem, 3.0126rem + 0.3931vw, 3.4331rem);
+  --text-4xl--line-height: 1.15;
+
+  /* text-5xl: 61.04px → 68.66px */
+  --text-5xl: clamp(3.815rem, 3.7657rem + 0.4914vw, 4.2913rem);
+  --text-5xl--line-height: 1.1;
+
+  /* text-6xl: 76.29px → 85.83px */
+  --text-6xl: clamp(4.7681rem, 4.7071rem + 0.6103vw, 5.3644rem);
+  --text-6xl--line-height: 1.1;
+
+  /* text-display: 95.37px → 107.28px */
+  --text-display: clamp(5.9606rem, 5.8838rem + 0.7681vw, 6.705rem);
+  --text-display--line-height: 1.05;
+  /* End of Custom Font Size */
+
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -127,46 +182,22 @@ button {
   /* Custom Colors */
   --color-vc-background: var(--vc-background);
   --color-vc-foreground: var(--vc-foreground);
-  --color-vc-func_name: var(--vc-func_name);
+  --color-vc-func-name: var(--vc-func-name);
   --color-vc-number: var(--vc-number);
   --color-vc-string: var(--vc-string);
   --color-vc-comment: var(--vc-comment);
-  --color-vc-func_arg: var(--vc-func_arg);
-  --color-vc-line_number: var(--vc-line_number);
-  --color-vc-act_line_number: var(--vc-act_line_number);
+  --color-vc-func-arg: var(--vc-func-arg);
+  --color-vc-line-number: var(--vc-line-number);
+  --color-vc-act-line-number: var(--vc-act-line-number);
   --color-vc-keyword: var(--vc-keyword);
   --color-vc-const: var(--vc-const);
-  --color-vc-term_bright_cyan: var(--vc-term_bright_cyan);
+  --color-vc-term-bright-cyan: var(--vc-term-bright-cyan);
   --color-vc-delete: var(--vc-delete);
   --color-background-blinding: var(--background-blinding);
 
   /* End of Custom Colors */
 
   /* Custom Animation */
-
-  /* Button Pulse & Ripple */
-  @keyframes btn-pulse {
-    0%,
-    100% {
-      box-shadow: 0 0 0 0 var(--pulse-color, oklch(from var(--bg) l c h / 0.5));
-    }
-    50% {
-      box-shadow: 0 0 0 var(--distance)
-        var(--pulse-color, oklch(from var(--bg) l c h / 0.5));
-    }
-  }
-  @keyframes btn-pulse-ripple {
-    0% {
-      box-shadow: 0 0 0 0 oklch(from var(--pulse-color, var(--bg)) l c h / 1);
-    }
-    100% {
-      box-shadow: 0 0 0 var(--distance)
-        oklch(from var(--pulse-color, var(--bg)) l c h / 0);
-    }
-  }
-  --animate-btn-pulse: btn-pulse var(--duration) ease-out infinite;
-  --animate-btn-pulse-ripple: btn-pulse-ripple var(--duration)
-    cubic-bezier(0.16, 1, 0.3, 1) infinite;
 
   /* Fade In */
   @keyframes fadeIn {
@@ -288,7 +319,7 @@ button {
   --animate-moving-square: moving-square var(--duration, 10s) ease-in-out
     infinite both;
 
-  /* Spin Ring */
+  /* Spin Ring used in CTRetroVortex */
   @keyframes spin-ring {
     from {
       transform: translate(-50%, -50%) scale(1) rotate(0deg);
@@ -299,7 +330,7 @@ button {
   }
   --animate-spin-ring: spin-ring var(--duration, 3s) linear infinite;
 
-  /* Rotate Rays */
+  /* Rotate Rays used in CTRetroVortex */
   @keyframes rotate-ray {
     from {
       transform: translate(-50%, -50%) rotate(0deg);
@@ -312,7 +343,7 @@ button {
   }
   --animate-rotate-ray: rotate-ray var(--duration, 8s) linear infinite;
 
-  /* Core Glow & Blind */
+  /* Core Glow & Blind used in CTRetroVortex */
   @keyframes core-glow {
     from {
       transform: translate(-50%, -50%) scale(0.85);
@@ -336,7 +367,7 @@ button {
     core-glow var(--duration-glow, 3s) ease-in forwards,
     core-blind var(--duration-blind, 6s) ease-in 6s forwards;
 
-  /* Particle Drift */
+  /* Particle Drift used in CTRetroVortex */
   @keyframes particle-drift {
     0% {
       transform: translate(var(--px), var(--py)) scale(1);
@@ -350,7 +381,7 @@ button {
   --animate-particle-drift: particle-drift var(--duration) linear var(--delay)
     infinite;
 
-  /* Swipe Right Arrow */
+  /* Swipe Right Arrow used in Navbar */
   @keyframes swipe-right {
     0% {
       opacity: 0;
@@ -367,7 +398,7 @@ button {
   }
   --animate-swipe-right: swipe-right var(--duration, 1.2s) ease-in-out infinite;
 
-  /* Slide Right */
+  /* Slide Right used in Navbar */
   @keyframes slide-right {
     0% {
       transform: translateX(0);
@@ -378,7 +409,7 @@ button {
   }
   --animate-slide-right: slide-right var(--duration, 0.7s) ease forwards;
 
-  /* Slide Left */
+  /* Slide Left used in Navbar */
   @keyframes slide-left {
     0% {
       transform: translateX(100%);
@@ -389,24 +420,49 @@ button {
   }
   --animate-slide-left: slide-left var(--duration, 0.7s) ease forwards;
 
-  /* Glossy Button */
+  /* Glossy Button used in CTGlossyBtn */
   @keyframes glossy-btn {
-      0% {
-    background: linear-gradient(-65deg, #0000 40%, #fff7 50%, #0000 70%);
-    background-size: 200% 100%;
-    background-repeat: no-repeat;
-    background-position: 130%;
-    opacity: 1;
-  }
-  100% {
-    background: linear-gradient(-65deg, #0000 40%, #fff7 50%, #0000 70%);
-    background-size: 200% 100%;
-    background-repeat: no-repeat;
-    background-position: -166%;
-    opacity: 0;
-  }
+    0% {
+      background: linear-gradient(-65deg, #0000 40%, #fff7 50%, #0000 70%);
+      background-size: 200% 100%;
+      background-repeat: no-repeat;
+      background-position: 130%;
+      opacity: 1;
+    }
+    100% {
+      background: linear-gradient(-65deg, #0000 40%, #fff7 50%, #0000 70%);
+      background-size: 200% 100%;
+      background-repeat: no-repeat;
+      background-position: -166%;
+      opacity: 0;
+    }
   }
   --animate-glossy-btn: glossy-btn var(--duration, 3s) ease infinite;
+
+
+  /* Scanline sweep — used on radio option hover */
+  @keyframes scanline-sweep {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  --animate-scanline-sweep: scanline-sweep var(--duration, 1.5s) linear infinite;
+
+  /* Corner Pulse in CTRevealButton */
+@keyframes corner-pulse {
+    0%,
+    100% {
+      transform: scale(1) translate(0, 0);
+    }
+    50% {
+      transform: scale(1.1) translate(var(--pulse-x, 0), var(--pulse-y, 0));
+    }
+  }
+  --animate-corner-pulse: corner-pulse var(--duration, 1.8s) ease-in-out infinite;
+  
 
   /* End of Custom Animation */
 }
@@ -454,5 +510,26 @@ button {
   }
   html {
     @apply font-sans;
+  }
+  h1 {
+    @apply text-display;
+  }
+  h2 {
+    @apply text-5xl;
+  }
+  h3 {
+    @apply text-4xl;
+  }
+  h4 {
+    @apply text-3xl;
+  }
+  h5 {
+    @apply text-2xl;
+  }
+  h6 {
+    @apply text-xl;
+  }
+  p {
+    @apply text-base;
   }
 }

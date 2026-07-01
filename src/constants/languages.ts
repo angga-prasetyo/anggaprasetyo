@@ -14,8 +14,8 @@ export enum WORDS {
   ENGLISH = 'english',
   NEXT = 'next',
   POPUP__ENABLE_SOUND_TITLE = 'popup__enable_sound_title',
-  POPUP__ENABLE_SOUND_DESCRIPTION = 'popup__enable_sound_description',
   POPUP__CHOOSE_LANGUAGE_TITLE = 'popup__choose_language_title',
+  POPUP__CONFIGURATION_TITLE = 'popup__configuration_title',
   OVERVIEW = 'overview',
   PROFILE = 'profile',
   WORKS = 'works',
@@ -26,6 +26,8 @@ export enum WORDS {
   NAVBAR__MINIMIZE = 'navbar__minimize',
   DOWNLOAD_CV = 'download_cv',
   CHAT__NO_PAGES = 'chat__no_pages',
+  RECOMMENDED = 'recommended',
+  LOADING_AUDIO = 'loading_audio',
 }
 
 type AllWordKeys = EnumValues<typeof WORDS> | CONTACT_KEYS;
@@ -35,33 +37,41 @@ export const words: {
     [key in EnumValues<typeof LANGUAGES>]: string;
   };
 } = {
+  [WORDS.RECOMMENDED]: {
+    [LANGUAGES.IDN]: 'Dianjurkan',
+    [LANGUAGES.ENG]: 'Recommended',
+  },
+  [WORDS.LOADING_AUDIO]: {
+        [LANGUAGES.IDN]: 'Memuat Suara',
+    [LANGUAGES.ENG]: 'Loading Audio',
+  },
   [WORDS.ALLOW]: {
-    [LANGUAGES.IDN]: 'Izinkan',
-    [LANGUAGES.ENG]: 'Allow',
+    [LANGUAGES.IDN]: 'HIDUPKAN SUARA',
+    [LANGUAGES.ENG]: 'ENABLE AUDIO',
   },
   [WORDS.DENY]: {
-    [LANGUAGES.IDN]: 'Tolak',
-    [LANGUAGES.ENG]: 'Deny',
+    [LANGUAGES.IDN]: 'MATIKAN',
+    [LANGUAGES.ENG]: 'MUTED',
   },
   [WORDS.INDONESIA]: {
-    [LANGUAGES.IDN]: 'Indonesia 🇮🇩',
-    [LANGUAGES.ENG]: 'Indonesia 🇮🇩',
+    [LANGUAGES.IDN]: 'Indonesia',
+    [LANGUAGES.ENG]: 'Indonesia',
   },
   [WORDS.ENGLISH]: {
-    [LANGUAGES.IDN]: 'Inggris (Amerika) 🇺🇸',
-    [LANGUAGES.ENG]: 'English (US) 🇺🇸',
+    [LANGUAGES.IDN]: 'Inggris (Amerika)',
+    [LANGUAGES.ENG]: 'English (US)',
   },
   [WORDS.NEXT]: {
     [LANGUAGES.IDN]: 'Lanjut',
     [LANGUAGES.ENG]: 'Next',
   },
   [WORDS.POPUP__ENABLE_SOUND_TITLE]: {
-    [LANGUAGES.IDN]: 'IZINKAN PUTAR SUARA?',
-    [LANGUAGES.ENG]: 'ALLOW PLAY SOUND?',
+    [LANGUAGES.IDN]: 'SUARA',
+    [LANGUAGES.ENG]: 'AUDIO OUTPUT',
   },
-  [WORDS.POPUP__ENABLE_SOUND_DESCRIPTION]: {
-    [LANGUAGES.IDN]: 'Izinkan untuk mendapatkan pengalaman terbaik',
-    [LANGUAGES.ENG]: 'Allow to get the best experience.',
+  [WORDS.POPUP__CONFIGURATION_TITLE]: {
+    [LANGUAGES.IDN]: 'Konfigurasi Sistem',
+    [LANGUAGES.ENG]: 'System Configuration',
   },
   [WORDS.POPUP__CHOOSE_LANGUAGE_TITLE]: {
     [LANGUAGES.IDN]: 'PILIH BAHASA',

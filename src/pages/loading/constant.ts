@@ -7,7 +7,6 @@ export const pageMeta: CTSeoMetaPropsMeta = {
 
 export enum SECTIONS {
   LANG = 'language',
-  AUDIO = 'audio',
   LOADING = 'loading',
   BEGIN = 'begin',
 }

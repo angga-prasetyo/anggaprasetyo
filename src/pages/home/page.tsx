@@ -34,16 +34,21 @@ const HomePage: React.FC = () => {
 
       {/* Home Content */}
       <section className="pt-15 flex flex-col items-end justify-end">
-        <div className="relative bg-[#596266]/30 w-42 mr-1">
-          <h2 className="absolute text-[#E8E8DC] text-lg font-bold -top-4 left-3">
+        {/* Name & Role */}
+        <div className="relative bg-[#596266]/30 w-[50dvw] md:w-60 md:mr-8">
+          <h2 className="absolute text-[#E8E8DC] text-lg font-bold -top-4 left-3 md:text-xl">
             Angga Prasetyo
           </h2>
-          <h2 className="text-[#E8E8DC] text-md font-bold pt-4 pb-2 pl-3">
+          <h2 className="text-[#E8E8DC] text-md font-bold pt-4 pb-2 pl-3 md:text-lg md:pt-5 md:pb-3">
             Frontend Engineer
           </h2>
         </div>
-        <div className="p-px bg-[#00c9d4] w-42 m-1 opacity-30" />
-        <div className="flex justify-between gap-1 w-42 mr-1">
+
+        {/* Divider */}
+        <div className="p-px bg-[#00c9d4] opacity-30 my-0.5 w-[50dvw] md:w-60 md:mr-8 md:my-1" />
+
+        {/* Specialization */}
+        <div className="flex justify-between gap-1 mr-0.5 w-[50dvw] md:w-60 md:mr-8">
           <div className="bg-[#a9a9a6] rounded w-full">
             <h3 className="text-[#4d4d4d] font-semibold text-center text-sm">
               React
@@ -55,15 +60,19 @@ const HomePage: React.FC = () => {
             </h3>
           </div>
         </div>
-        <div className="absolute top-35">
-          <div className="relative bg-black/60 w-39 mt-2 mb-1">
-            <h3 className="text-white text-center">
+
+        {/* Contact */}
+        <div className="absolute top-34 md:top-38">
+          <div className="relative bg-black/60 w-[45dvw] mt-2 mb-0.5 md:w-55 md:mr-8">
+            <h3 className="text-white text-center text-sm md:text-md">
               {words[WORDS.CONTACT][language]}
             </h3>
           </div>
           <Contacts />
         </div>
-        <div className="absolute top-60 right-2">
+
+        {/* Download Button */}
+        <div className="absolute top-60 right-2 md:top-70 md:right-10">
           <a
             href="/ap-cv.pdf"
             download="Angga Prasetyo - Remote Frontend Developer">
@@ -76,8 +85,8 @@ const HomePage: React.FC = () => {
 
       <Character />
       <div
-        className="absolute top-10 left-2 w-55 z-1"
-        onClick={() => changeTopic(null)}>
+        className="absolute top-10 left-2 w-[55dvw] z-1 md:w-[45dvw] md:translate-x-[50%] md:top-15"
+      >
         <ChatBubble
           show={Boolean(chatTopic)}
           message={chatTopic ? words[chatTopic][language] : ''}

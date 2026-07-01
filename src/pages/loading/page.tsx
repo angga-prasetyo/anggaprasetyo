@@ -3,9 +3,8 @@ import { useMemo } from 'react';
 import { CTLayout } from '@/components/ct-layout';
 import { useLoadingStore } from '@/stores/loading/store';
 
-import { AudioSection } from './components/AudioSection';
 import { BeginSection } from './components/BeginSection';
-import { LangSection } from './components/LangSection';
+import { ConfigurationSection } from './components/configuration-section/component';
 import { LoadingSection } from './components/LoadingSection';
 import { pageMeta, SECTIONS } from './constant';
 
@@ -15,9 +14,7 @@ const LoadingPage: React.FC = () => {
   const sections = useMemo(() => {
     switch (currentSection) {
       case SECTIONS.LANG:
-        return <LangSection />;
-      case SECTIONS.AUDIO:
-        return <AudioSection />;
+        return <ConfigurationSection />;
       case SECTIONS.LOADING:
         return <LoadingSection />;
       case SECTIONS.BEGIN:
@@ -27,11 +24,7 @@ const LoadingPage: React.FC = () => {
     }
   }, [currentSection]);
 
-  return (
-    <CTLayout meta={pageMeta}>
-      {sections}
-    </CTLayout>
-  );
+  return <CTLayout meta={pageMeta}>{sections}</CTLayout>;
 };
 
 export default LoadingPage;

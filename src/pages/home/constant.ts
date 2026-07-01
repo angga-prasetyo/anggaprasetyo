@@ -2,12 +2,14 @@ import { CTSeoMetaPropsMeta } from '@/components/ct-seo-meta/type';
 import { WORDS } from '@/constants/languages';
 import { CONTACT_KEYS } from '@/constants/others';
 
+import { ExpressionMap } from './type';
+
 export const pageMeta: CTSeoMetaPropsMeta = {
   descriptionPage: 'Home page for Custom Dashboard',
   titlePage: 'Home || Custom',
 };
 
-export const charExpressions: Record<string, Record<string, number>> = {
+export const charExpressions: ExpressionMap = {
   [CONTACT_KEYS.EMAIL]: {
     Fcl_MTH_Fun: 0.7,
   },

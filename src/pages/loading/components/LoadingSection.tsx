@@ -17,11 +17,9 @@ export const LoadingSection: React.FC = () => {
   const [progress, setProgress] = useState(0);
 
   const begin = useCallback(() => {
+    changeBgm(AUDIOS.BEGIN);
     changeSection(SECTIONS.BEGIN);
-  }, [changeSection]);
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => changeBgm(AUDIOS.LOADING), []);
+  }, [changeBgm, changeSection]);
 
   useEffect(() => {
     async function preloadAll() {

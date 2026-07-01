@@ -7,7 +7,7 @@ interface CTGlossyButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export function CTGlossyButton({
-  children = 'Frutiger Button',
+  children,
   className,
   ...props
 }: CTGlossyButtonProps) {
@@ -27,7 +27,8 @@ export function CTGlossyButton({
         style={{
           background:
             'radial-gradient(circle at 50% 100%, #30f8f8 10%, #30f8f800 55%), linear-gradient(#00526a, #009dcd)',
-        }}>
+        }}
+        >
         <div
           aria-hidden
           className="absolute inset-0 pointer-events-none animate-glossy-btn"
