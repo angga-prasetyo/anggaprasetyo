@@ -15,7 +15,7 @@ export const Header = () => {
     switch (pathname) {
       case UIEndpointsCommon.HOME:
         return (
-          <h1 className="font-semibold text-[#4d4d4d]">{`Angga/${words[WORDS.OVERVIEW][language]}`}</h1>
+          <h1 className="font-semibold text-[#4d4d4d] text-sm md:text-md">{`Angga/${words[WORDS.OVERVIEW][language]}`}</h1>
         );
       default:
         return <></>;

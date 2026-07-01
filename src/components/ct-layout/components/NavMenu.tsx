@@ -212,12 +212,12 @@ export function NavMenu({ onSelect }: NavMenuProps) {
 
                     {/* label */}
                     <span className="flex-1 min-w-0">
-                      <span className="block text-[9px] tracking-[2px] mb-2 leading-px text-[rgba(255,255,255,0.38)]">
+                      <span className="block text-xs tracking-[2px] mb-2 leading-px text-[rgba(255,255,255,0.38)]">
                         {item.index?.toUpperCase()} / {item.sub?.toUpperCase()}
                       </span>
                       <span
                         className={cn(
-                          'block text-[15px] font-extrabold tracking-[1px]',
+                          'block text-md font-extrabold tracking-[1px]',
                           isActive || isHovered
                             ? 'text-white'
                             : 'text-[#aeaea8]',
