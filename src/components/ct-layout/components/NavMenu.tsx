@@ -8,18 +8,19 @@ import {
   type LucideIcon,
   Menu,
 } from 'lucide-react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { WORDS, words } from '@/constants/languages';
+import { UIEndpointsCommon } from '@/constants/ui-endpoints/common';
 import { useSwipe } from '@/hooks/useSwipe';
 import { cn } from '@/lib/utils';
 import { useComponentStore } from '@/stores/component/store';
 import { useHomeStore } from '@/stores/home/store';
-import { EnumValues } from '@/types/common';
 
 import { NAV_ITEM_ID } from '../constant';
 
 type NavItem = {
-  id: EnumValues<typeof NAV_ITEM_ID>;
+  id: string;
   index: string;
   sub: string;
   label: string;
@@ -35,17 +36,19 @@ const ARROW_DELAYS = ['0s', '0.2s', '0.4s'];
 export function NavMenu({ onSelect }: NavMenuProps) {
   const { language } = useComponentStore((state) => state);
   const { changeTopic } = useHomeStore((state) => state);
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
   const NAV_ITEMS: NavItem[] = useMemo(
     () => [
       {
-        id: NAV_ITEM_ID.PROFILE,
+        id: UIEndpointsCommon.HOME,
         index: '01',
         sub: words[WORDS.OVERVIEW][language],
         label: words[WORDS.PROFILE][language],
         icon: User,
       },
       {
-        id: NAV_ITEM_ID.PROJECT,
+        id: UIEndpointsCommon.PROJECTS,
         index: '02',
         sub: words[WORDS.WORKS][language],
         label: words[WORDS.PROJECT][language],
@@ -61,7 +64,7 @@ export function NavMenu({ onSelect }: NavMenuProps) {
     ],
     [language],
   );
-  const [active, setActive] = useState(NAV_ITEM_ID.PROFILE);
+  const [active, setActive] = useState(pathname);
   const [hovered, setHovered] = useState<string | null>(null);
   const [open, setOpen] = useState(true);
 
@@ -77,10 +80,13 @@ export function NavMenu({ onSelect }: NavMenuProps) {
   function handleSelect(id: NavItem['id']) {
     setActive(id);
     onSelect?.(id);
+    changeTopic(null);
 
     switch (id) {
-      case NAV_ITEM_ID.PROFILE:
-        return changeTopic(null);
+      case UIEndpointsCommon.HOME:
+        return navigate(UIEndpointsCommon.HOME);
+      case UIEndpointsCommon.PROJECTS:
+        return navigate(UIEndpointsCommon.PROJECTS);
       default:
         return changeTopic(WORDS.CHAT__NO_PAGES);
     }

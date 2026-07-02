@@ -5,6 +5,7 @@ import { UIEndpointsCommon } from '@/constants/ui-endpoints/common';
 import { Error404 } from '@/pages/error/404';
 import { Home } from '@/pages/home';
 import { Loading } from '@/pages/loading';
+import { Projects } from '@/pages/projects';
 
 export const commonRoute: RouteObject[] = [
   {
@@ -24,6 +25,16 @@ export const commonRoute: RouteObject[] = [
       {
         index: true,
         element: <Home />,
+      },
+    ],
+  },
+  {
+    path: UIEndpointsCommon.PROJECTS,
+    element: <CTRouteGuard isPrivate />,
+    children: [
+      {
+        index: true,
+        element: <Projects />,
       },
     ],
   },

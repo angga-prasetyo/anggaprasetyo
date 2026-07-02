@@ -13,6 +13,7 @@ const CTLayoutComponent: React.FC<CTLayoutProps> = ({
   children,
   className,
   showNav = false,
+  title,
   ...rest
 }) => {
   const { pathname } = useLocation();
@@ -30,7 +31,7 @@ const CTLayoutComponent: React.FC<CTLayoutProps> = ({
       style={{ background }}
       {...rest}>
       <CTSeoMeta meta={meta} />
-      {!isLoadingPage && <Header />}
+      {!isLoadingPage && <Header title={title} />}
       {children}
       {showNav && <NavMenu />}
     </div>

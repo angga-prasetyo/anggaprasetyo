@@ -4,6 +4,7 @@ import { CTRetroVortex } from '@/components/ct-retro-vortex/component';
 import { AnimatedCircularProgressBar } from '@/components/ui/animated-circular-progress-bar';
 import { AUDIOS } from '@/constants/audios';
 import { preloadHome } from '@/pages/home';
+import { preloadProjects } from '@/pages/projects';
 import { useComponentStore } from '@/stores/component/store';
 import { useLoadingStore } from '@/stores/loading/store';
 import { preloadAudio, preloadGLTF } from '@/utils/other';
@@ -26,6 +27,7 @@ export const LoadingSection: React.FC = () => {
       const tasks = [
         // JS chunks
         preloadHome(),
+        preloadProjects(),
 
         // Fonts
         document.fonts.ready,

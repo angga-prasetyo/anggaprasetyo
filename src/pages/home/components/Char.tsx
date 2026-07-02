@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { Suspense } from 'react';
 
 import { useAnimations } from '@react-three/drei';
@@ -16,7 +16,7 @@ import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { CONTACT_KEYS } from '@/constants/others';
 import { useHomeStore } from '@/stores/home/store';
 
-import { charExpressions } from '../constant';
+import { charExpressions } from '../../../pages/home/constant';
 
 function Model({ gltf }: { gltf: GLTF }) {
   const group = useRef<Group>(null);
@@ -85,26 +85,29 @@ function Model({ gltf }: { gltf: GLTF }) {
   });
 
   // Ekspresi berdasarkan chatTopic
-  const expression =
-    charExpressions?.[chatTopic || 'neutral'] || charExpressions.neutral;
+  const expression = useMemo(
+    () => charExpressions?.[chatTopic || 'neutral'] || charExpressions.neutral,
+    [chatTopic],
+  );
+  useEffect(() => {
+    meshRefs.current.forEach((mesh) => {
+      if (!mesh.morphTargetInfluences || !mesh.morphTargetDictionary) return;
+      const dict = mesh.morphTargetDictionary;
+      const influences = mesh.morphTargetInfluences;
 
-  meshRefs.current.forEach((mesh) => {
-    if (!mesh.morphTargetInfluences || !mesh.morphTargetDictionary) return;
-    const dict = mesh.morphTargetDictionary;
-    const influences = mesh.morphTargetInfluences;
+      // Reset semua ekspresi dulu
+      Object.keys(charExpressions).forEach((topic) => {
+        Object.keys(charExpressions[topic]).forEach((key) => {
+          if (dict[key] !== undefined) influences[dict[key]] = 0;
+        });
+      });
 
-    // Reset semua ekspresi dulu
-    Object.keys(charExpressions).forEach((topic) => {
-      Object.keys(charExpressions[topic]).forEach((key) => {
-        if (dict[key] !== undefined) influences[dict[key]] = 0;
+      // Apply ekspresi baru
+      Object.entries(expression).forEach(([key, value]) => {
+        if (dict[key] !== undefined) influences[dict[key]] = value;
       });
     });
-
-    // Apply ekspresi baru
-    Object.entries(expression).forEach(([key, value]) => {
-      if (dict[key] !== undefined) influences[dict[key]] = value;
-    });
-  });
+  }, [expression]);
 
   return <primitive ref={group} object={scene} position={[-0.15, -1.185, 0]} />;
 }

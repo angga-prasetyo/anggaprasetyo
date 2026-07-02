@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import { CTGlossyButton } from '@/components/ct-glossy-btn/component';
 import { CTLayout } from '@/components/ct-layout';
 import { WORDS, words } from '@/constants/languages';
@@ -13,15 +11,14 @@ import { pageMeta } from './constant';
 
 const HomePage: React.FC = () => {
   const { language } = useComponentStore((state) => state);
-  const { chatTopic, changeTopic } = useHomeStore((state) => state);
-  useEffect(() => {
-    return () => {
-      changeTopic(null);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { chatTopic } = useHomeStore((state) => state);
+
   return (
-    <CTLayout meta={pageMeta} className="overflow-hidden" showNav>
+    <CTLayout
+      meta={pageMeta}
+      className="overflow-hidden"
+      title={words[WORDS.OVERVIEW][language]}
+      showNav>
       {/* Overlay blinding fade out */}
       <div
         className="fixed -inset-50 animate-fadeOut pointer-events-none"
@@ -84,9 +81,7 @@ const HomePage: React.FC = () => {
       </section>
 
       <Character />
-      <div
-        className="absolute top-10 left-2 w-[55dvw] z-1 md:w-[45dvw] md:translate-x-[50%] md:top-15"
-      >
+      <div className="absolute top-10 left-2 w-[55dvw] z-1 md:w-[45dvw] md:translate-x-[50%] md:top-15">
         <ChatBubble
           show={Boolean(chatTopic)}
           message={chatTopic ? words[chatTopic][language] : ''}
