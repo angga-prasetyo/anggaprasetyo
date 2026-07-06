@@ -28,6 +28,7 @@ export enum WORDS {
   CHAT__NO_PAGES = 'chat__no_pages',
   RECOMMENDED = 'recommended',
   LOADING_AUDIO = 'loading_audio',
+  PERSONAL = 'personal',
 }
 
 type AllWordKeys = EnumValues<typeof WORDS> | CONTACT_KEYS;
@@ -143,4 +144,8 @@ export const words: {
     [LANGUAGES.IDN]: 'Pengalaman',
     [LANGUAGES.ENG]: 'Experience',
   },
+  [WORDS.PERSONAL]: {
+    [LANGUAGES.IDN]: 'Pribadi',
+    [LANGUAGES.ENG]: 'Personal',
+  }
 };

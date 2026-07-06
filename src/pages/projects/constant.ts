@@ -5,3 +5,8 @@ export const pageMeta: CTSeoMetaPropsMeta = {
   titlePage: 'Projects || Angga',
 };
 
+export enum TOPIC {
+  PERSONAL = 'personal',
+  KODA = 'koda',
+}
+
