@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import { ChevronDown } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 
 import { useProjectsStore } from '@/stores/projects/store';
 import { EnumValues } from '@/types/common';
@@ -64,7 +64,7 @@ export const List: React.FC = () => {
             className="flex justify-between items-center w-full py-1.5 px-2 mb-2 bg-[#403f3f]">
             {/* Company Name */}
             <div className="flex gap-2">
-              <ChevronDown className="text-amber-300 animate-pulse" />
+              <ChevronRight className="text-amber-300 animate-pulse" />
               <h5 className="text-sm text-[#a5a4a4]">{companyName}</h5>
             </div>
 
