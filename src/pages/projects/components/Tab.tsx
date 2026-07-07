@@ -1,8 +1,7 @@
 import { ReactNode, useCallback } from 'react';
 
-import { User } from 'lucide-react';
+import { Building, User } from 'lucide-react';
 
-import Icon from '@/assets/images/ap-square_person.svg?react';
 import { WORDS, words } from '@/constants/languages';
 import { cn } from '@/lib/utils';
 import { useComponentStore } from '@/stores/component/store';
@@ -23,8 +22,8 @@ export const Tab: React.FC = () => {
     }[] = [
       {
         id: TOPIC.KODA,
-        icon: <Icon className="size-3 md:size-4" />,
-        label: 'Koda',
+        icon: <Building className="size-3 md:size-4" />,
+        label: words[WORDS.COMPANY][language],
       },
       {
         id: TOPIC.PERSONAL,
@@ -40,7 +39,7 @@ export const Tab: React.FC = () => {
         <div
           key={id}
           className={cn(
-            'relative border rounded-t-sm bg-[#b5b4b4] py-2 px-4 cursor',
+            'relative border rounded-t-sm bg-[#b5b4b4] py-2 px-4 cursor-pointer',
             isActive &&
               'bg-[radial-gradient(circle_at_50%_100%,#494949_20%,#343434_75%)]',
           )}

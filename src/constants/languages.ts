@@ -29,6 +29,7 @@ export enum WORDS {
   RECOMMENDED = 'recommended',
   LOADING_AUDIO = 'loading_audio',
   PERSONAL = 'personal',
+  COMPANY = 'company',
 }
 
 type AllWordKeys = EnumValues<typeof WORDS> | CONTACT_KEYS;
@@ -147,5 +148,9 @@ export const words: {
   [WORDS.PERSONAL]: {
     [LANGUAGES.IDN]: 'Pribadi',
     [LANGUAGES.ENG]: 'Personal',
+  },
+  [WORDS.COMPANY]: {
+    [LANGUAGES.IDN]: 'Perusahaan',
+    [LANGUAGES.ENG]: 'Company',
   }
 };
