@@ -2,6 +2,8 @@ import { ReactNode } from 'react';
 
 import { ChevronRight } from 'lucide-react';
 
+import { WORDS, words } from '@/constants/languages';
+import { useComponentStore } from '@/stores/component/store';
 import { useProjectsStore } from '@/stores/projects/store';
 import { EnumValues } from '@/types/common';
 
@@ -44,13 +46,16 @@ const list: Record<
   [TOPIC.PERSONAL]: [],
 };
 export const List: React.FC = () => {
+  const { language } = useComponentStore((state) => state);
   const { topic } = useProjectsStore((state) => state);
 
   if (!list[topic].length) {
     return (
       <div className="w-full h-[81%] bg-black flex items-center justify-center overflow-scroll">
         <div />
-        <p className="rotate-45 font-mono text-red-500 text-6xl">No Data</p>
+        <p className="rotate-45 font-mono text-red-500 text-6xl">
+          {words[WORDS.EMPTY][language]}
+        </p>
       </div>
     );
   }

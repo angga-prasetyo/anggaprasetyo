@@ -30,6 +30,7 @@ export enum WORDS {
   LOADING_AUDIO = 'loading_audio',
   PERSONAL = 'personal',
   COMPANY = 'company',
+  EMPTY = 'empty',
 }
 
 type AllWordKeys = EnumValues<typeof WORDS> | CONTACT_KEYS;
@@ -152,5 +153,9 @@ export const words: {
   [WORDS.COMPANY]: {
     [LANGUAGES.IDN]: 'Perusahaan',
     [LANGUAGES.ENG]: 'Company',
-  }
+  },
+  [WORDS.EMPTY]: {
+    [LANGUAGES.IDN]: 'KOSONG',
+    [LANGUAGES.ENG]: 'NO DATA',
+  },
 };
