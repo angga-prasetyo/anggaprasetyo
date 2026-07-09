@@ -4,6 +4,8 @@ import {
   User,
   Code2,
   ChevronRight,
+  // TODO: Remove eslint disable when ready to show experience
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   BriefcaseBusiness,
   type LucideIcon,
   Menu,
@@ -12,11 +14,14 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { WORDS, words } from '@/constants/languages';
 import { UIEndpointsCommon } from '@/constants/ui-endpoints/common';
+import { ZINDEX } from '@/constants/zIndex';
 import { useSwipe } from '@/hooks/useSwipe';
 import { cn } from '@/lib/utils';
 import { useComponentStore } from '@/stores/component/store';
 import { useHomeStore } from '@/stores/home/store';
 
+// TODO: Remove eslint disable when ready to show experience
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { NAV_ITEM_ID } from '../constant';
 
 type NavItem = {
@@ -54,13 +59,13 @@ export function NavMenu({ onSelect }: NavMenuProps) {
         label: words[WORDS.PROJECT][language],
         icon: Code2,
       },
-      {
-        id: NAV_ITEM_ID.EXP,
-        index: '03',
-        sub: words[WORDS.RECORD][language],
-        label: words[WORDS.EXPERIENCE][language],
-        icon: BriefcaseBusiness,
-      },
+      // {
+      //   id: NAV_ITEM_ID.EXP,
+      //   index: '03',
+      //   sub: words[WORDS.RECORD][language],
+      //   label: words[WORDS.EXPERIENCE][language],
+      //   icon: BriefcaseBusiness,
+      // },
     ],
     [language],
   );
@@ -100,7 +105,10 @@ export function NavMenu({ onSelect }: NavMenuProps) {
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
           onClick={() => setOpen(true)}
-          className="absolute bottom-5 right-0 bg-[#1c1e22] p-2 rounded text-[#00c9d4]">
+          className={cn(
+            'absolute bottom-5 right-0 bg-[#1c1e22] p-2 rounded text-[#00c9d4]',
+            ZINDEX.NAVBAR,
+          )}>
           <Menu />
         </div>
       )}
@@ -110,6 +118,7 @@ export function NavMenu({ onSelect }: NavMenuProps) {
         className={cn(
           'absolute bottom-0 right-0 animate-slide-left text-xs',
           !open && 'animate-slide-right',
+          ZINDEX.NAVBAR,
         )}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
