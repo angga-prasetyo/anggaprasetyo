@@ -8,89 +8,93 @@ import { cn } from '@/lib/utils';
 import { useComponentStore } from '@/stores/component/store';
 import { useProjectsStore } from '@/stores/projects/store';
 import { EnumValues } from '@/types/common';
-import { capitalize } from '@/utils/string';
 
 import { TOPIC } from '../constant';
 
-const list: Record<
-  EnumValues<typeof TOPIC>,
-  (
-    | {
-        id: string;
-        companyLogo?: ReactNode;
-        companyName: string;
-        projectName: string;
-        projectDetails?: Record<string, unknown>;
-      }
-    | never
-  )[]
-> = {
-  [TOPIC.KODA]: [
-    {
-      id: 'koda-trimegah',
-      companyName: 'Koda',
-      projectName: 'TrimaPlus Trading App',
-      projectDetails: {
-        outsourced_by: 'Trimegah',
-        duration: 'October 2023 - August 2024',
-        contributions: [
-          'Engineered a cross-platform desktop trading app using Tauri (Rust + React) supporting 2 asset classes: stocks and mutual funds.',
-          'Built real-time orderbook and buy/sell/amend/withdraw order flows with 4 order validity types (Day, GTD, GTC, advanced order) via NATS WebSocket.',
-          'Delivered mutual fund features across 3 transaction types: buy, sell, and switch orders with NAV-based calculations and order history.',
-          'Optimized live data streaming performance by improving NATS reconnection logic and reducing orderbook table re-render on high-frequency ticks.',
-        ],
-      },
-    },
-    {
-      id: 'koda-hukumku',
-      companyName: 'Koda',
-      projectName: 'Hukumku Web Platform',
-      projectDetails: {
-        outsourced_by: 'Hukumku',
-        duration: 'July 2023 - October 2023',
-        contributions: [
-          'Built 5 core user flows: registration, OTP verification, KYC document upload, profile settings, and home dashboard for a legal tech platform.',
-          'Developed a notification system and verification status flow handling 3 user states: pending, approved, and rejected.',
-          'Delivered full mobile-responsive layout across all pages with SASS and React Router v6.',
-        ],
-      },
-    },
-    {
-      id: 'koda-infinid',
-      companyName: 'Koda',
-      projectName: 'infinID HELOC Web',
-      projectDetails: {
-        outsourced_by: 'infinID',
-        duration: 'December 2022 - July 2023',
-        contributions: [
-          'Developed a 7-step multi-step HELOC loan application flow covering pre-qualification, property, income, identity, and document submission.',
-          'Integrated 3 third-party services — VIDA biometric selfie, Brankas open banking, and Google Maps autocomplete — into a single application form.',
-          'Built a custom file uploader supporting multi-document upload, PDF preview, and mobile camera capture with format and size validation.',
-          'Implemented Facebook Pixel and Google Analytics tracking across all public-facing pages.',
-        ],
-      },
-    },
-    {
-      id: 'koda-last-mile',
-      companyName: 'Koda',
-      projectName: 'Kargo Last Mile TMS',
-      projectDetails: {
-        outsourced_by: 'Kargo',
-        duration: 'January 2022 - October 2022',
-        contributions: [
-          'Maintained a last-mile TMS handling shipment routing, delivery orders, and transporter/fleet/driver profiles across 200+ commits over a 9-month engagement.',
-          'Implemented payables and receivables modules with multi-tab Delivery Order review, payment action flows, and adjustment forms covering 3 transporter payment types (dedicated, on-call, shipper).',
-          'Built bulk CSV upload/download for 5 data entities (routing, transporter, fleet, driver, contract) with validation and error handling.',
-          'Wrote unit tests for payable modules using React Testing Library, contributing to a test-coverage CI pipeline.',
-        ],
-      },
-    },
-  ],
-  [TOPIC.PERSONAL]: [],
-};
 export const List: React.FC = () => {
   const { language } = useComponentStore((state) => state);
   const { topic } = useProjectsStore((state) => state);
+
+  const list: Record<
+    EnumValues<typeof TOPIC>,
+    (
+      | {
+          id: string;
+          companyLogo?: ReactNode;
+          companyName: string;
+          projectName: string;
+          projectDetails?: Record<string, unknown>;
+        }
+      | never
+    )[]
+  > = {
+    [TOPIC.KODA]: [
+      {
+        id: 'koda-trimegah',
+        companyName: 'Koda',
+        projectName: 'TrimaPlus Trading App',
+        projectDetails: {
+          [words[WORDS.OUTSOURCED][language]]: 'Trimegah',
+          [words[WORDS.DURATION][language]]:
+            `${words[WORDS.OCTOBER][language]} 2023 - ${words[WORDS.AUGUST][language]} 2024`,
+          [words[WORDS.CONTRIBUTIONS][language]]: [
+            words[WORDS.TRIMEGAH_TRIMAPLUS_C_1][language],
+            words[WORDS.TRIMEGAH_TRIMAPLUS_C_2][language],
+            words[WORDS.TRIMEGAH_TRIMAPLUS_C_3][language],
+            words[WORDS.TRIMEGAH_TRIMAPLUS_C_4][language],
+          ],
+        },
+      },
+      {
+        id: 'koda-hukumku',
+        companyName: 'Koda',
+        projectName: 'Hukumku Web Platform',
+        projectDetails: {
+          [words[WORDS.OUTSOURCED][language]]: 'Hukumku',
+          [words[WORDS.DURATION][language]]:
+            `${words[WORDS.JULY][language]} 2023 - ${words[WORDS.OCTOBER][language]} 2023`,
+          [words[WORDS.CONTRIBUTIONS][language]]: [
+            words[WORDS.HUKUMKU_C_1][language],
+            words[WORDS.HUKUMKU_C_2][language],
+            words[WORDS.HUKUMKU_C_3][language],
+          ],
+        },
+      },
+      {
+        id: 'koda-infinid',
+        companyName: 'Koda',
+        projectName: 'infinID HELOC Web',
+        projectDetails: {
+          [words[WORDS.OUTSOURCED][language]]: 'infinID',
+          [words[WORDS.DURATION][language]]:
+            `${words[WORDS.DECEMBER][language]} 2022 - ${words[WORDS.JULY][language]} 2023`,
+          [words[WORDS.CONTRIBUTIONS][language]]: [
+            words[WORDS.INFINID_C_1][language],
+            words[WORDS.INFINID_C_2][language],
+            words[WORDS.INFINID_C_3][language],
+            words[WORDS.INFINID_C_4][language],
+          ],
+        },
+      },
+      {
+        id: 'koda-last-mile',
+        companyName: 'Koda',
+        projectName: 'Kargo Last Mile TMS',
+        projectDetails: {
+          [words[WORDS.OUTSOURCED][language]]: 'Kargo',
+          [words[WORDS.DURATION][language]]:
+            `${words[WORDS.JANUARY][language]} 2022 - ${words[WORDS.OCTOBER][language]} 2022`,
+          [words[WORDS.CONTRIBUTIONS][language]]: [
+            words[WORDS.KARGO_C_1][language],
+            words[WORDS.KARGO_C_2][language],
+            words[WORDS.KARGO_C_3][language],
+            words[WORDS.KARGO_C_4][language],
+          ],
+        },
+      },
+    ],
+    [TOPIC.PERSONAL]: [],
+  };
 
   if (!list[topic].length) {
     return (
@@ -137,7 +141,7 @@ export const List: React.FC = () => {
                     {/* Label */}
                     <div className="w-full md:col-span-6 md:flex md:justify-between">
                       <label className="text-md font-semibold text-vc-term-bright-cyan">
-                        {capitalize(label, { split: '_' })}
+                        {label}
                       </label>
                       <span className="text-md font-semibold text-vc-func-arg opacity-0 md:opacity-100">
                         :
