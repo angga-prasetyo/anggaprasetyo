@@ -116,8 +116,8 @@ export const List: React.FC = () => {
             className="group [&_summary::-webkit-details-marker]:hidden details-content:max-h-0 details-content:opacity-0 details-content:-translate-y-5 details-content:overflow-hidden details-content:transition-[max-height,opacity,content-visibility,translate] details-content:duration-500 details-content:ease-in-out details-content:transition-discrete open:details-content:max-h-[50%] open:details-content:opacity-100 open:details-content:translate-y-0">
             <summary
               className={cn(
-                'flex justify-between items-center w-full py-1.5 px-2 mb-2 transition-[margin-bottom] duration-500 bg-[#403f3f] group-open:mb-0 group-open:sticky group-open:top-0 ',
-                `group-open:${ZINDEX.PROJECT_SUMMARY}`,
+                'flex justify-between items-center w-full py-1.5 px-2 mb-2 transition-[margin-bottom] duration-500 bg-[#403f3f] group-open:mb-0 group-open:sticky group-open:top-0',
+                ZINDEX.PROJECT_SUMMARY,
               )}>
               {/* Company Name */}
               <div className="flex gap-2">
