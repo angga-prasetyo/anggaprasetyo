@@ -4,22 +4,28 @@ import {
   User,
   Code2,
   ChevronRight,
+  // TODO: Remove eslint disable when ready to show experience
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   BriefcaseBusiness,
   type LucideIcon,
   Menu,
 } from 'lucide-react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { WORDS, words } from '@/constants/languages';
+import { UIEndpointsCommon } from '@/constants/ui-endpoints/common';
+import { ZINDEX } from '@/constants/zIndex';
 import { useSwipe } from '@/hooks/useSwipe';
 import { cn } from '@/lib/utils';
 import { useComponentStore } from '@/stores/component/store';
 import { useHomeStore } from '@/stores/home/store';
-import { EnumValues } from '@/types/common';
 
+// TODO: Remove eslint disable when ready to show experience
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { NAV_ITEM_ID } from '../constant';
 
 type NavItem = {
-  id: EnumValues<typeof NAV_ITEM_ID>;
+  id: string;
   index: string;
   sub: string;
   label: string;
@@ -35,33 +41,35 @@ const ARROW_DELAYS = ['0s', '0.2s', '0.4s'];
 export function NavMenu({ onSelect }: NavMenuProps) {
   const { language } = useComponentStore((state) => state);
   const { changeTopic } = useHomeStore((state) => state);
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
   const NAV_ITEMS: NavItem[] = useMemo(
     () => [
       {
-        id: NAV_ITEM_ID.PROFILE,
+        id: UIEndpointsCommon.HOME,
         index: '01',
         sub: words[WORDS.OVERVIEW][language],
         label: words[WORDS.PROFILE][language],
         icon: User,
       },
       {
-        id: NAV_ITEM_ID.PROJECT,
+        id: UIEndpointsCommon.PROJECTS,
         index: '02',
         sub: words[WORDS.WORKS][language],
         label: words[WORDS.PROJECT][language],
         icon: Code2,
       },
-      {
-        id: NAV_ITEM_ID.EXP,
-        index: '03',
-        sub: words[WORDS.RECORD][language],
-        label: words[WORDS.EXPERIENCE][language],
-        icon: BriefcaseBusiness,
-      },
+      // {
+      //   id: NAV_ITEM_ID.EXP,
+      //   index: '03',
+      //   sub: words[WORDS.RECORD][language],
+      //   label: words[WORDS.EXPERIENCE][language],
+      //   icon: BriefcaseBusiness,
+      // },
     ],
     [language],
   );
-  const [active, setActive] = useState(NAV_ITEM_ID.PROFILE);
+  const [active, setActive] = useState(pathname);
   const [hovered, setHovered] = useState<string | null>(null);
   const [open, setOpen] = useState(true);
 
@@ -77,24 +85,30 @@ export function NavMenu({ onSelect }: NavMenuProps) {
   function handleSelect(id: NavItem['id']) {
     setActive(id);
     onSelect?.(id);
+    changeTopic(null);
 
     switch (id) {
-      case NAV_ITEM_ID.PROFILE:
-        return changeTopic(null);
+      case UIEndpointsCommon.HOME:
+        return navigate(UIEndpointsCommon.HOME);
+      case UIEndpointsCommon.PROJECTS:
+        return navigate(UIEndpointsCommon.PROJECTS);
       default:
         return changeTopic(WORDS.CHAT__NO_PAGES);
     }
   }
 
   return (
-    <div className="ct-nav-menu fixed inset-0">
+    <div className="ct-nav-menu">
       {/* Hamburger Menu When Closed */}
       {!open && (
         <div
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
           onClick={() => setOpen(true)}
-          className="absolute bottom-5 right-0 bg-[#1c1e22] p-2 rounded text-[#00c9d4]">
+          className={cn(
+            'absolute bottom-5 right-0 bg-[#1c1e22] p-2 rounded text-[#00c9d4]',
+            ZINDEX.NAVBAR,
+          )}>
           <Menu />
         </div>
       )}
@@ -104,6 +118,7 @@ export function NavMenu({ onSelect }: NavMenuProps) {
         className={cn(
           'absolute bottom-0 right-0 animate-slide-left text-xs',
           !open && 'animate-slide-right',
+          ZINDEX.NAVBAR,
         )}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}

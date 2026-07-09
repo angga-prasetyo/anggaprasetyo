@@ -5,8 +5,8 @@ import { CONTACT_KEYS } from '@/constants/others';
 import { ExpressionMap } from './type';
 
 export const pageMeta: CTSeoMetaPropsMeta = {
-  descriptionPage: 'Home page for Custom Dashboard',
-  titlePage: 'Home || Custom',
+  descriptionPage: 'Home page for Angga',
+  titlePage: 'Home || Angga',
 };
 
 export const charExpressions: ExpressionMap = {
