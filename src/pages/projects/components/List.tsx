@@ -135,7 +135,7 @@ export const List: React.FC = () => {
                     key={detailsId}
                     className="w-full mb-2 md:grid md:grid-cols-24 md:gap-2 md:m-0">
                     {/* Label */}
-                    <div className="w-full md:col-span-10 md:flex md:justify-between">
+                    <div className="w-full md:col-span-6 md:flex md:justify-between">
                       <label className="text-md font-semibold text-vc-term-bright-cyan">
                         {capitalize(label, { split: '_' })}
                       </label>
@@ -145,13 +145,13 @@ export const List: React.FC = () => {
                     </div>
                     {/* Value */}
                     {isValueArr ? (
-                      <ul>
+                      <ul className="md:col-span-24">
                         {(projectDetails?.[label] as string[])?.map((el, i) => {
                           return (
                             <div
                               key={`${detailsId}-${i}`}
-                              className="flex gap-2">
-                              <Code2 className="size-10 text-[#C0392B]" />
+                              className="flex gap-2 md:items-center">
+                              <Code2 className="size-15 text-[#C0392B] md:size-7" />
                               <li className="mb-1">
                                 <p className="w-full text-md text-white">
                                   {el}
@@ -162,7 +162,7 @@ export const List: React.FC = () => {
                         })}
                       </ul>
                     ) : (
-                      <p className="w-full text-md text-white md:col-span-14">
+                      <p className="w-full text-md text-white md:col-span-18">
                         {value}
                       </p>
                     )}
