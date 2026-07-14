@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 
 import PersonIcon from '@/assets/images/ap-square_person.svg';
+import { CTRetroCircularLoader } from '@/components/ct-retro-circular-loader/components';
 import { CTRetroVortex } from '@/components/ct-retro-vortex/component';
-import { AnimatedCircularProgressBar } from '@/components/ui/animated-circular-progress-bar';
 import { AUDIOS } from '@/constants/audios';
 import { preloadHome } from '@/pages/home';
 import { preloadProjects } from '@/pages/projects';
@@ -73,7 +73,10 @@ export const LoadingSection: React.FC = () => {
   return (
     <div className="h-full w-full flex justify-center items-center">
       <CTRetroVortex ringsOnly skipRingIdx={[0, 1, 2]} />
-      <AnimatedCircularProgressBar className="absolute" value={progress} />
+      <div className="absolute">
+        <CTRetroCircularLoader />
+        <p className="text-center text-xl text-cyan-500">{`${progress}%`}</p>
+      </div>
     </div>
   );
 };
