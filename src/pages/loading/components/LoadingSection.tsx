@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 
+import PersonIcon from '@/assets/images/ap-square_person.svg';
 import { CTRetroVortex } from '@/components/ct-retro-vortex/component';
 import { AnimatedCircularProgressBar } from '@/components/ui/animated-circular-progress-bar';
 import { AUDIOS } from '@/constants/audios';
@@ -7,7 +8,12 @@ import { preloadHome } from '@/pages/home';
 import { preloadProjects } from '@/pages/projects';
 import { useComponentStore } from '@/stores/component/store';
 import { useLoadingStore } from '@/stores/loading/store';
-import { preloadAudio, preloadGLTF } from '@/utils/other';
+import {
+  preloadAudio,
+  preloadGLTF,
+  preloadImage,
+  preloadPDF,
+} from '@/utils/other';
 
 import { SECTIONS } from '../constant';
 
@@ -32,13 +38,19 @@ export const LoadingSection: React.FC = () => {
         // Fonts
         document.fonts.ready,
 
+        // 3D Model
+        preloadGLTF('/ap-char_v1.glb'),
+
+        // Images
+        preloadImage(PersonIcon),
+
+        // Documents
+        preloadPDF('/ap-cv.pdf'),
+
         // Audio
         ...(enableAudio
           ? [preloadAudio(AUDIOS.BEGIN), preloadAudio(AUDIOS.MAIN)]
           : []),
-
-        // 3D Model
-        preloadGLTF('/ap-char_v1.glb'),
       ];
 
       // Progress Calculation

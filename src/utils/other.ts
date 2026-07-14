@@ -36,6 +36,27 @@ export function preloadImage(src: string, timeout = 5000): Promise<void> {
   });
 }
 
+export function preloadPDF(src: string, timeout = 5000): Promise<void> {
+  return new Promise((resolve) => {
+    const controller = new AbortController();
+    const timer = setTimeout(() => {
+      controller.abort();
+      resolve();
+    }, timeout);
+
+    fetch(src, { signal: controller.signal })
+      .then((res) => res.blob()) // trigger actual download, masuk ke HTTP cache
+      .then(() => {
+        clearTimeout(timer);
+        resolve();
+      })
+      .catch(() => {
+        clearTimeout(timer);
+        resolve();
+      });
+  });
+}
+
 export function preloadGLTF(path: string): Promise<void> {
   return new Promise((resolve, reject) => {
     new GLTFLoader().load(
