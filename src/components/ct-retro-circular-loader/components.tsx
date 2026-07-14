@@ -15,10 +15,6 @@ export const CTRetroCircularLoader: React.FC = () => {
       <svg viewBox="0 0 344 344" style={ringVars(0, 0)} className={RING_BASE}>
         <g id="out1">
           <path d="M72 172C72 116.772 116.772 72 172 72C227.228 72 272 116.772 272 172C272 227.228 227.228 272 172 272C116.772 272 72 227.228 72 172ZM197.322 172C197.322 158.015 185.985 146.678 172 146.678C158.015 146.678 146.678 158.015 146.678 172C146.678 185.985 158.015 197.322 172 197.322C185.985 197.322 197.322 185.985 197.322 172Z" />
-          {/* NOTE: this mask id isn't defined anywhere in the source (stripped on export from the
-              original design tool). Per the SVG masking spec an unresolved mask reference is
-              treated as `mask: none`, so the path renders unmasked — same as the live Uiverse demo.
-              Kept verbatim so behavior doesn't change. */}
           <path
             mask="url(#path-1-inside-1_111_3212)"
             strokeMiterlimit={16}
@@ -58,7 +54,6 @@ export const CTRetroCircularLoader: React.FC = () => {
           className="origin-center animate-[rotate16_4s_ease-in-out_infinite_alternate]">
           <path d="M195.136 135.689C188.115 131.215 179.948 128.873 171.624 128.946C163.299 129.019 155.174 131.503 148.232 136.099L148.42 136.382C155.307 131.823 163.368 129.358 171.627 129.286C179.886 129.213 187.988 131.537 194.954 135.975L195.136 135.689Z" />
           <path d="M195.136 208.311C188.115 212.784 179.948 215.127 171.624 215.054C163.299 214.981 155.174 212.496 148.232 207.901L148.42 207.618C155.307 212.177 163.368 214.642 171.627 214.714C179.886 214.786 187.988 212.463 194.954 208.025L195.136 208.311Z" />
-          {/* Same unresolved-mask note as ring 1 above — kept verbatim, renders unmasked. */}
           <path
             mask="url(#path-5-inside-3_111_3212)"
             fill="#00FFFF"
