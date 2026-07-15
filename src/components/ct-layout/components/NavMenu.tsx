@@ -40,7 +40,7 @@ const ARROW_DELAYS = ['0s', '0.2s', '0.4s'];
 
 export function NavMenu({ onSelect }: NavMenuProps) {
   const { language } = useComponentStore((state) => state);
-  const { changeTopic } = useHomeStore((state) => state);
+  const { changeTopic, changeBgAnimation } = useHomeStore((state) => state);
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const NAV_ITEMS: NavItem[] = useMemo(
@@ -86,6 +86,7 @@ export function NavMenu({ onSelect }: NavMenuProps) {
     setActive(id);
     onSelect?.(id);
     changeTopic(null);
+    changeBgAnimation(false);
 
     switch (id) {
       case UIEndpointsCommon.HOME:

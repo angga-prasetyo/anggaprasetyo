@@ -5,6 +5,7 @@ import { UseHomeStoreProps, UseHomeStoreStateProps } from './type';
 const initialState: UseHomeStoreStateProps = {
   chatTopic: null,
   gltf: null,
+  bgAnimation: true,
 };
 
 export const useHomeStore = create<UseHomeStoreProps>((set) => ({
@@ -14,6 +15,9 @@ export const useHomeStore = create<UseHomeStoreProps>((set) => ({
   },
   changeGltf(gltf) {
     set((state) => ({ ...state, gltf }));
+  },
+  changeBgAnimation(bgAnimation) {
+    set((state) => ({ ...state, bgAnimation }));
   },
   resetState() {
     set(() => initialState);

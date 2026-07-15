@@ -439,7 +439,6 @@ button {
   }
   --animate-glossy-btn: glossy-btn var(--duration, 3s) ease infinite;
 
-
   /* Scanline sweep — used on radio option hover */
   @keyframes scanline-sweep {
     0% {
@@ -452,7 +451,7 @@ button {
   --animate-scanline-sweep: scanline-sweep var(--duration, 1.5s) linear infinite;
 
   /* Corner Pulse in CTRevealButton */
-@keyframes corner-pulse {
+  @keyframes corner-pulse {
     0%,
     100% {
       transform: scale(1) translate(0, 0);
@@ -461,8 +460,15 @@ button {
       transform: scale(1.1) translate(var(--pulse-x, 0), var(--pulse-y, 0));
     }
   }
-  --animate-corner-pulse: corner-pulse var(--duration, 1.8s) ease-in-out infinite;
-  
+  --animate-corner-pulse: corner-pulse var(--duration, 1.8s) ease-in-out
+    infinite;
+
+  /* CTRetroCircularLoader Rotation */
+  @keyframes rotate16 {
+    to {
+      transform: rotate(360deg);
+    }
+  }
 
   /* End of Custom Animation */
 }
