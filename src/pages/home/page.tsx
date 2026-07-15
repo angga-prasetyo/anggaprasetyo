@@ -11,7 +11,7 @@ import { pageMeta } from './constant';
 
 const HomePage: React.FC = () => {
   const { language } = useComponentStore((state) => state);
-  const { chatTopic } = useHomeStore((state) => state);
+  const { chatTopic, bgAnimation } = useHomeStore((state) => state);
 
   return (
     <CTLayout
@@ -20,14 +20,16 @@ const HomePage: React.FC = () => {
       title={words[WORDS.OVERVIEW][language]}
       showNav>
       {/* Overlay blinding fade out */}
-      <div
-        className="fixed -inset-50 animate-fadeOut pointer-events-none"
-        style={
-          {
-            background: 'var(--background-blinding)',
-          } as React.CSSProperties
-        }
-      />
+      {bgAnimation && (
+        <div
+          className="fixed -inset-50 animate-fadeOut pointer-events-none"
+          style={
+            {
+              background: 'var(--background-blinding)',
+            } as React.CSSProperties
+          }
+        />
+      )}
 
       {/* Home Content */}
       <section className="pt-15 flex flex-col items-end justify-end">
