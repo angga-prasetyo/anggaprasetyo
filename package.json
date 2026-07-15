@@ -10,7 +10,9 @@
     "lint": "eslint ./src --ext js,jsx,ts,tsx --fix --ignore-path ./.gitignore --report-unused-disable-directives --max-warnings 0",
     "coverage": "vitest run --coverage",
     "e2e": "pnpm build && playwright test --ui",
-    "test": "eslint ./src --ext js,jsx,ts,tsx --fix --ignore-path ./.gitignore --report-unused-disable-directives --max-warnings 0 && vitest run --coverage && pnpm build && playwright test"
+    "test": "eslint ./src --ext js,jsx,ts,tsx --fix --ignore-path ./.gitignore --report-unused-disable-directives --max-warnings 0 && vitest run --coverage && pnpm build && playwright test",
+    "deploy": "pnpm run build && wrangler deploy",
+    "preview": "pnpm run build && wrangler dev"
   },
   "dependencies": {
     "@fontsource-variable/exo-2": "^5.2.8",
@@ -35,6 +37,7 @@
     "zustand": "^4.5.6"
   },
   "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.44.0",
     "@playwright/test": "^1.60.0",
     "@tailwindcss/vite": "^4.3.0",
     "@testing-library/jest-dom": "^6.9.1",
@@ -67,7 +70,8 @@
     "vite-plugin-compression2": "^0.10.6",
     "vite-plugin-image-optimizer": "^1.1.8",
     "vite-plugin-svgr": "^4.3.0",
-    "vitest": "^4.1.6"
+    "vitest": "^4.1.6",
+    "wrangler": "^4.110.0"
   },
   "engines": {
     "node": ">=22.17.1",
