@@ -7,6 +7,8 @@ import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
 import svgr from 'vite-plugin-svgr';
 import { defineConfig } from 'vitest/config';
 
+import { cloudflare } from "@cloudflare/vite-plugin";
+
 // https://vitejs.dev/config/
 export default () => {
   return defineConfig({
@@ -18,16 +20,10 @@ export default () => {
         '@react-three/drei',
       ],
     },
-    plugins: [
-      react(),
-      tailwindcss(),
-      svgr(),
-      ViteImageOptimizer(),
-      compression({
-        algorithm: 'brotliCompress',
-        exclude: [/\.(br)$/, /\.(gz)$/],
-      }),
-    ],
+    plugins: [react(), tailwindcss(), svgr(), ViteImageOptimizer(), compression({
+      algorithm: 'brotliCompress',
+      exclude: [/\.(br)$/, /\.(gz)$/],
+    }), cloudflare()],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, './src'),
