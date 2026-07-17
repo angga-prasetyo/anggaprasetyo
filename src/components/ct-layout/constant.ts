@@ -23,7 +23,7 @@ export const pageLayouts: (language?: UseComponentStoreProps['language']) => {
 } = (language = LANGUAGES.ENG) => ({
   [UIEndpointsCommon.LOADING]: {
     meta: {
-      titlePage: 'Loading Page in Angga Prasetyo',
+      titlePage: 'Loading || Angga Prasetyo',
       descriptionPage: 'Loading Page for Angga Prasetyo',
     },
   },

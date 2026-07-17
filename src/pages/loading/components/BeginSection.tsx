@@ -12,8 +12,9 @@ const particlesIncrementIntervals = 3000;
 
 export const BeginSection: React.FC = () => {
   const navigate = useNavigate();
-  const { changeBgm, changeFinishPreload } = useComponentStore(
-    (state) => state,
+  const changeBgm = useComponentStore((state) => state.changeBgm);
+  const changeFinishPreload = useComponentStore(
+    (state) => state.changeFinishPreload,
   );
 
   const [particles, setParticles] = useState(0);

@@ -18,8 +18,9 @@ import {
 import { SECTIONS } from '../constant';
 
 export const LoadingSection: React.FC = () => {
-  const { changeBgm, enableAudio } = useComponentStore((state) => state);
-  const { changeSection } = useLoadingStore((state) => state);
+  const changeBgm = useComponentStore((state) => state.changeBgm);
+  const enableAudio = useComponentStore((state) => state.enableAudio);
+  const changeSection = useLoadingStore((state) => state.changeSection);
 
   const [progress, setProgress] = useState(0);
 

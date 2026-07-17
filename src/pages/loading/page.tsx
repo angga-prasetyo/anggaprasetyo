@@ -9,7 +9,7 @@ import { LoadingSection } from './components/LoadingSection';
 import { SECTIONS } from './constant';
 
 const LoadingPage: React.FC = () => {
-  const { currentSection } = useLoadingStore((state) => state);
+  const currentSection = useLoadingStore((state) => state.currentSection);
 
   const sections = useMemo(() => {
     switch (currentSection) {

@@ -19,7 +19,7 @@ import { useHomeStore } from '@/stores/home/store';
 
 import { charExpressions } from '../constant';
 
-function Model({ gltf }: { gltf: GLTF }) {
+function Model({ gltf, showChar = false }: { gltf: GLTF; showChar?: boolean }) {
   const group = useRef<Group>(null);
   const { scene, animations } = gltf;
   const { actions } = useAnimations(animations, group);
@@ -31,7 +31,7 @@ function Model({ gltf }: { gltf: GLTF }) {
     spine: null,
   });
 
-  const { chatTopic } = useHomeStore((state) => state);
+  const chatTopic = useHomeStore((state) => state.chatTopic);
 
   useEffect(() => {
     meshRefs.current = [];
@@ -47,7 +47,8 @@ function Model({ gltf }: { gltf: GLTF }) {
   }, [scene]);
 
   useFrame(({ clock }) => {
-    // Play animasi sekali
+    if (!showChar) return;
+
     if (!started.current) {
       const action = actions['flipBody'];
       if (action) {
@@ -135,7 +136,7 @@ export function Character({ showChar }: { showChar?: boolean }) {
       <ambientLight intensity={0.5} />
       <directionalLight position={[-1, 0.5, 10]} intensity={1} />
       <Suspense fallback={null}>
-        <Model gltf={gltf} />
+        <Model gltf={gltf} showChar={showChar} />
       </Suspense>
     </Canvas>
   );

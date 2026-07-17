@@ -19,7 +19,7 @@ export function AudioModeCard({
   recommended = false,
   onSelect,
 }: AudioModeCardProps) {
-  const { language } = useComponentStore((state) => state);
+  const language = useComponentStore((state) => state.language);
   return (
     <button
       type="button"
@@ -41,7 +41,7 @@ export function AudioModeCard({
         className={cn(
           'pointer-events-none absolute inset-0 bg-linear-to-r from-transparent via-amber-400/15 to-transparent opacity-0 animate-scanline-sweep',
           selected && 'opacity-100',
-          !recommended &&' via-red-400/15 '
+          !recommended && ' via-red-400/15 ',
         )}
       />
       {recommended && (

@@ -24,7 +24,7 @@ const CTLayoutComponent: React.FC<CTLayoutProps> = ({
     pathname: EnumValues<typeof UIEndpointsCommon>;
   };
 
-  const { language } = useComponentStore((state) => state);
+  const language = useComponentStore((state) => state.language);
 
   const isLoadingPage = pathname === UIEndpointsCommon.LOADING;
 
