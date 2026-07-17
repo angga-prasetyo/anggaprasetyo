@@ -1,8 +1,7 @@
-import { CTSeoMetaProps } from '@/components/ct-seo-meta/type';
-
 export interface CTLayoutProps
-  extends CTSeoMetaProps, React.ComponentPropsWithoutRef<'div'> {
+  extends React.ComponentPropsWithoutRef<'div'> {
   showNav?: boolean;
+  showChar?: boolean;
   title?: string;
   children: React.ReactNode;
 }

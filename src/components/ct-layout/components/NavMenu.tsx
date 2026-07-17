@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import {
   User,
@@ -97,6 +97,10 @@ export function NavMenu({ onSelect }: NavMenuProps) {
         return changeTopic(WORDS.CHAT__NO_PAGES);
     }
   }
+
+  useEffect(() => {
+    setActive(pathname);
+  }, [pathname]);
 
   return (
     <div className="ct-nav-menu">

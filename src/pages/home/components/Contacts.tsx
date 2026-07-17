@@ -88,7 +88,7 @@ export const Contacts: FC = () => {
   const { chatTopic, changeTopic } = useHomeStore((state) => state);
 
   return (
-    <ul className="absolute flex justify-end gap-2 list-none mt-2 p-0 right-1 w-full md:right-8">
+    <ul className="flex justify-end gap-2 list-none p-0 mr-1 w-full md:mr-8">
       {SOCIALS.map(({ key, label, href, fill, icon }) => {
         const isActive = key === chatTopic;
         return (
