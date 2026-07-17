@@ -19,23 +19,10 @@ export const commonRoute: RouteObject[] = [
     ],
   },
   {
-    path: UIEndpointsCommon.HOME,
     element: <CTRouteGuard isPrivate />,
     children: [
-      {
-        index: true,
-        element: <Home />,
-      },
-    ],
-  },
-  {
-    path: UIEndpointsCommon.PROJECTS,
-    element: <CTRouteGuard isPrivate />,
-    children: [
-      {
-        index: true,
-        element: <Projects />,
-      },
+      { path: UIEndpointsCommon.HOME, element: <Home /> },
+      { path: UIEndpointsCommon.PROJECTS, element: <Projects /> },
     ],
   },
   { path: '*', element: <Error404 /> },

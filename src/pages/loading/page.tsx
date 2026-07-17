@@ -6,10 +6,10 @@ import { useLoadingStore } from '@/stores/loading/store';
 import { BeginSection } from './components/BeginSection';
 import { ConfigurationSection } from './components/configuration-section/component';
 import { LoadingSection } from './components/LoadingSection';
-import { pageMeta, SECTIONS } from './constant';
+import { SECTIONS } from './constant';
 
 const LoadingPage: React.FC = () => {
-  const { currentSection } = useLoadingStore((state) => state);
+  const currentSection = useLoadingStore((state) => state.currentSection);
 
   const sections = useMemo(() => {
     switch (currentSection) {
@@ -24,7 +24,7 @@ const LoadingPage: React.FC = () => {
     }
   }, [currentSection]);
 
-  return <CTLayout meta={pageMeta}>{sections}</CTLayout>;
+  return <CTLayout>{sections}</CTLayout>;
 };
 
 export default LoadingPage;

@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import {
   User,
@@ -39,8 +39,9 @@ interface NavMenuProps {
 const ARROW_DELAYS = ['0s', '0.2s', '0.4s'];
 
 export function NavMenu({ onSelect }: NavMenuProps) {
-  const { language } = useComponentStore((state) => state);
-  const { changeTopic, changeBgAnimation } = useHomeStore((state) => state);
+  const language = useComponentStore((state) => state.language);
+  const changeTopic = useHomeStore((state) => state.changeTopic);
+  const changeBgAnimation = useHomeStore((state) => state.changeBgAnimation);
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const NAV_ITEMS: NavItem[] = useMemo(
@@ -97,6 +98,10 @@ export function NavMenu({ onSelect }: NavMenuProps) {
         return changeTopic(WORDS.CHAT__NO_PAGES);
     }
   }
+
+  useEffect(() => {
+    setActive(pathname);
+  }, [pathname]);
 
   return (
     <div className="ct-nav-menu">

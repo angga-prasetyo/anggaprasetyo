@@ -18,9 +18,14 @@ import { AudioModeCard } from './components/AudioModeCard';
 import { SectionLabel } from './components/SectionLabel';
 
 export function ConfigurationSection() {
-  const { language, changeLanguage, enableAudio, changeEnableAudio, changeBgm } =
-    useComponentStore((state) => state);
-  const { changeSection } = useLoadingStore((state) => state);
+  const language = useComponentStore((state) => state.language);
+  const enableAudio = useComponentStore((state) => state.enableAudio);
+  const changeLanguage = useComponentStore((state) => state.changeLanguage);
+  const changeEnableAudio = useComponentStore(
+    (state) => state.changeEnableAudio,
+  );
+  const changeBgm = useComponentStore((state) => state.changeBgm);
+  const changeSection = useLoadingStore((state) => state.changeSection);
   const [loading, setLoading] = useState(false);
 
   const languageOptions: {
@@ -73,7 +78,6 @@ export function ConfigurationSection() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading]);
-
 
   return (
     <div className="h-full flex justify-center items-center">

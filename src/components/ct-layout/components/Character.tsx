@@ -14,11 +14,12 @@ import {
 import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 import { CONTACT_KEYS } from '@/constants/others';
+import { cn } from '@/lib/utils';
 import { useHomeStore } from '@/stores/home/store';
 
-import { charExpressions } from '../../../pages/home/constant';
+import { charExpressions } from '../constant';
 
-function Model({ gltf }: { gltf: GLTF }) {
+function Model({ gltf, showChar = false }: { gltf: GLTF; showChar?: boolean }) {
   const group = useRef<Group>(null);
   const { scene, animations } = gltf;
   const { actions } = useAnimations(animations, group);
@@ -30,7 +31,7 @@ function Model({ gltf }: { gltf: GLTF }) {
     spine: null,
   });
 
-  const { chatTopic } = useHomeStore((state) => state);
+  const chatTopic = useHomeStore((state) => state.chatTopic);
 
   useEffect(() => {
     meshRefs.current = [];
@@ -46,7 +47,8 @@ function Model({ gltf }: { gltf: GLTF }) {
   }, [scene]);
 
   useFrame(({ clock }) => {
-    // Play animasi sekali
+    if (!showChar) return;
+
     if (!started.current) {
       const action = actions['flipBody'];
       if (action) {
@@ -109,17 +111,21 @@ function Model({ gltf }: { gltf: GLTF }) {
     });
   }, [expression]);
 
-  return <primitive ref={group} object={scene} position={[-0.15, -1.185, 0]} />;
+  return <primitive ref={group} object={scene} position={[-0.15, -1.33, 0]} />;
 }
 
-export function Character() {
+export function Character({ showChar }: { showChar?: boolean }) {
   const { gltf } = useHomeStore((state) => state);
 
   if (!gltf) return <></>;
 
   return (
     <Canvas
-      className="fixed w-full h-dvh pointer-events-none"
+      className={cn(
+        'fixed -inset-y-70 w-full h-dvh pointer-events-none',
+        !showChar && 'hidden',
+      )}
+      frameloop={showChar ? 'always' : 'never'}
       camera={{ position: [-2, -1, 6], fov: 9 }}
       gl={{
         alpha: true,
@@ -130,7 +136,7 @@ export function Character() {
       <ambientLight intensity={0.5} />
       <directionalLight position={[-1, 0.5, 10]} intensity={1} />
       <Suspense fallback={null}>
-        <Model gltf={gltf} />
+        <Model gltf={gltf} showChar={showChar} />
       </Suspense>
     </Canvas>
   );
