@@ -17,7 +17,7 @@ import { CONTACT_KEYS } from '@/constants/others';
 import { cn } from '@/lib/utils';
 import { useHomeStore } from '@/stores/home/store';
 
-import { charExpressions } from '../../../pages/home/constant';
+import { charExpressions } from '../constant';
 
 function Model({ gltf }: { gltf: GLTF }) {
   const group = useRef<Group>(null);
@@ -120,7 +120,10 @@ export function Character({ showChar }: { showChar?: boolean }) {
 
   return (
     <Canvas
-      className={cn('fixed -inset-y-70 w-full h-dvh pointer-events-none', !showChar && 'hidden')}
+      className={cn(
+        'fixed -inset-y-70 w-full h-dvh pointer-events-none',
+        !showChar && 'hidden',
+      )}
       frameloop={showChar ? 'always' : 'never'}
       camera={{ position: [-2, -1, 6], fov: 9 }}
       gl={{
