@@ -3,7 +3,9 @@ import { useEffect, useRef } from 'react';
 import { useComponentStore } from '@/stores/component/store';
 
 export function useAudio() {
-  const { bgm, enableAudio } = useComponentStore((state) => state);
+  const bgm = useComponentStore((state) => state.bgm);
+  const enableAudio = useComponentStore((state) => state.enableAudio);
+
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   // Create element once, never recreate

@@ -9,8 +9,9 @@ import { ChatBubble } from './components/ChatBubble';
 import { Contacts } from './components/Contacts';
 
 const HomePage: React.FC = () => {
-  const { language } = useComponentStore((state) => state);
-  const { chatTopic, bgAnimation } = useHomeStore((state) => state);
+  const language = useComponentStore((state) => state.language);
+  const chatTopic = useHomeStore((state) => state.chatTopic);
+  const bgAnimation = useHomeStore((state) => state.bgAnimation);
 
   return (
     <>

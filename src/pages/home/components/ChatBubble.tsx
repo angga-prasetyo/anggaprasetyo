@@ -9,7 +9,7 @@ interface ChatBubbleProps {
 }
 
 export function ChatBubble({ message, show }: ChatBubbleProps) {
-  const { changeTopic } = useHomeStore((state) => state);
+  const changeTopic = useHomeStore((state) => state.changeTopic);
   if (!show) return null;
   return (
     <div className="flex flex-col items-start gap-0.75 md:items-center">
