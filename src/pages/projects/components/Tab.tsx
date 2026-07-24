@@ -11,8 +11,9 @@ import { UseProjectsStoreProps } from '@/stores/projects/type';
 import { TOPIC } from '../constant';
 
 export const Tab: React.FC = () => {
-  const { language } = useComponentStore((state) => state);
-  const { topic, changeTopic } = useProjectsStore((state) => state);
+  const language = useComponentStore((state) => state.language);
+  const topic = useProjectsStore((state) => state.topic);
+  const changeTopic = useProjectsStore((state) => state.changeTopic);
 
   const renderList = useCallback(() => {
     const list: {

@@ -1,6 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
 
 import PersonIcon from '@/assets/images/ap-square_person.svg';
+import GHIcon from '@/assets/images/github.svg';
+import INIcon from '@/assets/images/linkedin.svg';
+import MailIcon from '@/assets/images/mail.svg';
+import WAIcon from '@/assets/images/wa.svg';
 import { CTRetroCircularLoader } from '@/components/ct-retro-circular-loader/components';
 import { CTRetroVortex } from '@/components/ct-retro-vortex/component';
 import { AUDIOS } from '@/constants/audios';
@@ -44,6 +48,10 @@ export const LoadingSection: React.FC = () => {
 
         // Images
         preloadImage(PersonIcon),
+        preloadImage(GHIcon),
+        preloadImage(WAIcon),
+        preloadImage(MailIcon),
+        preloadImage(INIcon),
 
         // Documents
         preloadPDF('/ap-cv.pdf'),

@@ -115,7 +115,7 @@ function Model({ gltf, showChar = false }: { gltf: GLTF; showChar?: boolean }) {
 }
 
 export function Character({ showChar }: { showChar?: boolean }) {
-  const { gltf } = useHomeStore((state) => state);
+  const gltf = useHomeStore((state) => state.gltf);
 
   if (!gltf) return <></>;
 

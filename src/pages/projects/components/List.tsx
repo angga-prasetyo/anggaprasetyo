@@ -12,8 +12,8 @@ import { EnumValues } from '@/types/common';
 import { TOPIC } from '../constant';
 
 export const List: React.FC = () => {
-  const { language } = useComponentStore((state) => state);
-  const { topic } = useProjectsStore((state) => state);
+  const language = useComponentStore((state) => state.language);
+  const topic = useProjectsStore((state) => state.topic);
 
   const list: Record<
     EnumValues<typeof TOPIC>,
