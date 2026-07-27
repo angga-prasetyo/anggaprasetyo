@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from 'react';
+import { SetStateAction, useEffect, useMemo, useRef, useState } from 'react';
 import { Suspense } from 'react';
 
 import { useAnimations } from '@react-three/drei';
@@ -14,12 +14,21 @@ import {
 import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 import { CONTACT_KEYS } from '@/constants/others';
+import { ZINDEX } from '@/constants/zIndex';
 import { cn } from '@/lib/utils';
 import { useHomeStore } from '@/stores/home/store';
 
 import { charExpressions } from '../constant';
 
-function Model({ gltf, showChar = false }: { gltf: GLTF; showChar?: boolean }) {
+function Model({
+  gltf,
+  showChar = false,
+  setPoseReady,
+}: {
+  gltf: GLTF;
+  showChar?: boolean;
+  setPoseReady: React.Dispatch<SetStateAction<boolean>>;
+}) {
   const group = useRef<Group>(null);
   const { scene, animations } = gltf;
   const { actions } = useAnimations(animations, group);
@@ -56,7 +65,9 @@ function Model({ gltf, showChar = false }: { gltf: GLTF; showChar?: boolean }) {
         action.clampWhenFinished = true;
         action.time = 20 / 60;
         action.play();
+        action.getMixer().update(0);
         started.current = true;
+        setPoseReady(true);
       }
     }
 
@@ -117,6 +128,7 @@ function Model({ gltf, showChar = false }: { gltf: GLTF; showChar?: boolean }) {
 
 export function Character({ showChar }: { showChar?: boolean }) {
   const gltf = useHomeStore((state) => state.gltf);
+  const [poseReady, setPoseReady] = useState(false);
 
   if (!gltf) return <></>;
 
@@ -124,7 +136,7 @@ export function Character({ showChar }: { showChar?: boolean }) {
     <Canvas
       className={cn(
         'fixed -inset-y-70 w-full h-dvh pointer-events-none',
-        !showChar && 'hidden',
+        (!showChar || !poseReady) && ZINDEX.CHARACTER_HIDDEN,
       )}
       frameloop={showChar ? 'always' : 'never'}
       camera={{ position: [-2, -1, 6], fov: 9 }}
@@ -137,7 +149,7 @@ export function Character({ showChar }: { showChar?: boolean }) {
       <ambientLight intensity={0.5} />
       <directionalLight position={[-1, 0.5, 10]} intensity={1} />
       <Suspense fallback={null}>
-        <Model gltf={gltf} showChar={showChar} />
+        <Model gltf={gltf} showChar={showChar} setPoseReady={setPoseReady} />
       </Suspense>
     </Canvas>
   );
