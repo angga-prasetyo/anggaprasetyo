@@ -365,7 +365,7 @@ button {
   --animate-core-glow: core-glow var(--duration-glow, 3s) ease-in forwards;
   --animate-core-blind:
     core-glow var(--duration-glow, 3s) ease-in forwards,
-    core-blind var(--duration-blind, 6s) ease-in 6s forwards;
+    core-blind var(--duration-blind, 6s) ease-in var(--duration-blind, 6s) forwards;
 
   /* Particle Drift used in CTRetroVortex */
   @keyframes particle-drift {
