@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 
-import { CTLayout } from '@/components/ct-layout';
 import { useLoadingStore } from '@/stores/loading/store';
 
 import { BeginSection } from './components/BeginSection';
@@ -24,7 +23,7 @@ const LoadingPage: React.FC = () => {
     }
   }, [currentSection]);
 
-  return <CTLayout>{sections}</CTLayout>;
+  return sections;
 };
 
 export default LoadingPage;

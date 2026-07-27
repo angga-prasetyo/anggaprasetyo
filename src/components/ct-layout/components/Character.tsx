@@ -54,6 +54,7 @@ function Model({ gltf, showChar = false }: { gltf: GLTF; showChar?: boolean }) {
       if (action) {
         action.setLoop(LoopOnce, 1);
         action.clampWhenFinished = true;
+        action.time = 20 / 60;
         action.play();
         started.current = true;
       }
