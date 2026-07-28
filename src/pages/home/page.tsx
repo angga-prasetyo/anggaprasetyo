@@ -17,7 +17,7 @@ const HomePage: React.FC = () => {
     <>
       {bgAnimation && (
         <div
-          className="fixed -inset-50 animate-fadeOut pointer-events-none"
+          className="fixed -inset-50 animate-fade-out pointer-events-none"
           style={
             { background: 'var(--background-blinding)' } as React.CSSProperties
           }

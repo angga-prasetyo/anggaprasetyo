@@ -200,7 +200,7 @@ button {
   /* Custom Animation */
 
   /* Fade In */
-  @keyframes fadeIn {
+  @keyframes fade-in {
     0% {
       opacity: 0;
     }
@@ -208,10 +208,10 @@ button {
       opacity: 1;
     }
   }
-  --animate-fadeIn: fadeIn var(--duration) ease-in forwards;
+  --animate-fade-in: fade-in var(--duration, 3s) ease-in forwards;
 
   /* Fade Out */
-  @keyframes fadeOut {
+  @keyframes fade-out {
     0% {
       opacity: 1;
     }
@@ -219,7 +219,7 @@ button {
       opacity: 0;
     }
   }
-  --animate-fadeOut: fadeOut var(--duration, 1s) ease-out forwards;
+  --animate-fade-out: fade-out var(--duration, 1s) ease-out forwards;
 
   /* Blink Cursor */
   @keyframes blink-cursor {
@@ -365,7 +365,7 @@ button {
   --animate-core-glow: core-glow var(--duration-glow, 3s) ease-in forwards;
   --animate-core-blind:
     core-glow var(--duration-glow, 3s) ease-in forwards,
-    core-blind var(--duration-blind, 6s) ease-in 6s forwards;
+    core-blind var(--duration-blind, 6s) ease-in var(--duration-blind, 6s) forwards;
 
   /* Particle Drift used in CTRetroVortex */
   @keyframes particle-drift {

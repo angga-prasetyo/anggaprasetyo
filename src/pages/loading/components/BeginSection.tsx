@@ -7,8 +7,9 @@ import { AUDIOS } from '@/constants/audios';
 import { UIEndpointsCommon } from '@/constants/ui-endpoints/common';
 import { useComponentStore } from '@/stores/component/store';
 
-const maxAnimationDuration = 10700;
-const particlesIncrementIntervals = 3000;
+const maxAnimationWithBgmDuration = 11700;
+const maxAnimationWithoutBgmDuration = 5000;
+const particlesIncrementIntervals = 3500;
 
 export const BeginSection: React.FC = () => {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ export const BeginSection: React.FC = () => {
   const changeFinishPreload = useComponentStore(
     (state) => state.changeFinishPreload,
   );
+  const enableAudio = useComponentStore((state) => state.enableAudio);
 
   const [particles, setParticles] = useState(0);
 
@@ -32,12 +34,12 @@ export const BeginSection: React.FC = () => {
       changeFinishPreload(true);
       changeBgm(AUDIOS.MAIN);
       navigate(UIEndpointsCommon.HOME);
-    }, maxAnimationDuration);
+    }, enableAudio ? maxAnimationWithBgmDuration : maxAnimationWithoutBgmDuration);
 
     return () => {
       clearTimeout(timeout);
     };
-  }, [changeBgm, changeFinishPreload, navigate]);
+  }, [changeBgm, changeFinishPreload, navigate, enableAudio]);
 
   return (
     <div className="h-full w-full flex justify-center items-center">

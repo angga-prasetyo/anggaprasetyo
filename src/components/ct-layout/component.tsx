@@ -3,7 +3,9 @@ import { useLocation } from 'react-router-dom';
 import { CTSeoMeta } from '@/components/ct-seo-meta/component';
 import { UIEndpointsCommon } from '@/constants/ui-endpoints/common';
 import { cn } from '@/lib/utils';
+import { SECTIONS } from '@/pages/loading/constant';
 import { useComponentStore } from '@/stores/component/store';
+import { useLoadingStore } from '@/stores/loading/store';
 import { EnumValues } from '@/types/common';
 
 import { Character } from './components/Character';
@@ -25,8 +27,11 @@ const CTLayoutComponent: React.FC<CTLayoutProps> = ({
   };
 
   const language = useComponentStore((state) => state.language);
+  const loadingCurrSection = useLoadingStore((state) => state.currentSection);
 
   const isLoadingPage = pathname === UIEndpointsCommon.LOADING;
+  const renderChar =
+    !isLoadingPage || (isLoadingPage && loadingCurrSection === SECTIONS.BEGIN);
 
   const background = isLoadingPage
     ? 'var(--vc-background)'
@@ -58,7 +63,7 @@ const CTLayoutComponent: React.FC<CTLayoutProps> = ({
         </>
       )}
       {children}
-      {!isLoadingPage && (
+      {renderChar && (
         <Character showChar={currentPageLayoutShowChar ?? showChar} />
       )}
       {(currentPageLayoutShowNav || showNav) && <NavMenu />}
